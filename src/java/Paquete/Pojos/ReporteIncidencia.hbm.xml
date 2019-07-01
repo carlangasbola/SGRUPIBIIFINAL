@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.ReporteIncidencia" table="reporte_incidencia" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idReporte" type="int">
+            <column name="idReporte" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sesionDeLaboratorio" class="Paquete.Pojos.SesionDeLaboratorio" fetch="select">
+            <column name="idSesion" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="binary">
+            <column name="Nombre" not-null="true" />
+        </property>
+        <property name="observaciones" type="binary">
+            <column name="Observaciones" not-null="true" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="Fecha" length="23" not-null="true" />
+        </property>
+        <property name="estado" type="binary">
+            <column name="Estado" not-null="true" />
+        </property>
+        <property name="actualizacion" type="timestamp">
+            <column name="Actualizacion" length="23" not-null="true" />
+        </property>
+        <set name="historialEmergencias" table="historial_emergencia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idReporte" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.HistorialEmergencia" />
+        </set>
+    </class>
+</hibernate-mapping>

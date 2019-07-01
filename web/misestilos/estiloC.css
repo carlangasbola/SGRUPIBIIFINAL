@@ -1,0 +1,157 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.navbar-custom {
+    background-color: #6C1D45;
+}
+
+.form-gap {
+    padding-top: 70px;
+}
+
+/* change the brand and text color */
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255, 255, 255, .8);
+}
+
+/* change the link color */
+
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, .5);
+}
+
+/* change the color of active or hovered links */
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
+.colortitulo {
+    background-color: #B8447F;
+}
+
+.colorpantone {
+    color: #6C1D45;
+}
+
+.bg-coloverde{
+    background-color: #1d6c1d;
+}
+
+.bg-colorazul{
+   background-color:  #1A1C79;
+}
+
+.colorboton{
+    background-color: #B81F6D;
+    color: white;
+}
+
+.colorrojo{
+    
+    background-color: #830D18;
+    color: white;
+}
+.colorverde{
+    background-color: #00661d;
+    color: white;
+}
+
+.coloramarillo{
+    background-color: #CFC41A;
+}
+
+.colorazul{
+    background-color: #1A5179;
+    color: white;
+}
+
+/* Estilos de las cartas de presentacion al inicio en administrador */
+.cardPracticas{
+    background-color: #0a3339; 
+    color:white
+}
+.cardSustacias{
+    background-color: #167379;
+    color:white
+}
+.cardEventos{
+    background-color: #28a7b8;
+    color:white
+}
+.cardUsuarios{
+    background-color: #b81f6d;
+    color:white
+}
+.cardGrupos{
+    background-color: #831D1D;
+    color:white
+}
+.bts {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+.success {
+    border-color: #CED4DA;
+}
+.success:hover {
+    background-color: #B81F6D;
+    color: white;
+}
+
+.successrojo {
+    border-color: #CED4DA;
+}
+.successrojo:hover {
+    background-color: #DC3545;
+    color: white;
+}
+
+.successverde {
+    border-color: #CED4DA;
+}
+.successverde:hover {
+    background-color: #5CB85C;
+    color: white;
+}
+
+.anteriorsiguiente {
+    background-color: #B81F6D;
+    color: white;
+    cursor: pointer; 
+}
+.successansig {
+    border-color: #CED4DA;
+}
+.successansig:hover {
+    background-color: #A51B62;
+    color: white;
+}
+.tabla{
+    background-color: #B81F6D;
+}
+
+.colorrojofuerte{
+    color: #830A2C;
+}
+
+.bgcolorrojofuerte{
+    background-color: #830A2C;
+    color:white;
+}
+.center {
+    text-align: center;
+}
+
+.bggris{
+    background-color: #6E837E;
+    color:white;
+}
+
+.colorpantone2{
+    background-color: #831D29;
+}

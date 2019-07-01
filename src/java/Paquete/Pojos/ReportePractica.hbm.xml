@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.ReportePractica" table="reporte_practica" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idReportePractica" type="int">
+            <column name="idReporte_practica" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuarios" class="Paquete.Pojos.Usuarios" fetch="select">
+            <column name="idUsuario_Alumno" not-null="true" />
+        </many-to-one>
+        <property name="documentoPractica" type="binary">
+            <column name="Documento_practica" not-null="true" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="Fecha" length="23" not-null="true" />
+        </property>
+        <property name="calificacion" type="double">
+            <column name="calificacion" precision="53" scale="0" not-null="true" />
+        </property>
+        <property name="observaciones" type="binary">
+            <column name="Observaciones" />
+        </property>
+        <property name="grupo" type="binary">
+            <column name="Grupo" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

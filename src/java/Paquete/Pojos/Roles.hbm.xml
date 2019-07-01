@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.Roles" table="roles" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idrol" type="int">
+            <column name="idrol" />
+            <generator class="identity" />
+        </id>
+        <property name="nombreRol" type="string">
+            <column name="nombre_rol" length="50" not-null="true" />
+        </property>
+        <set name="usuarioses" table="usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idRol" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.Usuarios" />
+        </set>
+        <set name="usuarioses_1" table="usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idRol" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.Usuarios" />
+        </set>
+    </class>
+</hibernate-mapping>

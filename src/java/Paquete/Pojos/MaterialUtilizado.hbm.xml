@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.MaterialUtilizado" table="material_utilizado" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idMaterialUtilizado" type="int">
+            <column name="idMaterial_utilizado" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="material" class="Paquete.Pojos.Material" fetch="select">
+            <column name="idMaterial" not-null="true" />
+        </many-to-one>
+        <many-to-one name="practica" class="Paquete.Pojos.Practica" fetch="select">
+            <column name="idPractica" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

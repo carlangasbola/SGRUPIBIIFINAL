@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.Emergencias" table="emergencias" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idEmergencias" type="int">
+            <column name="idEmergencias" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="serializable">
+            <column name="Nombre" not-null="true" />
+        </property>
+        <property name="telefono" type="int">
+            <column name="Telefono" not-null="true" />
+        </property>
+        <property name="correo" type="serializable">
+            <column name="Correo" not-null="true" />
+        </property>
+        <set name="historialEmergencias" table="historial_emergencia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idEmergencias" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.HistorialEmergencia" />
+        </set>
+    </class>
+</hibernate-mapping>

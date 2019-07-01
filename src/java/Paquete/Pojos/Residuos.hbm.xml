@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.Residuos" table="residuos" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idResiduo" type="int">
+            <column name="idResiduo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sesionDeLaboratorio" class="Paquete.Pojos.SesionDeLaboratorio" fetch="select">
+            <column name="idSesion" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="binary">
+            <column name="Nombre" not-null="true" />
+        </property>
+        <property name="tipo" type="binary">
+            <column name="Tipo" not-null="true" />
+        </property>
+        <property name="cantidad" type="double">
+            <column name="Cantidad" precision="53" scale="0" not-null="true" />
+        </property>
+        <property name="fechaDeIngreso" type="timestamp">
+            <column name="Fecha_de_ingreso" length="23" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

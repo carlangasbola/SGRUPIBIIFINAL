@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.SesionDeLaboratorio" table="sesion_de_laboratorio" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idSesion" type="int">
+            <column name="idSesion" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="unidadGrupo" class="Paquete.Pojos.UnidadGrupo" fetch="select">
+            <column name="idUnidad_Grupo" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="timestamp">
+            <column name="fecha" length="23" not-null="true" />
+        </property>
+        <property name="docenteAuxiliar" type="string">
+            <column name="Docente_Auxiliar" length="50" not-null="true" />
+        </property>
+        <set name="historialEquipos" table="historial_equipo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSesion" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.HistorialEquipo" />
+        </set>
+        <set name="reactivoUtilizados" table="reactivo_utilizado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSesion" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.ReactivoUtilizado" />
+        </set>
+        <set name="notificacionesSesions" table="notificaciones_sesion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSesion" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.NotificacionesSesion" />
+        </set>
+        <set name="residuoses" table="residuos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSesion" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.Residuos" />
+        </set>
+        <set name="reporteIncidencias" table="reporte_incidencia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSesion" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.ReporteIncidencia" />
+        </set>
+        <set name="vales" table="vale" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSesion" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.Vale" />
+        </set>
+    </class>
+</hibernate-mapping>

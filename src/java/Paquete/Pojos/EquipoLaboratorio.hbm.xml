@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.EquipoLaboratorio" table="equipo_laboratorio" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idEquipoLaboratorio" type="int">
+            <column name="idEquipo_laboratorio" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="serializable">
+            <column name="Nombre" not-null="true" />
+        </property>
+        <property name="caracteristicas" type="serializable">
+            <column name="Caracteristicas" not-null="true" />
+        </property>
+        <property name="existenciaInventario" type="short">
+            <column name="Existencia_inventario" not-null="true" />
+        </property>
+        <property name="cantidad" type="int">
+            <column name="Cantidad" not-null="true" />
+        </property>
+        <set name="equipoUtilizados" table="equipo_utilizado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idEquipo_laboratorio" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.EquipoUtilizado" />
+        </set>
+        <set name="historialEquipos" table="historial_equipo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idEquipo_laboratorio" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.HistorialEquipo" />
+        </set>
+        <set name="datosVales" table="datos_vale" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idEquipo_laboratorio" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.DatosVale" />
+        </set>
+    </class>
+</hibernate-mapping>

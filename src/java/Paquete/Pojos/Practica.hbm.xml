@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.Practica" table="practica" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idPractica" type="int">
+            <column name="idPractica" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="unidadTematica" class="Paquete.Pojos.UnidadTematica" fetch="select">
+            <column name="idUnidad_Tematica" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarios" class="Paquete.Pojos.Usuarios" fetch="select">
+            <column name="idUsuario_Creador" not-null="true" />
+        </many-to-one>
+        <property name="creacion" type="timestamp">
+            <column name="Creacion" length="23" not-null="true" />
+        </property>
+        <set name="materialUtilizados" table="material_utilizado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPractica" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.MaterialUtilizado" />
+        </set>
+        <set name="notificacionesPracticas" table="notificaciones_practica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPractica" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.NotificacionesPractica" />
+        </set>
+        <one-to-one name="datosPractica" class="Paquete.Pojos.DatosPractica"></one-to-one>
+        <set name="equipoUtilizados" table="equipo_utilizado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPractica" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.EquipoUtilizado" />
+        </set>
+        <set name="reactivosUtilizadoPracticas" table="reactivos_utilizado_practica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPractica" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.ReactivosUtilizadoPractica" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.DatosPractica" table="datos_practica" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idPractica" type="int">
+            <column name="idPractica" />
+            <generator class="foreign">
+                <param name="property">practica</param>
+            </generator>
+        </id>
+        <one-to-one name="practica" class="Paquete.Pojos.Practica" constrained="true"></one-to-one>
+        <property name="numeroPractica" type="java.lang.Integer">
+            <column name="Numero_Practica" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="Nombre" />
+        </property>
+        <property name="editor" type="string">
+            <column name="Editor" />
+        </property>
+        <property name="actualizacion" type="timestamp">
+            <column name="Actualizacion" length="23" />
+        </property>
+        <property name="introducion" type="string">
+            <column name="Introducion" />
+        </property>
+        <property name="actividadesPrevias" type="string">
+            <column name="Actividades_Previas" />
+        </property>
+        <property name="objetivos" type="string">
+            <column name="Objetivos" />
+        </property>
+        <property name="semaforo" type="string">
+            <column name="Semaforo" />
+        </property>
+        <property name="recomendaciones" type="string">
+            <column name="Recomendaciones" />
+        </property>
+        <property name="protocolos" type="string">
+            <column name="Protocolos" />
+        </property>
+        <property name="desarrollo" type="string">
+            <column name="Desarrollo" />
+        </property>
+        <property name="registroDatos" type="string">
+            <column name="Registro_Datos" />
+        </property>
+        <property name="resultados" type="string">
+            <column name="Resultados" />
+        </property>
+        <property name="analisisResultados" type="string">
+            <column name="Analisis_Resultados" />
+        </property>
+        <property name="referencias" type="string">
+            <column name="Referencias" />
+        </property>
+        <property name="nomeclantura" type="string">
+            <column name="Nomeclantura" />
+        </property>
+        <property name="anexos" type="string">
+            <column name="Anexos" />
+        </property>
+    </class>
+</hibernate-mapping>

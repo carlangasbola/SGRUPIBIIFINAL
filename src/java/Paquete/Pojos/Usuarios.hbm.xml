@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.Usuarios" table="usuarios" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idUsuarios" type="int">
+            <column name="idUsuarios" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="roles" class="Paquete.Pojos.Roles" fetch="select">
+            <column name="idRol" not-null="true" />
+        </many-to-one>
+        <property name="userLogin" type="string">
+            <column name="UserLogin" length="50" not-null="true" />
+        </property>
+        <property name="passsword" type="string">
+            <column name="Passsword" length="60" not-null="true" />
+        </property>
+        <set name="listaGrupos" table="lista_grupo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idUsuario_Alumno" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.ListaGrupo" />
+        </set>
+        <set name="reportePracticas" table="reporte_practica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idUsuario_Alumno" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.ReportePractica" />
+        </set>
+        <one-to-one name="datosUsuario" class="Paquete.Pojos.DatosUsuario"></one-to-one>
+        <set name="practicas" table="practica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idUsuario_Creador" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.Practica" />
+        </set>
+        <set name="unidadGrupos" table="unidad_grupo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idDocenteGrupo" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.UnidadGrupo" />
+        </set>
+    </class>
+</hibernate-mapping>

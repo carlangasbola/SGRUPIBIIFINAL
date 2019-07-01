@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.ReactivosUtilizadoPractica" table="reactivos_utilizado_practica" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idReactivosUtilizado" type="int">
+            <column name="idReactivos_utilizado" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="practica" class="Paquete.Pojos.Practica" fetch="select">
+            <column name="idPractica" not-null="true" />
+        </many-to-one>
+        <many-to-one name="reactivos" class="Paquete.Pojos.Reactivos" fetch="select">
+            <column name="idReactivo" not-null="true" />
+        </many-to-one>
+        <property name="idDatos" type="int">
+            <column name="idDatos" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

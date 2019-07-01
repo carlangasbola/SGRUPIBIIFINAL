@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.Vale" table="vale" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idVale" type="int">
+            <column name="idVale" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="equipo" class="Paquete.Pojos.Equipo" fetch="select">
+            <column name="idEquipo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="sesionDeLaboratorio" class="Paquete.Pojos.SesionDeLaboratorio" fetch="select">
+            <column name="idSesion" not-null="true" />
+        </many-to-one>
+        <property name="vale" type="binary">
+            <column name="Vale" not-null="true" />
+        </property>
+        <property name="status" type="binary">
+            <column name="Status" not-null="true" />
+        </property>
+        <set name="datosVales" table="datos_vale" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idVale" not-null="true" />
+            </key>
+            <one-to-many class="Paquete.Pojos.DatosVale" />
+        </set>
+    </class>
+</hibernate-mapping>

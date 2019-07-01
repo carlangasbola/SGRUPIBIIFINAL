@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/06/2019 09:51:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Paquete.Pojos.HistorialEquipo" table="historial_equipo" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+        <id name="idHistorialEquipo" type="int">
+            <column name="idHistorial_equipo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="equipoLaboratorio" class="Paquete.Pojos.EquipoLaboratorio" fetch="select">
+            <column name="idEquipo_laboratorio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="sesionDeLaboratorio" class="Paquete.Pojos.SesionDeLaboratorio" fetch="select">
+            <column name="idSesion" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="timestamp">
+            <column name="Fecha" length="23" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
