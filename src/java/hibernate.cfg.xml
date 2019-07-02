@@ -49,6 +49,7 @@ Contributor(s):
     <property name="hibernate.current_session_context_class">
             org.hibernate.context.internal.ThreadLocalSessionContext
         </property>
+    <property name="hibernate.connection.pool_size">10</property>
     <mapping resource="Paquete/Pojos/Residuos.hbm.xml"/>
     <mapping resource="Paquete/Pojos/Grupo.hbm.xml"/>
     <mapping resource="Paquete/Pojos/NotificacionesSesion.hbm.xml"/>

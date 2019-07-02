@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.ListaGrupo" table="lista_grupo" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idListaGrupo" type="int">
             <column name="idLista_Grupo" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="unidadGrupo" class="Paquete.Pojos.UnidadGrupo" fetch="select">
             <column name="idUnidad_Grupo" not-null="true" />

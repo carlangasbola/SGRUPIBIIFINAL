@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.Practica" table="practica" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idPractica" type="int">
             <column name="idPractica" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="unidadTematica" class="Paquete.Pojos.UnidadTematica" fetch="select">
             <column name="idUnidad_Tematica" not-null="true" />

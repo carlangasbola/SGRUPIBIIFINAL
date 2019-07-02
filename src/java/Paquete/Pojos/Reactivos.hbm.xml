@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.Reactivos" table="reactivos" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idReactivo" type="int">
             <column name="idReactivo" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="nombre" type="serializable">
             <column name="Nombre" not-null="true" />

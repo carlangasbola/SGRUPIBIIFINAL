@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.NotificacionesSesion" table="notificaciones_sesion" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idNotificacion" type="int">
             <column name="idNotificacion" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="sesionDeLaboratorio" class="Paquete.Pojos.SesionDeLaboratorio" fetch="select">
             <column name="idSesion" not-null="true" />

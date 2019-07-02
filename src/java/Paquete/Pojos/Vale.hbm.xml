@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.Vale" table="vale" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idVale" type="int">
             <column name="idVale" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="equipo" class="Paquete.Pojos.Equipo" fetch="select">
             <column name="idEquipo" not-null="true" />

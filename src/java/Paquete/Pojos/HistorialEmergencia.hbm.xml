@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.HistorialEmergencia" table="historial_emergencia" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idHistorial" type="int">
             <column name="idHistorial" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="emergencias" class="Paquete.Pojos.Emergencias" fetch="select">
             <column name="idEmergencias" not-null="true" />

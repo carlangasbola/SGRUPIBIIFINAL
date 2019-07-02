@@ -1,0 +1,60 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+
+                <h1 class="h3">Estos son todos los usuarios que se encuentran en el sistema </h1>
+                <p> Puede editar la información de los usuarios o eliminarlos del sistema. </p>
+
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Lista de usuarios</h6>
+                    </div>
+                    <div class="card-body">
+
+                         <h:form>
+                            <p:dataTable var="du" value="#{DatosUsuario.datosUsuarios}">
+                                <p:column headerText="Nombre">
+                                    <h:outputText value="#{du.nombre}" />
+                                </p:column>
+
+                                <p:column headerText="Paterno">
+                                    <h:outputText value="#{du.apellidoPaterno}" />
+                                </p:column>
+
+                                <p:column headerText="Materno">
+                                    <h:outputText value="#{du.apellidoMaterno}" />
+                                </p:column>
+
+                                <p:column headerText="Correo">
+                                    <h:outputText value="#{du.correo}" />
+                                </p:column>
+
+                                <p:column style="width:75px;text-align: center" headerText="Ver">
+                                    <p:commandButton value="Ver" />
+                                </p:column>
+
+                                <p:column style="text-align: center" headerText="Eliminar">
+                                    <p:commandButton value="Eliminar" />
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </h:form>
+
+                    </div>          
+                </div>
+            </ui:define> 			
+        </ui:composition> 
+
+    </h:body>
+</html>

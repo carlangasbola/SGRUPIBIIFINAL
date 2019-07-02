@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.Roles" table="roles" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idrol" type="int">
             <column name="idrol" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="nombreRol" type="string">
             <column name="nombre_rol" length="50" not-null="true" />

@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.MaterialUtilizado" table="material_utilizado" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idMaterialUtilizado" type="int">
             <column name="idMaterial_utilizado" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="material" class="Paquete.Pojos.Material" fetch="select">
             <column name="idMaterial" not-null="true" />

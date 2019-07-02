@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.Grupo" table="grupo" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idGrupo" type="int">
             <column name="idGrupo" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="nombre" type="string">
             <column name="Nombre" length="45" not-null="true" unique="true" />

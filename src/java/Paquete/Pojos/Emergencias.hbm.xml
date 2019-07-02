@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.Emergencias" table="emergencias" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idEmergencias" type="int">
             <column name="idEmergencias" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="nombre" type="serializable">
             <column name="Nombre" not-null="true" />

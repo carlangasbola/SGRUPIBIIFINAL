@@ -6,7 +6,7 @@
     <class name="Paquete.Pojos.Material" table="material" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idMaterial" type="int">
             <column name="idMaterial" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="nombre" type="serializable">
             <column name="Nombre" not-null="true" />
