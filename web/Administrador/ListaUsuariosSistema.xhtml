@@ -44,7 +44,7 @@
                             </p:column>
 
                             <p:column style="text-align: center" headerText="Eliminar">
-                                <p:commandButton value="Eliminar" action="#{Usuarios.EliminarUsuario(du.idUsuarios)}" />
+                                <p:commandButton value="Eliminar" ajax="false" action="#{Usuarios.EliminarUsuario(du.idUsuarios)}" />
                             </p:column>
 
                         </p:dataTable>
