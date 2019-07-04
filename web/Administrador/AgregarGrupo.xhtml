@@ -1,0 +1,65 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+
+                <h:form>  
+                    <p:growl id="growl" showDetail="true" sticky="false"  />  
+                </h:form>
+
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <h4 class=" text-center">Módulo de administración de Grupos</h4>
+                        <p class="lead">Bienvenido al módulo de creación de grupos, da clic en crear y completa los
+                            datos que se te piden.</p>
+                        <p >Una vez creado el grupo, da clic en su nombre para añadir o visuzalizar
+                            las unidades de aprendizaje que tiene asignadas.</p>
+                    </div>
+                </div>
+
+                <div class="row text-center">
+                    <div class="col">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" >
+                            <i class="fas fa-plus"></i>
+                            Crear un nuevo grupo
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col">
+
+                        <h:form>
+                            <p:dataTable var="g"  value="#{Grupo.listaGrupo}">
+
+                                <p:column headerText="Grupo">
+                                    <h:outputText value="#{g.nombre}" />
+                                </p:column>
+
+                                <p:column headerText="Cupo">
+                                    <h:outputText value="#{g.cupo}" />
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </h:form>
+
+<p>YA ESTOY HASTA LA PUTA MADRE</p>
+                    </div>
+                </div>
+
+            </ui:define> 			
+        </ui:composition> 
+   
+    
+</html>

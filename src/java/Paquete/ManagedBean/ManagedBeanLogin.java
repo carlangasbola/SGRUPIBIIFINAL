@@ -1,4 +1,4 @@
-package Paquete.ManagedBean.Login;
+package Paquete.ManagedBean;
 
 import Hibernate.Util.HibernateUtil;
 import Paquete.Beans.Mensajes;

@@ -1,4 +1,4 @@
-package Paquete.ManagedBean.Login;
+package Paquete.ManagedBean;
 
 import Hibernate.Util.HibernateUtil;
 import Paquete.Beans.Mensajes;
@@ -153,6 +153,8 @@ public class ManagedBeanDatosUsuario {
     
     
     public List<DatosUsuario> getDatosUsuarios() {
+        if(datosUsuarios == null)
+            ObtenerDatosUsuarios();
         return datosUsuarios;
     }
 

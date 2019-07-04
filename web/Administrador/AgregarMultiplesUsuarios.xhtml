@@ -1,0 +1,66 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+
+                <h:form>
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="h3"> Agregar alumnos a grupo </h1> <br/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <p> <strong>Instrucciones</strong> </p>
+                            <p> 1.- Descargue nuestra plantilla <a href="../FormatoExcel/FormatoExcel.xls">Click para descargar</a>.  </p>
+                            <p> 2.- Llene los datos que se presentan en el archivo que acaba de descargar.</p>
+                            <p> 3.- A continuación haga click en buscar archivo, seleccione la plantilla con lainformación que ya ha ingresado y haga click en subir</p>
+                            <p> 4.- Dar clic en el boton "Agregar Alumnos".</p>
+
+                            <div class="w-100"></div>
+                            Seleccionar archivo:
+                            <p:fileUpload fileUploadListener="#{UploadExcel.handleFileUpload}"
+                                          mode="advanced" 
+                                          dragDropSupport="false"
+                                          sizeLimit="1000000" 
+                                          fileLimit="10" 
+                                          allowTypes="/(\.|\/)(xls)$/"  
+                                          fileLimitMessage="El maximo de archivos es 1"  
+                                          invalidFileMessage="Se debe seleccionar un archivo xls"
+                                          cancelLabel="Cancelar" uploadLabel="Subir Archivo" label="Buscar Archivo"/>
+                            <br />
+                            <h:commandButton value="Añadir usuarios" action="#{ListaGrupo.LeerArchivosExcel()}"  > </h:commandButton>
+
+                        </div>
+                        <div class="col">
+
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    Información Principal
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Nombre del grupo: </li>
+                                    <li class="list-group-item">Nombre de la unidad de aprendizaje: </li>
+                                    <li class="list-group-item">Cupo de grupo: </li>
+                                    <li class="list-group-item">Docente que imparte: </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </h:form>
+
+            </ui:define> 			
+        </ui:composition> 
+    </h:body>
+</html>
