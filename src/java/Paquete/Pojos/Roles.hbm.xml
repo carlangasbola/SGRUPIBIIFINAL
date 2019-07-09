@@ -3,10 +3,10 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 8/07/2019 11:30:54 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Paqueteca.Roles" table="roles" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+    <class name="Paquete.Pojos.Roles" table="roles" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idrol" type="int">
             <column name="idrol" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="nombreRol" type="string">
             <column name="nombre_rol" length="50" not-null="true" />
@@ -15,7 +15,7 @@
             <key>
                 <column name="idRol" not-null="true" />
             </key>
-            <one-to-many class="Paqueteca.Usuarios" />
+            <one-to-many class="Paquete.Pojos.Usuarios" />
         </set>
     </class>
 </hibernate-mapping>
