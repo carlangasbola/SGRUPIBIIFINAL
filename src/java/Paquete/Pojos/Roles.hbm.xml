@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 1/07/2019 07:23:55 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 8/07/2019 11:30:54 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Paquete.Pojos.Roles" table="roles" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
+    <class name="Paqueteca.Roles" table="roles" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idrol" type="int">
             <column name="idrol" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
         <property name="nombreRol" type="string">
             <column name="nombre_rol" length="50" not-null="true" />
@@ -15,13 +15,7 @@
             <key>
                 <column name="idRol" not-null="true" />
             </key>
-            <one-to-many class="Paquete.Pojos.Usuarios" />
-        </set>
-        <set name="usuarioses_1" table="usuarios" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idRol" not-null="true" />
-            </key>
-            <one-to-many class="Paquete.Pojos.Usuarios" />
+            <one-to-many class="Paqueteca.Usuarios" />
         </set>
     </class>
 </hibernate-mapping>

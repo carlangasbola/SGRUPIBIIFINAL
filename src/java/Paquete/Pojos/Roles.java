@@ -1,5 +1,5 @@
 package Paquete.Pojos;
-// Generated 1/07/2019 07:23:53 PM by Hibernate Tools 4.3.1
+// Generated 8/07/2019 11:30:52 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,7 +14,6 @@ public class Roles  implements java.io.Serializable {
      private int idrol;
      private String nombreRol;
      private Set usuarioses = new HashSet(0);
-     private Set usuarioses_1 = new HashSet(0);
 
     public Roles() {
     }
@@ -24,11 +23,10 @@ public class Roles  implements java.io.Serializable {
         this.idrol = idrol;
         this.nombreRol = nombreRol;
     }
-    public Roles(int idrol, String nombreRol, Set usuarioses, Set usuarioses_1) {
+    public Roles(int idrol, String nombreRol, Set usuarioses) {
        this.idrol = idrol;
        this.nombreRol = nombreRol;
        this.usuarioses = usuarioses;
-       this.usuarioses_1 = usuarioses_1;
     }
    
     public int getIdrol() {
@@ -51,13 +49,6 @@ public class Roles  implements java.io.Serializable {
     
     public void setUsuarioses(Set usuarioses) {
         this.usuarioses = usuarioses;
-    }
-    public Set getUsuarioses_1() {
-        return this.usuarioses_1;
-    }
-    
-    public void setUsuarioses_1(Set usuarioses_1) {
-        this.usuarioses_1 = usuarioses_1;
     }
 
 
