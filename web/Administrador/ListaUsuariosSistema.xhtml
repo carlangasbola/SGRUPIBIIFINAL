@@ -39,19 +39,21 @@
                                 <h:outputText value="#{du.correo}" />
                             </p:column>
 
+                            <p:column headerText="Rol">
+                                <h:outputText value="#{du.usuarios.roles.nombreRol}" />
+                            </p:column>
+
+
                             <p:column style="width:75px;text-align: center" headerText="Editar">
-                                <p:commandButton value="Editar" />
+                                <h:commandButton value="Editar" class="btn btn-success" action="#{DatosUsuario.obtenerDatosUsuario(du)}" ></h:commandButton> 
                             </p:column>
 
                             <p:column style="text-align: center" headerText="Eliminar">
-                                <p:commandButton value="Eliminar" ajax="false" action="#{Usuarios.EliminarUsuario(du.idUsuarios)}" />
+                                <p:commandButton value="Eliminar" class="btn btn-danger" ajax="false"  action="#{DatosUsuario.EliminarUsuario(du.idUsuarios)}" />
                             </p:column>
 
                         </p:dataTable>
-
                     </h:form>
-
-
 
                 </div>          
             </div>
