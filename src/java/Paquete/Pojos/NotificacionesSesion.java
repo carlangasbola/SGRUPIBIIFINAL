@@ -11,13 +11,13 @@ public class NotificacionesSesion  implements java.io.Serializable {
 
      private int idNotificacion;
      private SesionDeLaboratorio sesionDeLaboratorio;
-     private byte[] descripcion;
+     private String descripcion;
      private short estado;
 
     public NotificacionesSesion() {
     }
 
-    public NotificacionesSesion(int idNotificacion, SesionDeLaboratorio sesionDeLaboratorio, byte[] descripcion, short estado) {
+    public NotificacionesSesion(int idNotificacion, SesionDeLaboratorio sesionDeLaboratorio, String descripcion, short estado) {
        this.idNotificacion = idNotificacion;
        this.sesionDeLaboratorio = sesionDeLaboratorio;
        this.descripcion = descripcion;
@@ -38,11 +38,11 @@ public class NotificacionesSesion  implements java.io.Serializable {
     public void setSesionDeLaboratorio(SesionDeLaboratorio sesionDeLaboratorio) {
         this.sesionDeLaboratorio = sesionDeLaboratorio;
     }
-    public byte[] getDescripcion() {
+    public String getDescripcion() {
         return this.descripcion;
     }
     
-    public void setDescripcion(byte[] descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
     public short getEstado() {

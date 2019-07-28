@@ -11,8 +11,8 @@
         <many-to-one name="sesionDeLaboratorio" class="Paquete.Pojos.SesionDeLaboratorio" fetch="select">
             <column name="idSesion" not-null="true" />
         </many-to-one>
-        <property name="descripcion" type="binary">
-            <column name="Descripcion" not-null="true" />
+        <property name="descripcion" type="string">
+            <column name="Descripcion" length="255" not-null="true" />
         </property>
         <property name="estado" type="short">
             <column name="Estado" not-null="true" />

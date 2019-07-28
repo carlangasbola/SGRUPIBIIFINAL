@@ -29,6 +29,7 @@ public class DatosPractica  implements java.io.Serializable {
      private String referencias;
      private String nomeclantura;
      private String anexos;
+     private String competencias;
 
     public DatosPractica() {
     }
@@ -37,7 +38,7 @@ public class DatosPractica  implements java.io.Serializable {
     public DatosPractica(Practica practica) {
         this.practica = practica;
     }
-    public DatosPractica(Practica practica, Integer numeroPractica, String nombre, String editor, Date actualizacion, String introducion, String actividadesPrevias, String objetivos, String semaforo, String recomendaciones, String protocolos, String desarrollo, String registroDatos, String resultados, String analisisResultados, String referencias, String nomeclantura, String anexos) {
+    public DatosPractica(Practica practica, Integer numeroPractica, String nombre, String editor, Date actualizacion, String introducion, String actividadesPrevias, String objetivos, String semaforo, String recomendaciones, String protocolos, String desarrollo, String registroDatos, String resultados, String analisisResultados, String referencias, String nomeclantura, String anexos, String competencias) {
        this.practica = practica;
        this.numeroPractica = numeroPractica;
        this.nombre = nombre;
@@ -56,6 +57,7 @@ public class DatosPractica  implements java.io.Serializable {
        this.referencias = referencias;
        this.nomeclantura = nomeclantura;
        this.anexos = anexos;
+       this.competencias = competencias;
     }
    
     public int getIdPractica() {
@@ -191,8 +193,14 @@ public class DatosPractica  implements java.io.Serializable {
     public void setAnexos(String anexos) {
         this.anexos = anexos;
     }
+    
+    public String getCompetencias() {
+        return competencias;
+    }
 
-
+    public void setCompetencias(String competencias) {
+        this.competencias = competencias;
+    }
 
 
 }

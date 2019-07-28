@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 1/07/2019 07:23:55 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 3/03/2019 08:38:07 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Paquete.Pojos.Eventos" table="eventos" schema="dbsgr" catalog="dbsgr" optimistic-lock="version">
         <id name="idEventos" type="int">
@@ -11,17 +11,17 @@
         <many-to-one name="unidadGrupo" class="Paquete.Pojos.UnidadGrupo" fetch="select">
             <column name="idUnidad_Grupo" not-null="true" />
         </many-to-one>
-        <property name="tipo" type="binary">
-            <column name="Tipo" not-null="true" />
+        <property name="tipo" type="string">
+            <column name="Tipo" length="250" not-null="true" />
         </property>
-        <property name="nombre" type="binary">
-            <column name="Nombre" not-null="true" />
+        <property name="nombre" type="string">
+            <column name="Nombre" length="250" not-null="true" />
         </property>
         <property name="fecha" type="timestamp">
             <column name="Fecha" length="23" not-null="true" />
         </property>
-        <property name="descripcion" type="binary">
-            <column name="Descripcion" />
+        <property name="descripcion" type="string">
+            <column length="250" name="Descripcion" />
         </property>
     </class>
 </hibernate-mapping>

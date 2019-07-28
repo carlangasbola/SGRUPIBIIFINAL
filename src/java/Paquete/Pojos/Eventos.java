@@ -1,5 +1,5 @@
 package Paquete.Pojos;
-// Generated 1/07/2019 07:23:53 PM by Hibernate Tools 4.3.1
+// Generated 3/03/2019 08:38:04 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -12,23 +12,23 @@ public class Eventos  implements java.io.Serializable {
 
      private int idEventos;
      private UnidadGrupo unidadGrupo;
-     private byte[] tipo;
-     private byte[] nombre;
+     private String tipo;
+     private String nombre;
      private Date fecha;
-     private byte[] descripcion;
+     private String descripcion;
 
     public Eventos() {
     }
 
 	
-    public Eventos(int idEventos, UnidadGrupo unidadGrupo, byte[] tipo, byte[] nombre, Date fecha) {
+    public Eventos(int idEventos, UnidadGrupo unidadGrupo, String tipo, String nombre, Date fecha) {
         this.idEventos = idEventos;
         this.unidadGrupo = unidadGrupo;
         this.tipo = tipo;
         this.nombre = nombre;
         this.fecha = fecha;
     }
-    public Eventos(int idEventos, UnidadGrupo unidadGrupo, byte[] tipo, byte[] nombre, Date fecha, byte[] descripcion) {
+    public Eventos(int idEventos, UnidadGrupo unidadGrupo, String tipo, String nombre, Date fecha, String descripcion) {
        this.idEventos = idEventos;
        this.unidadGrupo = unidadGrupo;
        this.tipo = tipo;
@@ -51,18 +51,18 @@ public class Eventos  implements java.io.Serializable {
     public void setUnidadGrupo(UnidadGrupo unidadGrupo) {
         this.unidadGrupo = unidadGrupo;
     }
-    public byte[] getTipo() {
+    public String getTipo() {
         return this.tipo;
     }
     
-    public void setTipo(byte[] tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    public byte[] getNombre() {
+    public String getNombre() {
         return this.nombre;
     }
     
-    public void setNombre(byte[] nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
     public Date getFecha() {
@@ -72,11 +72,11 @@ public class Eventos  implements java.io.Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public byte[] getDescripcion() {
+    public String getDescripcion() {
         return this.descripcion;
     }
     
-    public void setDescripcion(byte[] descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 

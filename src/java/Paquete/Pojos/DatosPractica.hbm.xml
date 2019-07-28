@@ -62,5 +62,8 @@
         <property name="anexos" type="string">
             <column name="Anexos" />
         </property>
+        <property name="competencias" type="string">
+            <column name="Competencias" length="250" />
+        </property>
     </class>
 </hibernate-mapping>
