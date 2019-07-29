@@ -1,0 +1,482 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta charset="utf-8"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!-- Custom fonts for this template-->
+        <link href="../Files/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Custom styles for this template-->
+        <link href="../Files/css/sb-admin-2.min.css" rel="stylesheet"/>
+        <!-- Custom styles for this page -->
+        <link href="../Files/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"></link>
+        <link href="../Files/inventario/css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link href="../Files/inventario/css/style.css" rel='stylesheet' type='text/css' />
+        <title>Sistema de gestión de riesgos</title>
+    </h:head>
+
+    <h:body id="page-top"> 
+
+        <!-- Growl para la muestra de mensajes -->
+        <p:growl id="growl" showDetail="true" sticky="true" />  
+
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <ui:insert name = "barralateral" >
+                <ui:include src = "../Templates/BarraLateral.xhtml" />
+            </ui:insert>    
+            <!-- End of Sidebar -->
+
+            <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Main Content -->
+                <div id="content">
+                    <!-- Topbar -->
+                    <ui:insert name = "Topbar" >
+                        <ui:include src = "../Templates/BarraNavegacion.xhtml" />
+                    </ui:insert>
+                    
+                    <div class="row mx-4">
+                        
+                        <div style="width:32%" class="card shadow mr-4 states-first">
+                            <div align="center">
+                                <div class="stats-left ">
+                                    <h5>Registros</h5>
+                                    <h4><a style="color:#FFFFFF" href="AdministrarReactivos.xhtml">Reactivos</a></h4>
+                                </div>
+                                <div class="stats-right">
+                                    <label>#{DatosReactivos.datosReactivo.size()}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="width:32%" class="card shadow mr-4 states-mdl">
+                            <div align="center">
+                                <div class="stats-left">
+                                    <h5>Registros</h5>
+                                    <h4><a style="color:#FFFFFF" href="../Administrador/AdministrarMaterial.xhtml">Material</a></h4>
+                                </div>
+                                <div class="stats-right">
+                                    <label>#{DatosMaterial.datosMaterial.size()}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="width:32%" class="card shadow states-last">
+                            <div align="center">
+                                <div class="stats-left">
+                                    <h5>Registros</h5>
+                                    <h4><a style="color:#FFFFFF" href="../Administrador/AdministrarEquipo.xhtml">Equipo</a></h4>
+                                </div>
+                                <div class="stats-right">
+                                    <label>#{DatosEquipoLaboratorio.datosEquipo.size()}</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row mx-4">
+                        
+                        <div style="width:32%" class="card shadow mr-4 p-3">
+                            <div align="center">
+                                <canvas id="polar-reactivo" width="100%" ></canvas>
+                            </div>
+                        </div>
+
+                        <div style="width:32%" class="card shadow mr-4 p-3">
+                            <div align="center">
+                                <canvas id="bar-material" width="100%" height="100%"></canvas>
+                            </div>
+                        </div>
+
+                        <div style="width:32%" class="card shadow p-3">
+                            <div align="center">
+                                <canvas id="bar-equipo" width="100%" height="100%"></canvas>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row mx-4">
+                        
+                        <div style="width:32%" class="card shadow mr-4 p-3">
+                            <div align="left">
+                                <div class="stats-title">
+                                    <h4 class="title">Reactivos</h4>
+                                </div>
+                                <div class="stats-body">
+                                    
+                                    <div class="row">
+                                        <div style="width:50%">
+                                            Explosivos
+                                        </div>
+                                        
+                                        <div style="width:41%">
+                                            <div class="progress progress-striped active progress-right">
+                                                <div class="bar explosivo" style="width:#{DatosReactivos.porcentajeReactivo('Explosivo')}%"></div> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="width:9%" align="right">
+                                            <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Explosivo")}%</span> 
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div style="width:50%">
+                                            Inflamables
+                                        </div>
+                                        
+                                        <div style="width:41%">
+                                            <div class="progress progress-striped active progress-right">
+                                                <div class="bar inflamable" style="width:#{DatosReactivos.porcentajeReactivo('Inflamable')}%"></div> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="width:9%" align="right">
+                                            <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Inflamable")}%</span> 
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div style="width:50%">
+                                            Gases a presión
+                                        </div>
+                                        
+                                        <div style="width:41%">
+                                            <div class="progress progress-striped active progress-right">
+                                                <div class="bar presion" style="width:#{DatosReactivos.porcentajeReactivo('Gas a presión')}%"></div> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="width:9%" align="right">
+                                            <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Gas a presión")}%</span> 
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div style="width:50%">
+                                            Sustancias comburentes
+                                        </div>
+                                        
+                                        <div style="width:41%">
+                                            <div class="progress progress-striped active progress-right">
+                                                <div class="bar comburente" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia comburente')}%"></div> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="width:9%" align="right">
+                                            <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia comburente")}%</span> 
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div style="width:50%">
+                                            Perjudiciales para la salud 
+                                        </div>
+                                        
+                                        <div style="width:41%">
+                                            <div class="progress progress-striped active progress-right">
+                                                <div class="bar perjudicial" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia perjudicial para la salud')}%"></div> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="width:9%" align="right">
+                                            <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia perjudicial para la salud")}%</span> 
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div style="width:50%">
+                                            Sustancias corrosivas 
+                                        </div>
+                                        
+                                        <div style="width:41%">
+                                            <div class="progress progress-striped active progress-right">
+                                                <div class="bar corrosiva" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia corrosiva')}%"></div> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="width:9%" align="right">
+                                            <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia corrosiva")}%</span> 
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div style="width:50%">
+                                            Sustancias nosivas
+                                        </div>
+                                        
+                                        <div style="width:41%">
+                                            <div class="progress progress-striped active progress-right">
+                                                <div class="bar nosiva" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia nosiva')}%"></div> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="width:9%" align="right">
+                                            <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia nosiva")}%</span> 
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div style="width:50%">
+                                            Sustancias tóxicas
+                                        </div>
+                                        
+                                        <div style="width:41%">
+                                            <div class="progress progress-striped active progress-right">
+                                                <div class="bar toxica" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia tóxica')}%"></div> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="width:9%" align="right">
+                                            <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia tóxica")}%</span> 
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div style="width:50%">
+                                            Sustancias peligrosas
+                                        </div>
+                                        
+                                        <div style="width:41%">
+                                            <div class="progress progress-striped active progress-right">
+                                                <div class="bar peligrosas" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia peligrosas para el medio ambiente')}%"></div> 
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="width:9%" align="right">
+                                            <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia peligrosas para el medio ambiente")}%</span> 
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div style="width:66%" class="card shadow ">
+                        </div>
+                        
+                    </div><br/><br/>
+                    
+                </div>
+            </div>  
+        </div>
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <script src="../Files/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../Files/js/sb-admin-2.min.js"></script>
+        <script>
+            var materiales = [];
+            var cantidadMaterial = [];
+            var equipo = [];
+            var cantidadEquipo = [];
+            
+            function nombresEquipo() {
+                equipo = [];
+                let i = 0;
+                while (true) {
+                    
+                    if (i === 0){
+                        equipo.push(String("#{DatosEquipoLaboratorio.nombreEquipo(0)}").substr(0, 6));
+                    }
+                    else if (i === 1){
+                        equipo.push(String("#{DatosEquipoLaboratorio.nombreEquipo(1)}").substr(0, 6));
+                    }
+                    else if (i === 2){
+                        equipo.push(String("#{DatosEquipoLaboratorio.nombreEquipo(2)}").substr(0, 6));
+                    }
+                    else if (i === 3){
+                        equipo.push(String("#{DatosEquipoLaboratorio.nombreEquipo(3)}").substr(0, 6));
+                    }
+                    else if (i === 4){
+                        equipo.push(String("#{DatosEquipoLaboratorio.nombreEquipo(4)}").substr(0, 6));
+                    }
+                    i++;
+                    if (i >= #{DatosEquipoLaboratorio.datosEquipo.size()} || i === 5) {
+                        break;
+                    }
+                }
+                return equipo;
+            }
+            
+            function cantidadesEquipo() {
+                cantidadEquipo = [];
+                let i = 0;
+                while (true) {
+                    
+                    if (i === 0){
+                        cantidadEquipo.push(String("#{DatosEquipoLaboratorio.cantidadEquipo(0)}"));
+                    }
+                    else if (i === 1){
+                        cantidadEquipo.push(String("#{DatosEquipoLaboratorio.cantidadEquipo(1)}"));
+                    }
+                    else if (i === 2){
+                        cantidadEquipo.push(String("#{DatosEquipoLaboratorio.cantidadEquipo(2)}"));
+                    }
+                    else if (i === 3){
+                        cantidadEquipo.push(String("#{DatosEquipoLaboratorio.cantidadEquipo(3)}"));
+                    }
+                    else if (i === 4){
+                        cantidadEquipo.push(String("#{DatosEquipoLaboratorio.cantidadEquipo(4)}"));
+                    }
+                    i++;
+                    if (i >= #{DatosEquipoLaboratorio.datosEquipo.size()} || i === 5) {
+                        break;
+                    }
+                }
+                return cantidadEquipo;
+            }
+            
+            function nombresMateriales() {
+                materiales = [];
+                let i = 0;
+                while (true) {
+                    
+                    if (i === 0){
+                        materiales.push(String("#{DatosMaterial.nombreMaterial(0)}").substr(0, 6));
+                    }
+                    else if (i === 1){
+                        materiales.push(String("#{DatosMaterial.nombreMaterial(1)}").substr(0, 6));
+                    }
+                    else if (i === 2){
+                        materiales.push(String("#{DatosMaterial.nombreMaterial(2)}").substr(0, 6));
+                    }
+                    else if (i === 3){
+                        materiales.push(String("#{DatosMaterial.nombreMaterial(3)}").substr(0, 6));
+                    }
+                    else if (i === 4){
+                        materiales.push(String("#{DatosMaterial.nombreMaterial(4)}").substr(0, 6));
+                    }
+                    i++;
+                    if (i >= #{DatosMaterial.datosMaterial.size()} || i === 5) {
+                        break;
+                    }
+                }
+                return materiales;
+            }
+            
+            function cantidadesMateriales() {
+                cantidadMaterial = [];
+                let i = 0;
+                while (true) {
+                    
+                    if (i === 0){
+                        cantidadMaterial.push(String("#{DatosMaterial.cantidadMaterial(0)}"));
+                    }
+                    else if (i === 1){
+                        cantidadMaterial.push(String("#{DatosMaterial.cantidadMaterial(1)}"));
+                    }
+                    else if (i === 2){
+                        cantidadMaterial.push(String("#{DatosMaterial.cantidadMaterial(2)}"));
+                    }
+                    else if (i === 3){
+                        cantidadMaterial.push(String("#{DatosMaterial.cantidadMaterial(3)}"));
+                    }
+                    else if (i === 4){
+                        cantidadMaterial.push(String("#{DatosMaterial.cantidadMaterial(4)}"));
+                    }
+                    i++;
+                    if (i >= #{DatosMaterial.datosMaterial.size()} || i === 5) {
+                        break;
+                    }
+                }
+                return cantidadMaterial;
+            }
+            
+            new Chart(document.getElementById("polar-reactivo"), {
+                type: 'polarArea',
+                data: {
+                    labels: ["Explosivos", "Gases líquidos o sólidos inflamables", "Gases a presión", "Sustancias comburentes", 
+                             "Sustancias perjudiciales para la salud", "Sustancias corrosivas", "Sustancias nosivas", 
+                             "Sustancias tóxicas", "Sustancias peligrosas para el medio ambiente"],
+                    datasets: [{
+                            label: "Population (millions)",
+                            backgroundColor: ["#A61308", "#3e95cd", "#A68608", "#8EA608", "#00A811", "#00A897", "#005CA8", "#3100A8", "#8000A8"],
+                            data: [#{DatosReactivos.cantidadReactivos("Explosivo")}, #{DatosReactivos.cantidadReactivos("Inflamable")}, 
+                                   #{DatosReactivos.cantidadReactivos("Gas a presión")}, #{DatosReactivos.cantidadReactivos("Sustancia comburente")},
+                                   #{DatosReactivos.cantidadReactivos("Sustancia perjudicial para la salud")},
+                                   #{DatosReactivos.cantidadReactivos("Sustancia corrosiva")}, #{DatosReactivos.cantidadReactivos("Sustancia nosiva")}, 
+                                   #{DatosReactivos.cantidadReactivos("Sustancia tóxica")},
+                                   #{DatosReactivos.cantidadReactivos("Sustancia peligrosas para el medio ambiente")}]
+                        }
+                    ]
+                },
+                options: {
+                    legend: {
+                        position: 'bottom',
+                        display: false
+                    }
+                }
+            });
+            
+            new Chart(document.getElementById("bar-material"), {
+                type: 'bar',
+                data: {
+                    labels: nombresMateriales(),
+                    datasets: [
+                        {
+                            label: "Piezas",
+                            backgroundColor: ["#3e95cd", "#00A811", "#00A897", "#005CA8", "#8000A8"],
+                            data: cantidadesMateriales()
+                        }
+                    ]
+                },
+                options: {
+                    legend: { 
+                        display: false 
+                    },
+                    title: {
+                        display: true,
+                        //text: 'Predicted world population (millions) in 2050'
+                    }
+                }
+            });
+            
+            new Chart(document.getElementById("bar-equipo"), {
+                type: 'bar',
+                data: {
+                    labels: nombresEquipo(),
+                    datasets: [
+                        {
+                            label: "Piezas",
+                            backgroundColor: ["#3e95cd", "#00A811", "#00A897", "#005CA8", "#8000A8"],
+                            data: cantidadesEquipo()
+                        }
+                    ]
+                },
+                options: {
+                    legend: { 
+                        display: false 
+                    },
+                    title: {
+                        display: true,
+                        //text: 'Predicted world population (millions) in 2050'
+                    }
+                }
+            });
+        </script>
+    </h:body>
+</html>
+
+
+<!--
+    IMPORTANTE LEER:
+    El template principal manda a llarmar a los templates de la carpeta Template
+    Este es el cascaron principal y va cambiando dependiendo de la pagina
+    Si quieres modicar algo modifica los archivos de la carpeta Template
+-->

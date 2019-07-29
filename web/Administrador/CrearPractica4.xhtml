@@ -1,0 +1,330 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <h:head>
+        <meta charset="utf-8"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"/>
+        <!-- Custom fonts for this template-->
+        <link href="../Files/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Custom styles for this template-->
+        <link href="../Files/css/sb-admin-2.min.css" rel="stylesheet"/>
+        <!-- Custom styles for this page -->
+        <link href="../Files/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"></link>
+	<link href="../Files/inventario/css/style.css" rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="../Files/inventario/build/styles/an-skill-bar.css"/>
+        <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
+        <link href="../Files/inventario/css/botones.css" rel='stylesheet' type='text/css' />
+        <style>
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+            }
+
+            *:before, *:after {
+              box-sizing: inherit;
+            }
+
+
+            #skill {
+              width: 100%;
+              background-color: #f2f2f2;
+              padding: 30px;
+              display: block;
+              border-radius: 5px;
+              margin: auto;
+            }
+        </style>
+    <title>Sistema de gestión de riesgos</title>
+    </h:head>
+
+    <h:body id="page-top"> 
+
+        <!-- Growl para la muestra de mensajes -->
+        <p:growl id="growl" showDetail="true" sticky="true" />  
+
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <ui:insert name = "barralateral" >
+                <ui:include src = "../Templates/BarraLateral.xhtml" />
+            </ui:insert>    
+            <!-- End of Sidebar -->
+
+            <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Main Content -->
+                <div id="content">
+                    <!-- Topbar -->
+                    <ui:insert name = "Topbar" >
+                        <ui:include src = "../Templates/BarraNavegacion.xhtml" />
+                    </ui:insert>
+                    
+                    <h:form>
+                        <div class="row mx-4">
+                            <div style="width:100%" class="card shadow  p-4">
+
+                                <div class="row form-group">
+
+                                    <div class="col-12 col-md-2">
+                                        <img src="../Files/inventario/images/IPN.png" width="50%" />
+                                    </div>
+
+                                    <div class="col-12 col-md-8" align="center">
+                                        <h1 class="h3">INSTITUTO POLITÉCNICO NACIONAL</h1>
+                                        <h1 class="h4">UNIDAD PROFESIONAL INTERDISCIPLINARIA DE BIOTECNOLOGÍA</h1>
+                                        <h1 class="h5">DEPARTAMENTO DE BIOINGENIERÍA</h1>
+                                        <h1 class="h5">ACADEMIA DE FUNDAMENTOS DE BIOINGENIERÍA</h1>
+                                        <h1 class="h5">LABORATORIO DE BIOINGENIERÍA</h1>
+                                    </div>
+                                    <div class="col-12 col-md-2" align="right">
+                                        <br/><img src="../Files/inventario/images/UPIBI.png" width="70%"/>
+                                    </div>
+
+                                </div>
+                                
+                                <div style="padding-left:0%;padding-top:3%" align="center">
+                                    <div style="padding-left:0%">
+                                        <h1 class="h5"><strong>#{ListaPracticas.datosPractica.nombre}</strong></h1>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group" style="padding-bottom:.5%">
+                                    <div style="padding-left:0%;padding-bottom:1%">
+                                        <strong>NIVEL DE RIESGO</strong>
+                                    </div>
+
+                                    <div id="skill">
+
+                                        <div class="#{ListaPracticas.textoSemaforo(ListaPracticas.datosPractica.semaforo)}">
+                                            <div class="filled" data-width="#{ListaPracticas.porcentajeSemaforo(ListaPracticas.datosPractica.semaforo)}"></div>
+                                            <span class="title">#{ListaPracticas.nivelSemaforo(ListaPracticas.datosPractica.semaforo)}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>OBJETIVOS</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.objetivos}" escape="false" />
+                                    </div>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>ACTIVIDADES PREVIAS</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.actividadesPrevias}" escape="false" />
+                                    </div>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>COMPETENCIAS</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.competencias}" escape="false" />
+                                    </div>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>INTRODUCCIÓN</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.introducion}" escape="false" />
+                                    </div>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0;padding-bottom:1%">
+                                        <p><strong>MATERIAL</strong></p>
+                                    </div>
+                                    <ui:repeat var="item" varStatus="status" value="#{ListaPracticas.materialPractica}">
+                                        <div class="input-group" style="padding-left:2%">
+                                            •&bnsp; #{item.cantidad} #{item.nombre}
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0;padding-bottom:1%">
+                                        <p><strong>EQUIPO</strong></p>
+                                    </div>
+                                    <ui:repeat var="item" varStatus="status" value="#{ListaPracticas.equipoPractica}">
+                                        <div class="input-group" style="padding-left:2%">
+                                            •&bnsp; #{item.cantidad} #{item.nombre}
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0;padding-bottom:1%">
+                                        <p><strong>REACTIVOS</strong></p>
+                                    </div>
+                                    <ui:repeat var="item" varStatus="status" value="#{ListaPracticas.reactivosPractica}">
+                                        <div class="input-group" style="padding-left:2%">
+                                            •&bnsp; #{item.cantidad} #{item.nombre}
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>DESARROLLO EXPERIMENTAL</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.desarrollo}" escape="false" />
+                                    </div>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>REGISTRO DE DATOS</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.registroDatos}" escape="false" />
+                                    </div>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>RESULTADOS</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.resultados}" escape="false" />
+                                    </div>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>ANÁLISIS DE RESULTADOS</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.analisisResultados}" escape="false" />
+                                    </div>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>REFERENCIAS</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.referencias}" escape="false" />
+                                    </div>
+                                </div>
+
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>NOMECLATURA</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.nomeclantura}" escape="false" />
+                                    </div>
+                                </div>
+                                
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>ANEXOS</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.anexos}" escape="false" />
+                                    </div>
+                                </div>
+                                
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>RECOMENDACIONES</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.recomendaciones}" escape="false" />
+                                    </div>
+                                </div>
+                                
+                                <div style="padding-left:0%;padding-top:3%">
+                                    <div style="padding-left:0%">
+                                        <p><strong>PROTOCOLOS</strong></p>
+                                    </div>
+
+                                    <div style="padding-top:1%;padding-bottom:2%">
+                                        <h:outputText value="#{ListaPracticas.datosPractica.protocolos}" escape="false" />
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="row mx-3 my-5">
+                                
+                            <div class="col-12 col-md-4" align="left">
+                                <button type="submit" class="anteriorsiguiente successansig button3 form-control col-sm-8" 
+                                        jsf:action="CrearPractica3.xhtml">
+                                    <i class="fas fa-chevron-circle-left mr-2"></i>Anterior
+                                </button>
+                            </div>
+
+                            <div class="col-12 col-md-4" align="center">
+                                <button type="submit" class="anteriorsiguiente successansig button3 form-control col-sm-8" 
+                                        jsf:action="CrearPractica3.xhtml">
+                                    <i class="fas fa-save mr-2"></i>Guardar 
+                                    <f:actionListener binding="#{ListaPracticas.insertarPracticaCompleta()}" /> 
+                                </button>
+                            </div>
+
+                            <div class="col-12 col-md-4" align="right">
+                                <p:commandButton type="submit" class="anteriorsiguiente successansig button3 form-control col-sm-8" 
+                                                 ajax="false" actionListener="#{ListaPracticas.preparaDescarga()}">
+                                    <p:fileDownload value="#{ListaPracticas.descarga}" />
+                                </p:commandButton><i class="fas fa-file-pdf mr-2"></i>Ver PDF 
+                            </div>
+
+                        </div>
+                        
+                    </h:form>
+                </div>
+            </div>  
+        </div>
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        
+        <script src="../Files/js/sb-admin-2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+        <script src="../Files/inventario/build/scripts/an-skill-bar.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.skillbar').skillbar({
+                    speed: 1500,
+                });
+            });
+        </script>
+    </h:body>
+</html>

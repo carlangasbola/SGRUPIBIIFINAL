@@ -70,7 +70,7 @@ public class ManagedBeanLogin {
         Transaction transaction = null;
 
         DatosUsuario du = new DatosUsuario();
-
+        
         try {
 
             transaction = session.beginTransaction();

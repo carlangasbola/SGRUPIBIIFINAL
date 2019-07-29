@@ -13,8 +13,8 @@ public class EquipoLaboratorio  implements java.io.Serializable {
 
 
      private int idEquipoLaboratorio;
-     private Serializable nombre;
-     private Serializable caracteristicas;
+     private String nombre;
+     private String caracteristicas;
      private short existenciaInventario;
      private int cantidad;
      private Set equipoUtilizados = new HashSet(0);
@@ -25,14 +25,14 @@ public class EquipoLaboratorio  implements java.io.Serializable {
     }
 
 	
-    public EquipoLaboratorio(int idEquipoLaboratorio, Serializable nombre, Serializable caracteristicas, short existenciaInventario, int cantidad) {
+    public EquipoLaboratorio(int idEquipoLaboratorio, String nombre, String caracteristicas, short existenciaInventario, int cantidad) {
         this.idEquipoLaboratorio = idEquipoLaboratorio;
         this.nombre = nombre;
         this.caracteristicas = caracteristicas;
         this.existenciaInventario = existenciaInventario;
         this.cantidad = cantidad;
     }
-    public EquipoLaboratorio(int idEquipoLaboratorio, Serializable nombre, Serializable caracteristicas, short existenciaInventario, int cantidad, Set equipoUtilizados, Set historialEquipos, Set datosVales) {
+    public EquipoLaboratorio(int idEquipoLaboratorio, String nombre, String caracteristicas, short existenciaInventario, int cantidad, Set equipoUtilizados, Set historialEquipos, Set datosVales) {
        this.idEquipoLaboratorio = idEquipoLaboratorio;
        this.nombre = nombre;
        this.caracteristicas = caracteristicas;
@@ -50,18 +50,18 @@ public class EquipoLaboratorio  implements java.io.Serializable {
     public void setIdEquipoLaboratorio(int idEquipoLaboratorio) {
         this.idEquipoLaboratorio = idEquipoLaboratorio;
     }
-    public Serializable getNombre() {
+    public String getNombre() {
         return this.nombre;
     }
     
-    public void setNombre(Serializable nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public Serializable getCaracteristicas() {
+    public String getCaracteristicas() {
         return this.caracteristicas;
     }
     
-    public void setCaracteristicas(Serializable caracteristicas) {
+    public void setCaracteristicas(String caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
     public short getExistenciaInventario() {

@@ -8,10 +8,10 @@
             <column name="idEquipo_laboratorio" />
             <generator class="identity" />
         </id>
-        <property name="nombre" type="serializable">
+        <property name="nombre" type="string">
             <column name="Nombre" not-null="true" />
         </property>
-        <property name="caracteristicas" type="serializable">
+        <property name="caracteristicas" type="string">
             <column name="Caracteristicas" not-null="true" />
         </property>
         <property name="existenciaInventario" type="short">

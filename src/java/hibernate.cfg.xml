@@ -45,6 +45,7 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:sqlserver://sgrupibi.database.windows.net:1433;databaseName=dbsgr</property>
     <property name="hibernate.connection.username">usuario</property>
     <property name="hibernate.connection.password">alfa2456*</property>
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
     <!-- Este etiqueta es para el getCurrentSession(); -->
     <property name="hibernate.current_session_context_class">
             org.hibernate.context.internal.ThreadLocalSessionContext
