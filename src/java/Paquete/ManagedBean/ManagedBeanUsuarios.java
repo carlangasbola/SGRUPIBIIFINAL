@@ -4,6 +4,7 @@ import Hibernate.Util.HibernateUtil;
 import Paquete.Beans.Mensajes;
 import Paquete.Pojos.Usuarios;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.inject.Named;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -13,9 +14,7 @@ import org.hibernate.Transaction;
 @RequestScoped
 public class ManagedBeanUsuarios {
 
-    public ManagedBeanUsuarios() {
-    }
-
+    
     public void EliminarUsuario(int idUsuario) {
         Mensajes mensaje = new Mensajes();
         Transaction transObj = null;
@@ -28,6 +27,7 @@ public class ManagedBeanUsuarios {
             transObj.commit();
             mensaje.setMessage("Eliminado del sistema");
             mensaje.info();
+            
         } catch (HibernateException exObj) {
             if (transObj != null) {
                 transObj.rollback();
@@ -35,6 +35,7 @@ public class ManagedBeanUsuarios {
                 mensaje.warn();
             }
         }
+        
     }
 
     
