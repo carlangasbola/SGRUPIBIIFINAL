@@ -16,6 +16,7 @@ import Paquete.Pojos.UnidadAprendizaje;
 import Paquete.Pojos.UnidadGrupo;
 import Paquete.Pojos.Usuarios;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -26,6 +27,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import jxl.Sheet;
 import jxl.Workbook;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -37,8 +39,6 @@ import org.hibernate.Transaction;
 @Named(value = "ListaGrupo")
 @RequestScoped
 public class ManagedBeanListaGrupo {
-
-    private Session hibernateSession;
 
     //Parametros para la creación de un usuario    
     private String nombre;
@@ -60,6 +60,8 @@ public class ManagedBeanListaGrupo {
 
     public void LeerArchivosExcel() {
 
+        String usuario = "";
+        Session hibernateSession = null;
         ////// Forma de asignar o recuperar el Id GRUPO
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         Map<String, Object> sessionMap = externalContext.getSessionMap();
@@ -74,14 +76,20 @@ public class ManagedBeanListaGrupo {
         String archivoDestino = realPath + File.separator + "web" + File.separator + "ExcelUpload" + File.separator + filename;
         int contador = 1;
 
-        hibernateSession = HibernateUtil.getSessionFactory().getCurrentSession();
-        UnidadGrupo ug = new UnidadGrupo();
-
-        ug = (UnidadGrupo) hibernateSession.get(UnidadGrupo.class, idUnidadGrupo);
-
         try {
-            Workbook archivoExcel = Workbook.getWorkbook(new File(archivoDestino));
+            hibernateSession = HibernateUtil.getSessionFactory().getCurrentSession();
+            hibernateSession.beginTransaction();
 
+            UnidadGrupo ug = new UnidadGrupo();
+            ug = (UnidadGrupo) hibernateSession.get(UnidadGrupo.class, idUnidadGrupo);
+            Workbook archivoExcel = Workbook.getWorkbook(new File(archivoDestino));
+            
+            if ( archivoExcel.getNumberOfSheets() >= ug.getGrupo().getCupo()){
+                Mensajes message = new Mensajes();
+                message.setMessage("La cantidad de alumnos a ingresar es mas grande que el cupo del grupo");
+                message.warn();
+                return;
+            }
             //Recorre cada hoja
             for (int hojas = 0; hojas < archivoExcel.getNumberOfSheets(); hojas++) {
                 Sheet hoja = archivoExcel.getSheet(hojas);
@@ -90,7 +98,6 @@ public class ManagedBeanListaGrupo {
                 int numColumnas = hoja.getColumns();
                 int numFilas = hoja.getRows();
                 String dato;
-                hibernateSession.beginTransaction();
                 //Recorre cada fila de la hoja
                 for (int fila = 1; fila < numFilas; fila++) {
                     for (int columna = 1; columna < numColumnas; columna++) {
@@ -133,6 +140,7 @@ public class ManagedBeanListaGrupo {
                         }
 
                     }
+                    usuario = identificador + " " + nombre + " " + paterno + " " + materno;
                     ListaGrupo listgroup = new ListaGrupo();
                     Usuarios user = new Usuarios();
                     DatosUsuario datauser = new DatosUsuario();
@@ -180,7 +188,9 @@ public class ManagedBeanListaGrupo {
                     .addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_FATAL,
                                     "Mensaje del sistema",
-                                    "No se completo la acción, inténtelo más tarde,Probablemente se intento insertar un usuario que ya existe "));
+                                    "No se completo la acción,"
+                                    + " inténtelo más tarde,Probablemente se intento insertar un usuario que ya existe \n"
+                                    + usuario));
             System.out.println("ExepcionAlumno : " + e);
         }
     }
@@ -202,8 +212,8 @@ public class ManagedBeanListaGrupo {
             tx.rollback();
             mensaje.setMessage("No se pudo eliminar el usuario");
             mensaje.fatal();
-        } 
-        
+        }
+
     }
 
     public List<ListaGrupo> obtenerListaGrupo() {
@@ -212,10 +222,19 @@ public class ManagedBeanListaGrupo {
         Map<String, Object> sessionMap = externalContext.getSessionMap();
         int idUnidadGrupo = (int) sessionMap.get("Id_UnidadGrupo");
         //////////////////////////////////////
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = null;
+        Transaction tran = null;
+         List<ListaGrupo> lg = new ArrayList<>();
+        try{
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        tran = session.beginTransaction();
         Query q = session.createQuery("FROM ListaGrupo WHERE unidadGrupo.idUnidadGrupo = :idUnidadGrupo");
         q.setParameter("idUnidadGrupo", idUnidadGrupo);
-        List<ListaGrupo> lg = q.list();
+        lg = q.list();
+        tran.commit();
+        }catch(HibernateException ex){
+            tran.rollback();
+        }
         return lg;
     }
 

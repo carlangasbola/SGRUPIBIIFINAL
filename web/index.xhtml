@@ -15,14 +15,26 @@
         </link>
         <!-- Estilos Propios -->
         <link rel="stylesheet" href="misestilos/estiloC.css"></link>
+        <!-- ICONOS -->
+        <script src="https://kit.fontawesome.com/6d493ccdf7.js"></script>
     </h:head>
     <h:body>
         <h:form>  
             <p:growl id="growl" showDetail="true" sticky="false"  />  
         </h:form>
 
+
         <!-- Image and text -->
-         <nav class='navbar navbar-expand-lg navbar-custom mb-4'> <a class='navbar-brand' href='#'>IPN</a> <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'><span class='navbar-toggler-icon'></span></button> <div class='collapse navbar-collapse justify-content-end' id='navbarSupportedContent'> <ul class='navbar-nav '> <li class='nav-item '> <a class='nav-link active' href='#'>Tutorial de uso del sistema<span class='sr-only'>(current)</span></a> </li><li class='nav-item'> <a class='nav-link' href='#'>Directorio Teléfonico</a> </li><li class='nav-item'> <a class='nav-link disabled' href='#'>Buzón de sugerencias</a> </li></ul> </div></nav>
+        <nav class='navbar navbar-expand-lg navbar-custom mb-4'> <a class='navbar-brand' href='index.html'>IPN</a>
+            <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'><span class='navbar-toggler-icon'></span></button>
+            <div class='collapse navbar-collapse justify-content-end' id='navbarSupportedContent'>
+                <ul class='navbar-nav '>
+                    <li class='nav-item '> <a class='nav-link active' href='#'>Tutorial de uso del sistema<span class='sr-only'>(current)</span></a> </li>
+                    <li class='nav-item'> <a class='nav-link' href='#'>Directorio Teléfonico</a> </li>
+                    <li class='nav-item'> <a class='nav-link disabled' href='#'>Buzón de sugerencias</a> </li>
+                </ul>
+            </div>
+        </nav>
 
         <h2 class="colorpantone text-center my-5 col-12">Sistema de gestión de riesgos para laboratorios de biotecnología</h2>
 
@@ -64,7 +76,6 @@
                         <li><strong>Gestión de inventarios:</strong> registro para el control y seguimiento de las sustancias químicas. </li>
                         <li><strong>Gestión de prácticas:</strong> identifica riesgos,directorio de emergencias,  protocolos de actuación preventivo y de contingencias</li>
                         <li><strong>Gestión del riesgo:</strong> establece los protocolos de prevención, atención y mantenimiento por medio de una matriz de riesgo para el equipo académico.</li>
-
                     </ul>
 
                     <img src="https://estudiareninternet.com/wp-content/uploads/2016/07/ipn.png" alt="" height="100" class=""></img>
@@ -76,7 +87,9 @@
         <script>
             window.location.hash = "no-back-button";
             window.location.hash = "Again-No-back-button";//again because google chrome don't insert first hash into history
-            window.onhashchange = function () { window.location.hash = "no-back-button"; }
+            window.onhashchange = function () {
+                window.location.hash = "no-back-button";
+            }
         </script>
 
 

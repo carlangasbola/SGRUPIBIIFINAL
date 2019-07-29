@@ -8,58 +8,100 @@
       xmlns:p="http://primefaces.org/ui">
 
 
-        <ui:composition template = "TemplatePrincipal.xhtml">	         
-            <ui:define name = "Contenido">
+    <ui:composition template = "TemplatePrincipal.xhtml">	         
+        <ui:define name = "Contenido">
 
-                <h:form>  
-                    <p:growl id="growl" showDetail="true" sticky="false"  />  
-                </h:form>
+            <h:form>  
+                <p:growl id="growl" showDetail="true" sticky="false"  />  
+            </h:form>
 
 
-                <div class="row mt-2">
-                    <div class="col">
-                        <h4 class=" text-center">Módulo de administración de Grupos</h4>
-                        <p class="lead">Bienvenido al módulo de creación de grupos, da clic en crear y completa los
-                            datos que se te piden.</p>
-                        <p >Una vez creado el grupo, da clic en su nombre para añadir o visuzalizar
-                            las unidades de aprendizaje que tiene asignadas.</p>
+            <div class="row mt-2">
+                <div class="col">
+                    <h4 class=" text-center">Módulo de administración de Grupos</h4>
+                    <p class="lead">Bienvenido al módulo de creación de grupos, da clic en crear y completa los
+                        datos que se te piden.<br></br> Despúes da clic en el enlace para añadir unidades de aprendizaje.</p>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#exampleModal" >
+                        <i class="fas fa-plus"></i>
+                        Crear un nuevo grupo
+                    </button>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col">
+
+                    <h:form>
+                        <p:dataTable var="g"  value="#{Grupo.listaGrupo}" >
+
+                            <p:column headerText="Grupo">
+                                <h:commandLink  value="#{g.nombre}" action="#{UnidadGrupo.redirectRelacionarUnidadAprendizajeGrupo()}" >
+                                    <f:setPropertyActionListener target="#{UnidadGrupo.grupo}" value="#{g}"></f:setPropertyActionListener>
+                                </h:commandLink> 
+                            </p:column>
+
+                            <p:column headerText="Cupo">
+                                <h:outputText value="#{g.cupo}" />
+                            </p:column>
+
+                            <p:column headerText="# Unidades de aprendizaje">
+                                <h:outputText value="#{Grupo.cantidadUnidadesAprendizaje(g.idGrupo)}" />
+                            </p:column>
+
+                            <p:column headerText="Modificar" >
+                                <h:commandButton styleClass="btn btn-secondary btn-sm" value="Modificar" action="#{Grupo.redirecionarModificacionGrupo(g)}"></h:commandButton>
+                            </p:column>
+
+                            <p:column headerText="Eliminar">
+                                <h:commandButton styleClass="btn btn-danger btn-sm" value="Eliminar" action="#{Grupo.eliminarGrupo(g.idGrupo)}" ></h:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </h:form>
+
+                    <p>
+                        <h1 class="display-4">  <strong> YA ESTOY HASTA LA PUTA MADRE </strong> </h1>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Modal de creacion de grupo -->
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Creación de grupo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form jsf:id="formulario">
+                                <p class="text-danger lead">El nombre del grupo no se puede repetir</p>
+                                <label for="nombre">Nombre del grupo</label>
+                                <input id="nombre" class="form-control" type="text" jsf:value="#{Grupo.grupo.nombre}" />
+                                <label for="cupo">Cupo del grupo</label>
+                                <input id="cupo" class="form-control" type="number" min="15" max="40" jsf:value="#{Grupo.grupo.cupo}"/>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary" jsf:action="#{Grupo.crearGrupo()}">Crear grupo</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="row text-center">
-                    <div class="col">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" >
-                            <i class="fas fa-plus"></i>
-                            Crear un nuevo grupo
-                        </button>
-                    </div>
-                </div>
+        </ui:define> 			
+    </ui:composition> 
 
-                <div class="row mt-5">
-                    <div class="col">
 
-                        <h:form>
-                            <p:dataTable var="g"  value="#{Grupo.listaGrupo}">
-
-                                <p:column headerText="Grupo">
-                                    <h:outputText value="#{g.nombre}" />
-                                </p:column>
-
-                                <p:column headerText="Cupo">
-                                    <h:outputText value="#{g.cupo}" />
-                                </p:column>
-
-                            </p:dataTable>
-
-                        </h:form>
-
-<p>YA ESTOY HASTA LA PUTA MADRE</p>
-                    </div>
-                </div>
-
-            </ui:define> 			
-        </ui:composition> 
-   
-    
 </html>

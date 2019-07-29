@@ -8,7 +8,7 @@
             <column name="idReactivo" />
             <generator class="identity" />
         </id>
-        <property name="nombre" type="serializable">
+        <property name="nombre" type="string">
             <column name="Nombre" not-null="true" />
         </property>
         <property name="tipo" type="string">
@@ -20,7 +20,7 @@
         <property name="existenciaInventario" type="byte">
             <column name="Existencia_inventario" not-null="true" />
         </property>
-        <property name="medida" type="serializable">
+        <property name="medida" type="string">
             <column name="Medida" not-null="true" />
         </property>
         <set name="datosVales" table="datos_vale" inverse="true" lazy="true" fetch="select">

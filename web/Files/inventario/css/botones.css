@@ -1,0 +1,44 @@
+.bts {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+.success {
+    border-color: #CED4DA;
+}
+.success:hover {
+    background-color: #B81F6D;
+    color: white;
+}
+
+.successrojo {
+    border-color: #CED4DA;
+}
+.successrojo:hover {
+    background-color: #78261F;
+    color: white;
+}
+
+.successverde {
+    border-color: #CED4DA;
+}
+.successverde:hover {
+    background-color: #0F6848;
+    color: white;
+}
+
+.anteriorsiguiente {
+    background-color: #6B1D47;
+    color: white;
+    cursor: pointer; 
+}
+.successansig {
+    border-color: #CED4DA;
+}
+.successansig:hover {
+    background-color: #57183a;
+    color: white;
+}
+.button3 {
+    border-radius: 5px;
+}

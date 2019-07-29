@@ -1,0 +1,318 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+	<link href="../Files/inventario/css/botones.css" rel='stylesheet' type='text/css' />
+    </h:head>
+
+    <ui:composition template = "TemplatePrincipal.xhtml">	         
+        <ui:define name = "Contenido">
+
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="h2"> Creación de prácticas de laboratorio </h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p> Completa la información a continuación para crear una nueva práctica </p>
+                    <p><strong>III Desarrollo de la práctica</strong></p>
+                </div>
+            </div>
+            
+                <h:form>
+                    <div class="row form-group">
+                        <div class="col-12 col-md">
+                            <label for="Desarrollo experimental"> > Desarrollo experimental</label>
+                            <p:textEditor id="Desarrolloexp" height="250" widgetVar="descriptionWidget5" value="#{ListaPracticas.datosPractica.desarrollo}">
+                                <f:facet name="toolbar">
+                                    <span class="ql-formats">
+                                        <select class="ql-font" />
+                                        <select class="ql-size" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold" />
+                                        <button class="ql-italic" />
+                                        <button class="ql-underline" />
+                                        <button class="ql-strike" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-color" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-script" value="sub" />
+                                        <button class="ql-script" value="super" />
+                                    </span>                            
+                                    <span class="ql-formats">
+                                        <button class="ql-list" value="ordered" />
+                                        <button class="ql-list" value="bullet" />
+                                        <button class="ql-indent" value="-1" />
+                                        <button class="ql-indent" value="+1" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-align" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-image" />>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-clean" />
+                                    </span>
+                                </f:facet>
+                            </p:textEditor>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-12 col-md">
+                            <label for="Registrodedatos">> Registro de datos</label>
+                            <p:textEditor id="Registrodedatos" height="250" widgetVar="descriptionWidget4" value="#{ListaPracticas.datosPractica.registroDatos}">
+                                <f:facet name="toolbar">
+                                    <span class="ql-formats">
+                                        <select class="ql-font" />
+                                        <select class="ql-size" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold" />
+                                        <button class="ql-italic" />
+                                        <button class="ql-underline" />
+                                        <button class="ql-strike" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-color" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-script" value="sub" />
+                                        <button class="ql-script" value="super" />
+                                    </span>                            
+                                    <span class="ql-formats">
+                                        <button class="ql-list" value="ordered" />
+                                        <button class="ql-list" value="bullet" />
+                                        <button class="ql-indent" value="-1" />
+                                        <button class="ql-indent" value="+1" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-align" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-image" />>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-clean" />
+                                    </span>
+                                </f:facet>
+                            </p:textEditor>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-12 col-md">
+                            <label for="Resultados">> Resultados </label>
+                            <p:textEditor id="resultados" height="250" widgetVar="descriptionWidget3" value="#{ListaPracticas.datosPractica.resultados}">
+                                <f:facet name="toolbar">
+                                    <span class="ql-formats">
+                                        <select class="ql-font" />
+                                        <select class="ql-size" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold" />
+                                        <button class="ql-italic" />
+                                        <button class="ql-underline" />
+                                        <button class="ql-strike" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-color" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-script" value="sub" />
+                                        <button class="ql-script" value="super" />
+                                    </span>                            
+                                    <span class="ql-formats">
+                                        <button class="ql-list" value="ordered" />
+                                        <button class="ql-list" value="bullet" />
+                                        <button class="ql-indent" value="-1" />
+                                        <button class="ql-indent" value="+1" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-align" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-image" />>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-clean" />
+                                    </span>
+                                </f:facet>
+                            </p:textEditor>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-12 col-md">
+                            <label for="Analisis de resultados">> Análisis de resultados</label>
+                            <p:textEditor id="analisisr" height="250" widgetVar="descriptionWidget2" value="#{ListaPracticas.datosPractica.analisisResultados}">
+                                <f:facet name="toolbar">
+                                    <span class="ql-formats">
+                                        <select class="ql-font" />
+                                        <select class="ql-size" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold" />
+                                        <button class="ql-italic" />
+                                        <button class="ql-underline" />
+                                        <button class="ql-strike" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-color" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-script" value="sub" />
+                                        <button class="ql-script" value="super" />
+                                    </span>                            
+                                    <span class="ql-formats">
+                                        <button class="ql-list" value="ordered" />
+                                        <button class="ql-list" value="bullet" />
+                                        <button class="ql-indent" value="-1" />
+                                        <button class="ql-indent" value="+1" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-align" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-image" />>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-clean" />
+                                    </span>
+                                </f:facet>
+                            </p:textEditor>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md">
+                        <p><strong>III Desarrollo de la práctica</strong></p>
+                    </div>
+
+                    <div class="row" style="padding-bottom:1%">
+                        <!-- Referencias -->
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Referencias6">> Referencias</label>
+                                <p:textEditor id="referencias" height="100" widgetVar="descriptionWidget6" 
+                                              value="#{ListaPracticas.datosPractica.referencias}">
+                                    <f:facet name="toolbar">
+                                        <span class="ql-formats">
+                                            <button class="ql-bold" />
+                                            <button class="ql-italic" />
+                                        </span>                        
+                                        <span class="ql-formats">
+                                            <button class="ql-list" value="ordered" />
+                                            <button class="ql-list" value="bullet" />
+                                            <button class="ql-indent" value="-1" />
+                                            <button class="ql-indent" value="+1" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-align" />
+                                        </span>
+                                    </f:facet>
+                                </p:textEditor>
+                            </div>
+                        </div>
+                        <!-- Nomecatura -->
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Nomenclatura">> Nomenclatura</label>
+                                <p:textEditor id="nomeclatura" height="100" widgetVar="descriptionWidget" 
+                                              value="#{ListaPracticas.datosPractica.nomeclantura}">
+                                    <f:facet name="toolbar">
+                                        <span class="ql-formats">
+                                            <button class="ql-bold" />
+                                            <button class="ql-italic" />
+                                        </span>                        
+                                        <span class="ql-formats">
+                                            <button class="ql-list" value="ordered" />
+                                            <button class="ql-list" value="bullet" />
+                                            <button class="ql-indent" value="-1" />
+                                            <button class="ql-indent" value="+1" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-align" />
+                                        </span>
+                                    </f:facet>
+                                </p:textEditor>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-12 col-md">
+                            <label for="anexos">> Anexos</label>
+                            <p:textEditor id="anexos" height="250" widgetVar="descriptionWidget1" value="#{ListaPracticas.datosPractica.anexos}" >
+                                <f:facet name="toolbar">
+                                    <span class="ql-formats">
+                                        <select class="ql-font" />
+                                        <select class="ql-size" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold" />
+                                        <button class="ql-italic" />
+                                        <button class="ql-underline" />
+                                        <button class="ql-strike" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-color" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-script" value="sub" />
+                                        <button class="ql-script" value="super" />
+                                    </span>                            
+                                    <span class="ql-formats">
+                                        <button class="ql-list" value="ordered" />
+                                        <button class="ql-list" value="bullet" />
+                                        <button class="ql-indent" value="-1" />
+                                        <button class="ql-indent" value="+1" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-align" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-image" />>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-clean" />
+                                    </span>
+                                </f:facet>
+                            </p:textEditor>
+                        </div>
+                    </div>
+                    
+                    <div class="row form-group">
+                        <div class="col-12 col-md">
+                            <label for="unidadTematica">> Unidad temática</label>
+                            <h:selectOneMenu id="uni" value="#{ListaPracticas.idUnidadTematica}" styleClass="form-control" >
+                                <f:selectItems value="#{ListaPracticas.unidadesTematicas()}" var="u" itemValue="#{u.idUnidadTematica}" itemLabel="#{u.nombre}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    
+                    <div class="row form-group" style="padding-bottom:.5%">
+                        <div class="col-12 col-md">
+                            <button type="submit" class="anteriorsiguiente successansig form-control mt-2 col-sm-2" jsf:action="CrearPractica2.xhtml" style="float:left"><i class="fas fa-chevron-circle-left mr-2"></i>Anterior</button>
+                            <button type="submit" class="anteriorsiguiente successansig form-control mt-2 col-sm-2" jsf:action="CrearPractica4.xhtml" style="float:right">
+                                <i class="fas fa-chevron-circle-right mr-2"></i>Siguiente
+                            </button>
+                        </div>
+                    </div>
+
+                </h:form>
+            
+        </ui:define> 			
+    </ui:composition> 
+</html>

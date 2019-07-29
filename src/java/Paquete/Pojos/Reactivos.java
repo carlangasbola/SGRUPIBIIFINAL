@@ -13,11 +13,11 @@ public class Reactivos  implements java.io.Serializable {
 
 
      private int idReactivo;
-     private Serializable nombre;
+     private String nombre;
      private String tipo;
      private double cantidad;
      private byte existenciaInventario;
-     private Serializable medida;
+     private String medida;
      private Set datosVales = new HashSet(0);
      private Set reactivoUtilizados = new HashSet(0);
      private Set reactivosUtilizadoPracticas = new HashSet(0);
@@ -26,7 +26,7 @@ public class Reactivos  implements java.io.Serializable {
     }
 
 	
-    public Reactivos(int idReactivo, Serializable nombre, String tipo, double cantidad, byte existenciaInventario, Serializable medida) {
+    public Reactivos(int idReactivo, String nombre, String tipo, double cantidad, byte existenciaInventario, String medida) {
         this.idReactivo = idReactivo;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -34,7 +34,7 @@ public class Reactivos  implements java.io.Serializable {
         this.existenciaInventario = existenciaInventario;
         this.medida = medida;
     }
-    public Reactivos(int idReactivo, Serializable nombre, String tipo, double cantidad, byte existenciaInventario, Serializable medida, Set datosVales, Set reactivoUtilizados, Set reactivosUtilizadoPracticas) {
+    public Reactivos(int idReactivo, String nombre, String tipo, double cantidad, byte existenciaInventario, String medida, Set datosVales, Set reactivoUtilizados, Set reactivosUtilizadoPracticas) {
        this.idReactivo = idReactivo;
        this.nombre = nombre;
        this.tipo = tipo;
@@ -53,11 +53,11 @@ public class Reactivos  implements java.io.Serializable {
     public void setIdReactivo(int idReactivo) {
         this.idReactivo = idReactivo;
     }
-    public Serializable getNombre() {
+    public String getNombre() {
         return this.nombre;
     }
     
-    public void setNombre(Serializable nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
     public String getTipo() {
@@ -81,11 +81,11 @@ public class Reactivos  implements java.io.Serializable {
     public void setExistenciaInventario(byte existenciaInventario) {
         this.existenciaInventario = existenciaInventario;
     }
-    public Serializable getMedida() {
+    public String getMedida() {
         return this.medida;
     }
     
-    public void setMedida(Serializable medida) {
+    public void setMedida(String medida) {
         this.medida = medida;
     }
     public Set getDatosVales() {

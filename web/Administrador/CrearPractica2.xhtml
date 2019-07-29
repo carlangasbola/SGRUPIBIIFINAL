@@ -1,0 +1,175 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+	<link href="../Files/inventario/css/botones.css" rel='stylesheet' type='text/css' />
+    </h:head>
+
+    <ui:composition template = "TemplatePrincipal.xhtml">	         
+        <ui:define name = "Contenido">
+
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="h2"> Creación de prácticas de laboratorio </h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p> Completa la información a continuación para crear una nueva práctica </p>
+                    <p><strong>II Seleccion de material, equipo y reactivos</strong></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h:form>
+                        <label for="reac">> Selección de reactivos</label>
+                        
+                        <table class="table table-hover">
+                            <thead>
+                                <tr align="center">
+                                    <th scope="col" class="col-12 col-md-5">Cantidad lt/kg</th>
+                                    <th scope="col" class="col-12 col-md-5">Nombre del reactivo</th>
+                                    <th scope="col" class="col-12 col-md-2">Eliminar/Agregar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ui:repeat var="r" value="#{ListaPracticas.reactivosPractica}">
+                                    <tr>
+                                        <td>#{r.cantidad}</td>
+                                        <td>#{r.nombre}</td>
+                                        <td>
+                                            <button type="submit" class="bts successrojo form-control" 
+                                                    jsf:action="#{ListaPracticas.eliminarReactivosPracticas(status.index)}">
+                                                    Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+                                <tr>
+                                    <td>
+                                        <input id="cantidadreactivo" type="number" required="true" 
+                                               class="form-control" jsf:value="#{DatosReactivos.reactivo.cantidad}">
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <select  class="custom-select" required="required" jsf:value="#{DatosReactivos.reactivo.nombre}" size="0">
+                                            <f:selectItems value="#{DatosReactivos.nombresReactivos()}" var="hola" />
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="bts successverde form-control" 
+                                                jsf:action="#{ListaPracticas.reactivosPracticas(DatosReactivos.reactivo.cantidad, 
+                                                DatosReactivos.reactivo.nombre)}">Agregar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table><br/><hr/><br/>
+                        
+                        <label for="mate">> Selección de material</label>
+                        <table class="table table-hover">
+                            <thead align="center">
+                                <tr>
+                                    <th scope="col" class="col-12 col-md-5">Cantidad</th>
+                                    <th scope="col" class="col-12 col-md-5">Nombre del material</th>
+                                    <th scope="col" class="col-12 col-md-2">Eliminar/Agregar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ui:repeat var="m" value="#{ListaPracticas.materialPractica}">
+                                    <tr>
+                                        <td>#{m.cantidad}</td>
+                                        <td>#{m.nombre}</td>
+                                        <td>
+                                            <button type="submit" class="bts successrojo form-control" 
+                                                    jsf:action="#{ListaPracticas.eliminarMaterialPracticas(status.index)}">Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+                                <tr>
+                                    <td>
+                                        <input id="cantidadmaterial" type="number" required="true" 
+                                               class="form-control" jsf:value="#{DatosMaterial.material.cantidad}">
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <select class="custom-select" required="required" 
+                                                jsf:value="#{DatosMaterial.material.nombre}" size="0">
+                                            <f:selectItems value="#{DatosMaterial.nombresMaterial()}" var="hola" />
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="bts successverde form-control" 
+                                                jsf:action="#{ListaPracticas.materialPracticas(DatosMaterial.material.cantidad, 
+                                                              DatosMaterial.material.nombre)}">Agregar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table><br/><hr/><br/>
+                        
+                        <label for="equi">> Selección de equipo</label>
+                        <table class="table table-hover">
+                            <thead align="center">
+                                <tr>
+                                    <th scope="col" class="col-12 col-md-5">Cantidad</th>
+                                    <th scope="col" class="col-12 col-md-5">Nombre del equipo</th>
+                                    <th scope="col" class="col-12 col-md-2">Eliminar/Agregar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ui:repeat var="e" value="#{ListaPracticas.equipoPractica}">
+                                    <tr>
+                                        <td>#{e.cantidad}</td>
+                                        <td>#{e.nombre}</td>
+                                        <td>
+                                            <button type="submit" class="bts successrojo form-control" 
+                                                    jsf:action="#{ListaPracticas.eliminarEquipoPracticas(status.index)}">Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+                                <tr>
+                                    <td>
+                                        <input id="cantidadequipo" type="number" required="true" 
+                                               class="form-control" jsf:value="#{DatosEquipoLaboratorio.equipo.cantidad}">
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <select  class="custom-select" required="required" 
+                                                 jsf:value="#{DatosEquipoLaboratorio.equipo.nombre}" size="0">
+                                            <f:selectItems value="#{DatosEquipoLaboratorio.nombresEquipo()}" var="hola" />
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="bts successverde form-control" 
+                                                jsf:action="#{ListaPracticas.equipoPracticas(DatosEquipoLaboratorio.equipo.cantidad, 
+                                                              DatosEquipoLaboratorio.equipo.nombre)}">Agregar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table><br/><hr/><br/>
+                        
+                        <button type="submit" class="anteriorsiguiente successansig form-control mt-2 col-sm-2" jsf:action="CrearPractica1.xhtml" style="float:left"><i class="fas fa-chevron-circle-left mr-2"></i>Anterior</button>
+                        <button type="submit" class="anteriorsiguiente successansig form-control mt-2 col-sm-2" jsf:action="CrearPractica3.xhtml" style="float:right">
+                            <i class="fas fa-chevron-circle-right mr-2"></i>Siguiente 
+                            <f:actionListener binding="#{DatosReactivos.datosCalculo(ListaPracticas.reactivosPractica, ListaPracticas.datosPractica)}" />
+                        </button>
+                        
+                    </h:form><br/><br/><br/>
+                </div>
+            </div>
+
+        </ui:define> 			
+    </ui:composition> 
+</html>

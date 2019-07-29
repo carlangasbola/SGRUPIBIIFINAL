@@ -1,0 +1,200 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+	<link href="../Files/inventario/css/botones.css" rel='stylesheet' type='text/css' />
+    </h:head>
+
+    <ui:composition template = "TemplatePrincipal.xhtml">	         
+        <ui:define name = "Contenido">
+
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="h2"> Creación de prácticas de laboratorio </h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p> Completa la información a continuación para crear una nueva práctica </p>
+                    <p><strong>I Requisitos</strong></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h:form>
+                        
+                        <div class="form-group">
+                            <p>> Título de la práctica </p>
+                            <input id="titulopractica" type="text" class="form-control form-control-sm " 
+                                   jsf:value="#{ListaPracticas.datosPractica.nombre}">
+                            </input>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="input-group col-sm-6">
+                                <label for="autor">> Autores</label>
+                                <div class="input-group">
+                                    <input id="otroautor" type="text" class="form-control form-control-sm" 
+                                           placeholder="Nombre del autor" jsf:value="#{ListaPracticas.datosPractica.editor}">
+                                    </input>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="bts successverde form-control form-control-sm" 
+                                                jsf:action="#{ListaPracticas.agregarAutor(ListaPracticas.datosPractica.editor)}" 
+                                                ajax="false">Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <ui:repeat var="item" varStatus="status" value="#{ListaPracticas.listaAutores}"><br/>
+                                    <div class="input-group">
+                                        <input id="otroAutorLista" type="text" class="form-control form-control-sm" 
+                                               placeholder="Nombre del autor" jsf:value="#{item}" readonly = "true">
+                                        </input>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="bts successrojo form-control form-control-sm" 
+                                                    jsf:action="#{managedBeanPractica.eliminarautor(status.index)}" >Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">                 
+                            <div class="col-12 col-md-6">
+                                <label for="objetivo">> Objetivos</label>
+                                <p:textEditor id="objetivos" height="100" widgetVar="descriptionWidget1" 
+                                              value="#{ListaPracticas.datosPractica.objetivos}">
+                                    <f:facet name="toolbar">
+                                        <span class="ql-formats">
+                                            <button class="ql-bold" />
+                                            <button class="ql-italic" />
+                                        </span>                        
+                                        <span class="ql-formats">
+                                            <button class="ql-list" value="ordered" />
+                                            <button class="ql-list" value="bullet" />
+                                            <button class="ql-indent" value="-1" />
+                                            <button class="ql-indent" value="+1" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-align" />
+                                        </span>
+                                    </f:facet>
+                                </p:textEditor>
+                            </div>
+                            <div class="col-12 col-md-6"> 
+                                <label for="activitypre">> Actividades Previas</label>
+                                <p:textEditor id="actividadesprevias" height="100" widgetVar="descriptionWidget2" 
+                                              value="#{ListaPracticas.datosPractica.actividadesPrevias}">
+                                    <f:facet name="toolbar">
+                                        <span class="ql-formats">
+                                            <button class="ql-bold" />
+                                            <button class="ql-italic" />
+                                        </span>                        
+                                        <span class="ql-formats">
+                                            <button class="ql-list" value="ordered" />
+                                            <button class="ql-list" value="bullet" />
+                                            <button class="ql-indent" value="-1" />
+                                            <button class="ql-indent" value="+1" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-align" />
+                                        </span>
+                                    </f:facet>
+                                </p:textEditor>
+                            </div><br/>  
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col-12 col-md">
+                                <label for="competencias">> Competencias</label>
+                                <p:textEditor id="competencia" height="100" widgetVar="descriptionWidget3" 
+                                              value="#{ListaPracticas.datosPractica.competencias}">
+                                    <f:facet name="toolbar">
+                                        <span class="ql-formats">
+                                            <button class="ql-bold" />
+                                            <button class="ql-italic" />
+                                        </span>                        
+                                        <span class="ql-formats">
+                                            <button class="ql-list" value="ordered" />
+                                            <button class="ql-list" value="bullet" />
+                                            <button class="ql-indent" value="-1" />
+                                            <button class="ql-indent" value="+1" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-align" />
+                                        </span>
+                                    </f:facet>
+                                </p:textEditor>
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col-12 col-md">
+                                <label for="introducción">> Introducción</label>
+                                <p:textEditor id="introduccion" height="300" widgetVar="descriptionWidget" 
+                                              value="#{ListaPracticas.datosPractica.introducion}">
+                                    <f:facet name="toolbar">
+                                        <span class="ql-formats">
+                                            <select class="ql-font" />
+                                            <select class="ql-size" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold" />
+                                            <button class="ql-italic" />
+                                            <button class="ql-underline" />
+                                            <button class="ql-strike" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-color" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-script" value="sub" />
+                                            <button class="ql-script" value="super" />
+                                        </span>                            
+                                        <span class="ql-formats">
+                                            <button class="ql-list" value="ordered" />
+                                            <button class="ql-list" value="bullet" />
+                                            <button class="ql-indent" value="-1" />
+                                            <button class="ql-indent" value="+1" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-align" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-image" />>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-clean" />
+                                        </span>
+                                    </f:facet>
+                                </p:textEditor>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="anteriorsiguiente successansig form-control mt-2 col-sm-2" 
+                                    jsf:action="CrearPractica2.xhtml" style="float:right">
+                                    <i class="fas fa-chevron-circle-right mr-2"></i>Siguiente
+                            </button>
+                        </div>
+                        
+                    </h:form><br/><br/><br/>
+                </div>
+            </div>
+
+        </ui:define> 			
+    </ui:composition> 
+</html>
