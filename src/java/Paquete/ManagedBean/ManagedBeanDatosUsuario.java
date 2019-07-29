@@ -44,12 +44,15 @@ public class ManagedBeanDatosUsuario implements Serializable{
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             tx = session.beginTransaction();
+            
+            Roles r = new Roles();
+            r = (Roles) session.get(Roles.class, roles.getIdrol());
 
             Usuarios u = new Usuarios();
             u = (Usuarios) session.get(Usuarios.class, datosUsuario.getUsuarios().getIdUsuarios());
             u.setUserLogin(datosUsuario.getCorreo());
             u.setPasssword(datosUsuario.getIdentificador());
-            u.setRoles((Roles) session.get(Roles.class, roles.getIdrol()));
+            u.setRoles(r);
             session.update(u);
 
             DatosUsuario du = new DatosUsuario();
