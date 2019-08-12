@@ -9,19 +9,25 @@
 
     <h:head>
         <meta charset="utf-8"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
         <!-- Custom fonts for this template-->
         <link href="../Files/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"/>
+
         <!-- Custom styles for this template-->
         <link href="../Files/css/sb-admin-2.min.css" rel="stylesheet"/>
         <!-- Custom styles for this page -->
         <link href="../Files/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"></link>
-        <link href="../Files/inventario/css/bootstrap.css" rel='stylesheet' type='text/css' />
-	<link href="../Files/inventario/css/style.css" rel='stylesheet' type='text/css' />
+        <link href="../Files/inventario/css/botones.css" rel='stylesheet' type='text/css' />
+        <link href="../Files/inventario/css/style.css" rel='stylesheet' type='text/css' />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <title>Sistema de gestión de riesgos</title>
+        
+        <style>
+            
+        </style>
     </h:head>
 
     <h:body id="page-top"> 
@@ -42,233 +48,234 @@
                     <!-- Topbar -->
                     <ui:insert name = "Topbar" >
                         <ui:include src = "../Templates/BarraNavegacion.xhtml" />
-                    </ui:insert>
-                    
+                    </ui:insert>    
+                    <!-- End Topbar -->
+                    <!-- Begin Page Content -->
                     <div class="row mx-4">
-                        
-                        <div style="width:32%" class="card shadow mr-4 states-first">
-                            <div align="center">
-                                <div class="stats-left ">
-                                    <h5>Registros</h5>
-                                    <h4><a style="color:#FFFFFF" href="AdministrarReactivos.xhtml">Reactivos</a></h4>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="row mr-md-2 r" >
+                                <div class="col-md-8 reactivos">
+                                    <a class="tituloP">Registros</a><br/>
+                                    <a class="tituloG" href="AdministrarReactivos.xhtml">Reactivos</a>
                                 </div>
-                                <div class="stats-right">
+                                <div class="col-md-4 cantidad align-self-center">
                                     <label>#{DatosReactivos.datosReactivo.size()}</label>
                                 </div>
                             </div>
                         </div>
-
-                        <div style="width:32%" class="card shadow mr-4 states-mdl">
-                            <div align="center">
-                                <div class="stats-left">
-                                    <h5>Registros</h5>
-                                    <h4><a style="color:#FFFFFF" href="../Administrador/AdministrarMaterial.xhtml">Material</a></h4>
+                        
+                        <div class="col-xs-12 col-md-4">
+                            <div class="row mr-md-2 m">
+                                <div class="col-md-8 material">
+                                    <a class="tituloP">Registros</a><br/>
+                                    <a class="tituloG" href="AdministrarMaterial.xhtml">Material</a>
                                 </div>
-                                <div class="stats-right">
+                                <div class="col-md-4 cantidad align-self-center">
                                     <label>#{DatosMaterial.datosMaterial.size()}</label>
                                 </div>
                             </div>
                         </div>
-
-                        <div style="width:32%" class="card shadow states-last">
-                            <div align="center">
-                                <div class="stats-left">
-                                    <h5>Registros</h5>
-                                    <h4><a style="color:#FFFFFF" href="../Administrador/AdministrarEquipo.xhtml">Equipo</a></h4>
+                        
+                        <div class="col-xs-12 col-md-4">
+                            <div class="row mr-md-1 e">
+                                <div class="col-md-8 equipo">
+                                    <a class="tituloP">Registros</a><br/>
+                                    <a class="tituloG" href="AdministrarEquipo.xhtml">Equipo</a>
                                 </div>
-                                <div class="stats-right">
+                                <div class="col-md-4 cantidad align-self-center">
                                     <label>#{DatosEquipoLaboratorio.datosEquipo.size()}</label>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                     
-                    <div class="row mx-4">
-                        
-                        <div style="width:32%" class="card shadow mr-4 p-3">
-                            <div align="center">
-                                <canvas id="polar-reactivo" width="100%" ></canvas>
-                            </div>
-                        </div>
-
-                        <div style="width:32%" class="card shadow mr-4 p-3">
-                            <div align="center">
-                                <canvas id="bar-material" width="100%" height="100%"></canvas>
-                            </div>
-                        </div>
-
-                        <div style="width:32%" class="card shadow p-3">
-                            <div align="center">
-                                <canvas id="bar-equipo" width="100%" height="100%"></canvas>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
-                    <div class="row mx-4">
-                        
-                        <div style="width:32%" class="card shadow mr-4 p-3">
-                            <div align="left">
-                                <div class="stats-title">
-                                    <h4 class="title">Reactivos</h4>
+                    <div class="row mx-4 my-4">
+                        <div class="col-xs-12 col-md-4">
+                            <div class="row mr-md-2" >
+                                <div class="col-md-12 card shadow p-3">
+                                    <canvas id="polar-reactivo" width="100%" ></canvas>
                                 </div>
-                                <div class="stats-body">
-                                    
-                                    <div class="row">
-                                        <div style="width:50%">
+                            </div>
+                        </div>
+                        
+                        <div class="col-xs-12 col-md-4">
+                            <div class="row mr-md-2" >
+                                <div class="col-md-12 card shadow p-3">
+                                    <canvas id="bar-material" width="100%" height="100%"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xs-12 col-md-4">
+                            <div class="row mr-md-1" >
+                                <div class="col-md-12 card shadow p-3">
+                                    <canvas id="bar-equipo" width="100%" height="100%"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mx-4 my-4">
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="row mr-md-2" >
+                                <div class="col-md-12 card shadow p-3">
+                                    <div class="row p-2">
+                                        <div style="width:40%">
                                             Explosivos
                                         </div>
                                         
-                                        <div style="width:41%">
+                                        <div style="width:48%">
                                             <div class="progress progress-striped active progress-right">
                                                 <div class="bar explosivo" style="width:#{DatosReactivos.porcentajeReactivo('Explosivo')}%"></div> 
                                             </div>
                                         </div>
                                         
-                                        <div style="width:9%" align="right">
+                                        <div style="width:12%" align="right">
                                             <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Explosivo")}%</span> 
                                         </div>
                                     </div>
                                     
-                                    <div class="row">
-                                        <div style="width:50%">
+                                    <div class="row p-2">
+                                        <div style="width:40%">
                                             Inflamables
                                         </div>
                                         
-                                        <div style="width:41%">
+                                        <div style="width:48%">
                                             <div class="progress progress-striped active progress-right">
                                                 <div class="bar inflamable" style="width:#{DatosReactivos.porcentajeReactivo('Inflamable')}%"></div> 
                                             </div>
                                         </div>
                                         
-                                        <div style="width:9%" align="right">
+                                        <div style="width:12%" align="right">
                                             <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Inflamable")}%</span> 
                                         </div>
                                     </div>
                                     
-                                    <div class="row">
-                                        <div style="width:50%">
+                                    <div class="row p-2">
+                                        <div style="width:40%">
                                             Gases a presión
                                         </div>
                                         
-                                        <div style="width:41%">
+                                        <div style="width:48%">
                                             <div class="progress progress-striped active progress-right">
                                                 <div class="bar presion" style="width:#{DatosReactivos.porcentajeReactivo('Gas a presión')}%"></div> 
                                             </div>
                                         </div>
                                         
-                                        <div style="width:9%" align="right">
+                                        <div style="width:12%" align="right">
                                             <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Gas a presión")}%</span> 
                                         </div>
                                     </div>
                                     
-                                    <div class="row">
-                                        <div style="width:50%">
-                                            Sustancias comburentes
+                                    <div class="row p-2">
+                                        <div style="width:40%">
+                                            Comburentes
                                         </div>
                                         
-                                        <div style="width:41%">
+                                        <div style="width:48%">
                                             <div class="progress progress-striped active progress-right">
                                                 <div class="bar comburente" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia comburente')}%"></div> 
                                             </div>
                                         </div>
                                         
-                                        <div style="width:9%" align="right">
+                                        <div style="width:12%" align="right">
                                             <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia comburente")}%</span> 
                                         </div>
                                     </div>
                                     
-                                    <div class="row">
-                                        <div style="width:50%">
-                                            Perjudiciales para la salud 
+                                    <div class="row p-2">
+                                        <div style="width:40%">
+                                            Perjudiciales
                                         </div>
                                         
-                                        <div style="width:41%">
+                                        <div style="width:48%">
                                             <div class="progress progress-striped active progress-right">
                                                 <div class="bar perjudicial" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia perjudicial para la salud')}%"></div> 
                                             </div>
                                         </div>
                                         
-                                        <div style="width:9%" align="right">
+                                        <div style="width:12%" align="right">
                                             <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia perjudicial para la salud")}%</span> 
                                         </div>
                                     </div>
                                     
-                                    <div class="row">
-                                        <div style="width:50%">
-                                            Sustancias corrosivas 
+                                    <div class="row p-2">
+                                        <div style="width:40%">
+                                            Corrosivas 
                                         </div>
                                         
-                                        <div style="width:41%">
+                                        <div style="width:48%">
                                             <div class="progress progress-striped active progress-right">
                                                 <div class="bar corrosiva" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia corrosiva')}%"></div> 
                                             </div>
                                         </div>
                                         
-                                        <div style="width:9%" align="right">
+                                        <div style="width:12%" align="right">
                                             <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia corrosiva")}%</span> 
                                         </div>
                                     </div>
                                     
-                                    <div class="row">
-                                        <div style="width:50%">
-                                            Sustancias nosivas
+                                    <div class="row p-2">
+                                        <div style="width:40%">
+                                            Nosivas
                                         </div>
                                         
-                                        <div style="width:41%">
+                                        <div style="width:48%">
                                             <div class="progress progress-striped active progress-right">
                                                 <div class="bar nosiva" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia nosiva')}%"></div> 
                                             </div>
                                         </div>
                                         
-                                        <div style="width:9%" align="right">
+                                        <div style="width:12%" align="right">
                                             <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia nosiva")}%</span> 
                                         </div>
                                     </div>
                                     
-                                    <div class="row">
-                                        <div style="width:50%">
-                                            Sustancias tóxicas
+                                    <div class="row p-2">
+                                        <div style="width:40%">
+                                            Tóxicas
                                         </div>
                                         
-                                        <div style="width:41%">
+                                        <div style="width:48%">
                                             <div class="progress progress-striped active progress-right">
                                                 <div class="bar toxica" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia tóxica')}%"></div> 
                                             </div>
                                         </div>
                                         
-                                        <div style="width:9%" align="right">
+                                        <div style="width:12%" align="right">
                                             <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia tóxica")}%</span> 
                                         </div>
                                     </div>
                                     
-                                    <div class="row">
-                                        <div style="width:50%">
-                                            Sustancias peligrosas
+                                    <div class="row p-2">
+                                        <div style="width:40%">
+                                            Peligrosas
                                         </div>
                                         
-                                        <div style="width:41%">
+                                        <div style="width:48%">
                                             <div class="progress progress-striped active progress-right">
                                                 <div class="bar peligrosas" style="width:#{DatosReactivos.porcentajeReactivo('Sustancia peligrosas para el medio ambiente')}%"></div> 
                                             </div>
                                         </div>
                                         
-                                        <div style="width:9%" align="right">
+                                        <div style="width:12%" align="right">
                                             <span class="pull-right">#{DatosReactivos.porcentajeReactivo("Sustancia peligrosas para el medio ambiente")}%</span> 
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
                         
-
-                        <div style="width:66%" class="card shadow ">
+                        <div class="col-xs-12 col-lg-8">
+                            <div class="row mr-md-1" >
+                                <div class="col-md-12 card shadow p-3">
+                                    <canvas width="100%" height="100%" ></canvas>
+                                </div>
+                            </div>
                         </div>
-                        
-                    </div><br/><br/>
+                    </div>
                     
+                    <!-- FOOTER -->
                 </div>
             </div>  
         </div>
@@ -278,6 +285,25 @@
             <i class="fas fa-angle-up"></i>
         </a>
 
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="../Files/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../Files/js/sb-admin-2.min.js"></script>
         <script>
@@ -470,6 +496,7 @@
                 }
             });
         </script>
+
     </h:body>
 </html>
 
