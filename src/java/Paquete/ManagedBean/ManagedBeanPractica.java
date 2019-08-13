@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.util.*;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.*;
 import javax.inject.Named;
 import org.dom4j.DocumentException;
@@ -16,27 +17,25 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 @Named("ListaPracticas")
-@RequestScoped
-public class ManagedBeanPractica {
+@SessionScoped
+public class ManagedBeanPractica implements Serializable {
     
-    private List<Practica> listaPracticas;
-    static Practica practica;
-    static Integer idUnidadTematica;
-    static DatosPractica datosPractica = new DatosPractica();
-    static List<String> listaAutores = new ArrayList<>();
-    static List<Reactivos> reactivosPractica = new ArrayList<>();
-    static List<Material> materialPractica = new ArrayList<>();
-    static List<EquipoLaboratorio> equipoPractica = new ArrayList<>();
+    private List<Practica> listaPracticas = new ArrayList<>();
+    private Practica practica = new Practica();
+    private Integer idUnidadTematica;
+    private DatosPractica datosPractica = new DatosPractica();
+    private List<String> listaAutores = new ArrayList<>();
+    private List<Reactivos> reactivosPractica = new ArrayList<>();
+    private List<Material> materialPractica = new ArrayList<>();
+    private List<EquipoLaboratorio> equipoPractica = new ArrayList<>();
     private DefaultStreamedContent descarga;
     
     @PostConstruct
     private void init() {
-        practica = new Practica();
-        listaPracticas = new ArrayList<>();
         ObtenerPracticas();
     }
     
-    public String datosPractica(int id){
+    public String obtenerDatosPractica(int id){
         List<Practica> practicaAux = new ArrayList();
             
         Transaction tran = null;
@@ -305,6 +304,10 @@ public class ManagedBeanPractica {
     public void agregarAutor(String nuevoAutor){
         listaAutores.add(nuevoAutor);
     }
+    
+    public void eliminarAutor(int posicion){
+        listaAutores.remove(posicion);
+    }
 
     public List<Practica> getListaPracticas() {
         if(listaPracticas == null) {
@@ -416,16 +419,12 @@ public class ManagedBeanPractica {
         return salida;
     }
 
-    public void setListaPracticas(List<Practica> listaPracticas) {
-        this.listaPracticas = listaPracticas;
-    }
-
     public Practica getPractica() {
         return practica;
     }
 
     public void setPractica(Practica practica) {
-        ManagedBeanPractica.practica = practica;
+        this.practica = practica;
     }
 
     public Integer getIdUnidadTematica() {
@@ -433,7 +432,7 @@ public class ManagedBeanPractica {
     }
 
     public void setIdUnidadTematica(Integer idUnidadTematica) {
-        ManagedBeanPractica.idUnidadTematica = idUnidadTematica;
+        this.idUnidadTematica = idUnidadTematica;
     }
 
     public DatosPractica getDatosPractica() {
@@ -451,7 +450,7 @@ public class ManagedBeanPractica {
     public void setListaAutores(List<String> listaAutores) {
         this.listaAutores = listaAutores;
     }
-    
+
     public List<Reactivos> getReactivosPractica() {
         return reactivosPractica;
     }
@@ -465,7 +464,7 @@ public class ManagedBeanPractica {
     }
 
     public void setMaterialPractica(List<Material> materialPractica) {
-        ManagedBeanPractica.materialPractica = materialPractica;
+        this.materialPractica = materialPractica;
     }
 
     public List<EquipoLaboratorio> getEquipoPractica() {
@@ -473,7 +472,7 @@ public class ManagedBeanPractica {
     }
 
     public void setEquipoPractica(List<EquipoLaboratorio> equipoPractica) {
-        ManagedBeanPractica.equipoPractica = equipoPractica;
+        this.equipoPractica = equipoPractica;
     }
 
     public DefaultStreamedContent getDescarga() {
@@ -483,5 +482,5 @@ public class ManagedBeanPractica {
     public void setDescarga(DefaultStreamedContent descarga) {
         this.descarga = descarga;
     }
-    
+
 }
