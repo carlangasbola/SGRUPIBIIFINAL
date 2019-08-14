@@ -42,9 +42,9 @@ Contributor(s):
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-    <property name="hibernate.connection.url">jdbc:sqlserver://127.0.0.1:1433;databaseName=dbsgr</property>
-    <property name="hibernate.connection.username">sa</property>
-    <property name="hibernate.connection.password">123</property>
+    <property name="hibernate.connection.url">jdbc:sqlserver://upibisgr.database.windows.net:1433;databaseName=dbsgr</property>
+    <property name="hibernate.connection.username">usuario</property>
+    <property name="hibernate.connection.password">alfa2456*</property>
     <property name="hibernate.enable_lazy_load_no_trans">true</property>
     <!-- Este etiqueta es para el getCurrentSession(); -->
     <property name="hibernate.current_session_context_class">
