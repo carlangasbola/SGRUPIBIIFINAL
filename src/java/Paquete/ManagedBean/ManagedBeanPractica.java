@@ -7,7 +7,6 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.util.*;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.*;
 import javax.inject.Named;

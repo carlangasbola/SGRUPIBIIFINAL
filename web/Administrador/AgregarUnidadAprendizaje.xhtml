@@ -1,0 +1,107 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:body>
+
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <h3>Unidades de aprendizaje</h3>
+                        <p>Para crear una unidad de aprendizaje, primero asigna el nombre,<br></br>
+                            despúes agrega una unidad tematica para esa unidad de aprendizaje,<br></br>
+                            al finalizar da click en guardar.</p>
+                        <h:form id="UnidadesAprendizajeForm">
+                            <label for="unidadAprendizaje"><strong>Unidad de aprendizaje</strong></label>
+                            <h:inputText id="unidadAprendizaje" value="#{UnidadAprendizaje.unidadAprendizaje.nombre}" class="form-control"  />
+
+                            <br />
+                            <strong>Unidades temáticas</strong>  &nbsp; &nbsp;  &nbsp; &nbsp;
+
+                            <h:commandButton class="btn btn-outline-info btn-sm" action="#{UnidadAprendizaje.addInput()}" value="+ Añadir">
+                                <f:ajax render="UnidadesAprendizajeForm" />
+                            </h:commandButton> &nbsp;
+                            <h:commandButton class="btn btn-outline-danger btn-sm" value="- Eliminar" action="#{UnidadAprendizaje.deleteInput()}"  ></h:commandButton>  &nbsp;
+                            <h:commandButton class="btn btn-outline-success btn-sm" value="Guardar todo" action="#{UnidadAprendizaje.insertUnidadAprendizajeYTematica()}" ></h:commandButton> <br/>
+
+                            <ui:repeat value="#{UnidadAprendizaje.unidadesTematicas}" var="unidadTematica" varStatus="estatus" >
+                                Unidad de aprendizaje: #{estatus.index+1} 
+                                <h:inputText id="input" value="#{unidadTematica.nombre}" class="form-control"  />
+                            </ui:repeat>
+
+                        </h:form>
+
+                    </div>
+                    <div class="col">
+                        <strong>Unidades de aprendizaje creadas</strong>
+                        <p>Da clic para ver las unidades tematicas existentes</p>
+                        <div class="accordion" id="accordionExample">
+
+                            <div id="accordion" >
+
+
+
+                                <c:forEach items="#{UnidadAprendizaje.obtenerUnidadesAprendizaje()}" var="ua" varStatus="estatus"> 
+
+                                    <div class="card">
+                                        <p><strong>Unidades Temáticas</strong> </p>
+                                        <div class="card-header" id="heading#{estatus.index}">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse#{estatus.index}" aria-expanded="false" aria-controls="collapse#{estatus.index}">
+                                                    #{ua.nombre}
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div id="collapse#{estatus.index}" class="collapse " aria-labelledby="heading#{estatus.index}" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <ui:repeat value="#{UnidadTematica.obtenerUnidadTematica(ua.idUnidadAprendizaje)}" var="ut" varStatus="estado">      
+                                                            <p>#{estado.index+1}.- <i>#{ut.nombre}</i> </p>
+                                                        </ui:repeat>
+                                                    </div>
+                                                    <div class="col">
+                                                        <p><strong>Grupos asignados: </strong></p>
+                                                        <ui:repeat value="#{UnidadAprendizaje.unidadGrupoPorUnidadAprendizaje(ua.idUnidadAprendizaje)}" var="ugua" >      
+                                                            <p>  #{ugua.grupo.nombre}  </p>
+                                                        </ui:repeat>
+                                                    </div>
+                                                </div>
+                                                <h:form>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <h:commandButton class="btn btn-primary btn-sm" value="Asignar a grupo" action="#{UnidadAprendizaje.returnGrupos()}" ></h:commandButton> &nbsp;
+                                                            <h:commandButton class="btn btn-success btn-sm" value="Editar" ></h:commandButton> &nbsp;
+                                                            <h:commandButton class="btn btn-danger btn-sm" value="Eliminar" action="#{UnidadAprendizaje.EliminarUnidadAprendizaje(ua.idUnidadAprendizaje)}" ></h:commandButton>
+                                                        </div>
+                                                    </div>
+                                                </h:form>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                </c:forEach>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ui:define> 			
+        </ui:composition> 
+    </h:body>
+</html>

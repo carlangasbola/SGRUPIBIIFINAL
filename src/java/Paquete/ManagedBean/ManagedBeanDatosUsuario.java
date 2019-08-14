@@ -54,11 +54,10 @@ public class ManagedBeanDatosUsuario implements Serializable{
             u.setPasssword(datosUsuario.getIdentificador());
             u.setRoles(r);
             session.update(u);
-
-            DatosUsuario du = new DatosUsuario();
-            du = (DatosUsuario) session.get(DatosUsuario.class, datosUsuario.getIdUsuarios());
-            du.setUsuarios(u);
-            session.update(du);
+            
+            
+            datosUsuario.setUsuarios(u);
+            session.merge(datosUsuario);
 
             tx.commit();
             mensaje.setMessage("Información Actualizada");

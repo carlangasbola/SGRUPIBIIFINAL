@@ -1,0 +1,54 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+
+                <h4>Alumnos inscritos en este grupo</h4>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido Paterno</th>
+                            <th scope="col">Apellido Materno</th>
+                            <th scope="col">Ver información</th>
+                            <th scope="col">Actualizar Datos</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <h:form>
+                            <ui:repeat value="#{ListaGrupo.obtenerListaGrupo()}" var="lg" varStatus="estatus" >
+                                <tr>
+                                    <th scope="row">#{estatus.index + 1}</th>
+                                    <td>#{lg.usuarios.datosUsuario.nombre}</td>
+                                    <td>#{lg.usuarios.datosUsuario.apellidoPaterno}</td>
+                                    <td>#{lg.usuarios.datosUsuario.apellidoMaterno}</td>
+                                    <td></td>
+                                    <td></td>
+                                    
+                                    <td>
+                                        <h:commandButton class="btn btn-sm btn-facebook" value="eliminar" action="#{ListaGrupo.eliminarAlumno()}">
+                                            <f:setPropertyActionListener target="#{ListaGrupo.alumnoListaGrupo}" value="#{lg}" />
+                                        </h:commandButton>
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                        </h:form>
+                    </tbody>
+                </table>
+                
+            </ui:define> 			
+        </ui:composition> 
+    </h:body>
+</html>

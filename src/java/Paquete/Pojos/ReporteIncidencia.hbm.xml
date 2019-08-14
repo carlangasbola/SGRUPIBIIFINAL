@@ -11,16 +11,16 @@
         <many-to-one name="sesionDeLaboratorio" class="Paquete.Pojos.SesionDeLaboratorio" fetch="select">
             <column name="idSesion" not-null="true" />
         </many-to-one>
-        <property name="nombre" type="binary">
+        <property name="nombre" type="string">
             <column name="Nombre" not-null="true" />
         </property>
-        <property name="observaciones" type="binary">
+        <property name="observaciones" type="string">
             <column name="Observaciones" not-null="true" />
         </property>
         <property name="fecha" type="timestamp">
             <column name="Fecha" length="23" not-null="true" />
         </property>
-        <property name="estado" type="binary">
+        <property name="estado" type="string">
             <column name="Estado" not-null="true" />
         </property>
         <property name="actualizacion" type="timestamp">

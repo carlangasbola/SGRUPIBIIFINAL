@@ -14,10 +14,10 @@ public class ReporteIncidencia  implements java.io.Serializable {
 
      private int idReporte;
      private SesionDeLaboratorio sesionDeLaboratorio;
-     private byte[] nombre;
-     private byte[] observaciones;
+     private String nombre;
+     private String observaciones;
      private Date fecha;
-     private byte[] estado;
+     private String estado;
      private Date actualizacion;
      private Set historialEmergencias = new HashSet(0);
 
@@ -25,7 +25,7 @@ public class ReporteIncidencia  implements java.io.Serializable {
     }
 
 	
-    public ReporteIncidencia(int idReporte, SesionDeLaboratorio sesionDeLaboratorio, byte[] nombre, byte[] observaciones, Date fecha, byte[] estado, Date actualizacion) {
+    public ReporteIncidencia(int idReporte, SesionDeLaboratorio sesionDeLaboratorio, String nombre, String observaciones, Date fecha, String estado, Date actualizacion) {
         this.idReporte = idReporte;
         this.sesionDeLaboratorio = sesionDeLaboratorio;
         this.nombre = nombre;
@@ -34,7 +34,7 @@ public class ReporteIncidencia  implements java.io.Serializable {
         this.estado = estado;
         this.actualizacion = actualizacion;
     }
-    public ReporteIncidencia(int idReporte, SesionDeLaboratorio sesionDeLaboratorio, byte[] nombre, byte[] observaciones, Date fecha, byte[] estado, Date actualizacion, Set historialEmergencias) {
+    public ReporteIncidencia(int idReporte, SesionDeLaboratorio sesionDeLaboratorio, String nombre, String observaciones, Date fecha, String estado, Date actualizacion, Set historialEmergencias) {
        this.idReporte = idReporte;
        this.sesionDeLaboratorio = sesionDeLaboratorio;
        this.nombre = nombre;
@@ -59,18 +59,18 @@ public class ReporteIncidencia  implements java.io.Serializable {
     public void setSesionDeLaboratorio(SesionDeLaboratorio sesionDeLaboratorio) {
         this.sesionDeLaboratorio = sesionDeLaboratorio;
     }
-    public byte[] getNombre() {
+    public String getNombre() {
         return this.nombre;
     }
     
-    public void setNombre(byte[] nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public byte[] getObservaciones() {
+    public String getObservaciones() {
         return this.observaciones;
     }
     
-    public void setObservaciones(byte[] observaciones) {
+    public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
     public Date getFecha() {
@@ -80,11 +80,11 @@ public class ReporteIncidencia  implements java.io.Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public byte[] getEstado() {
+    public String getEstado() {
         return this.estado;
     }
     
-    public void setEstado(byte[] estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
     public Date getActualizacion() {

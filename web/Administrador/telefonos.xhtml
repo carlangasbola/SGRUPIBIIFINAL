@@ -1,0 +1,157 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets">
+
+    <h:body> 
+
+        <ui:composition template = "TemplatePrincipal.xhtml">
+            <ui:define name="Contenido">	
+               
+                <!-- Page Content -->
+                <div class="row">
+                    <div class="col">
+                        <h3 class="mt-4">Números de emergencia</h3>
+                        <p class="lead "> Estos son los números a los cuales puedes llamar en caso de que 
+                            se presente algún incidente en los laboratorios.</p>
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-12">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Dependencia</th>
+                                    <th scope="col">Teléfono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Departamento de Protección Civil de la Secretaría General</th>
+                                    <td>54908</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Unidad Interna de Protección Civil de la Secretaría de Administración</th>
+                                    <td>51128 y 51330</td>
+                                </tr>                           
+                                <tr>
+                                    <th scope="row">Servicio Médico de la Secretaría de Administración</th>
+                                    <td>51100</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Servicio Médico y Ambulancia Institucional Zacatenco</th>
+                                    <td>54781, 54682, 54680 y 54736</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-9">
+                        <p> <strong>Nota :</strong>  Al solicitar el servicio de ambulancia institucional, debe tener una referencia general de lo sucedido con la persona afectada: </p>
+                        <ul>
+                            <li>Saber si la persona se encuentra consciente o inconsciente.</li>
+                            <li>Saber si presenta algún tipo de sangrado.</li>
+                            <li>Especificar los síntomas y molestias en particular a efectos de proporcionar una mejor atención.</li>
+                        </ul>
+                        <p> <strong>Directorio externo</strong> </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+
+                        <table class="table table-striped ">
+                            <thead >
+                                <tr>
+                                    <th scope="col">SERVICIO DE EMERGENCIA</th>
+                                    <th scope="col">TELÉFONO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Atención Ciudadana</th>
+                                    <td>072</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Radio Patrullas</th>
+                                    <td>060, 066</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Bomberos</th>
+                                    <td>068</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Cruz Roja</th>
+                                    <td>065 y 55-57-57-59 al 60</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Fugas y Faltas de Agua</th>
+                                    <td>56-54-32-10</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Fugas de Gas</th>
+                                    <td>53-53-27-63 y 53-53-28-23</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Protección Civil D.F.</th>
+                                    <td>56-83-22-22</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Emergencias</th>
+                                    <td>080</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Emergencia Transporte de Químicos</th>
+                                    <td>52-30-51-00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-6">
+                        <table class="table table-striped ">
+                            <thead >
+                                <tr>
+                                    <th scope="col">DEPENDENCIA DEL ESTADO DE MÉXICO</th>
+                                    <th scope="col">TELÉFONO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Cruz Roja Ecatepec</th>
+                                    <td>57-70-35-48 y 57-87-15-40</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Cruz Roja Naucalpan</th>
+                                    <td>55-60-69-88</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Cruz Roja Tlalnepantla</th>
+                                    <td>55-65-10-39 y 55-65-05-21</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Bomberos Naucalpan</th>
+                                    <td>53-73-11-22</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Bomberos Tlalnepantla</th>
+                                    <td>55-65-36-38 y 55-65-05-21</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Servitel (Servicios a la Ciudadanía)</th>
+                                    <td>01-800-591-6000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

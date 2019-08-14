@@ -1,0 +1,81 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:body>
+
+        <!-- Aquí va el contenido solo van ROWS y COLS no colocar containers -->
+        <ui:composition template = "TemplatePrincipal.xhtml">		
+            <ui:define name = "Contenido">
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="inicioAdministrador.xhtml">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item active">Incidencias creadas </li>
+                </ol>
+
+                <div class="row text-center mt-2">
+                    <div class="col">
+                        <h4 class="colorpantone text-center">Incidencias</h4>
+                        <p>La siguiente tabla muestra las incidencias que se han sucitado en las sesiones de laboratorio</p>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Fecha de creación</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">última actulización</th>
+                            <th scope="col">Ver</th>
+                            <th scope="col">Actualizar</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <h:form>
+                            <ui:repeat value="#{Incidencias.obtenerReportesIncidencia()}" var="ri" varStatus="status">
+                                <tr>
+                                    <!-- Este es unicamente para el conteo no tiene nada que ver en la base -->
+                                    <th scope="row">#{status.index +1}</th>
+                                    <th scope="col">#{ri.nombre}</th>
+                                    <th scope="col">#{ri.fecha}</th>                   
+                                    
+                                        <th scope="col">#{ri.estado}</th>
+                                    
+                                    <th scope="col">
+                                        #{ri.actualizacion}
+                                    </th>
+                                    <th scope="col">
+                                        <button class="btn" jsf:action="#{Incidencias.verReporte(ri)}">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </th>   
+                                    <th scope="col">
+                                        <button class="btn" jsf:action="#{Incidencias.obtenerReporte(ri)}">
+                                        <i class="fas fa-pen"></i>
+                                        
+                                        </button>
+                                    </th>   
+                                    <th scope="col">
+                                        <button class="btn" jsf:action="#{Incidencias.eliminarReporte(ri)}">
+                                            <i class="fas fa-trash-alt"></i>                      
+                                        </button>
+                                    </th>   
+                                </tr>
+                            </ui:repeat>
+                        </h:form>
+                    </tbody>
+                </table>
+
+            </ui:define> 
+        </ui:composition>       
+    </h:body>
+</html>

@@ -1,0 +1,92 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:body>
+
+        <!-- Aquí va el contenido solo van ROWS y COLS no colocar containers -->
+        <ui:composition template = "TemplatePrincipal.xhtml">		
+            <ui:define name = "Contenido">
+                <h:form>  
+                    <p:growl id="growl" showDetail="true" sticky="false"  />  
+                </h:form>
+
+                <div class="row text-center mt-2">
+                    <div class="col">
+                        <h4 class="colorpantone text-center">Creación de evento</h4>
+                        <p class="lead"> Llena los datos a continuación para la creación de un evento.</p>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <div class="card">
+                            <h5 class="card-header ">Evento</h5>
+                            <div class="card-body">
+                                <h5 class="card-title"> Datos </h5>
+                                <h:form>
+
+
+                                    <!-- Recordar cambiar -->
+                                    <div class="form-group ">
+                                        Selecciona el tipo de evento o escribelo: <br></br>
+                                        <p:selectOneMenu value="#{Evento.tipo}"  editable="true">
+                                            <f:selectItem itemValue="Entrega de practica" itemLabel="Entrega de práctica"/>
+                                        </p:selectOneMenu>
+                                        
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <h:outputLabel  for="restricted" value="Fecha de sesión " />                              
+                                        <p:calendar id="restricted" value="#{Evento.evento.fecha}" pattern="MM/dd/yyyy HH:mm"  />
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label for="nameE">Nombre del evento</label>
+                                        <input type="nameE" jsf:value="#{Evento.evento.nombre}" class="form-control form-control-sm" id="numseg" required="true"/>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label for="desc">Descripción</label>
+                                        <textarea id="desc" class="form-control" cols="30" rows="10" jsf:value="#{Evento.evento.descripcion}"></textarea>
+                                    </div>
+
+                                    <h5 class="card-subtitle mb-2 text-muted my-4">Grupo y unidad de aprendizaje</h5>
+
+                                    <div class="form-group row">
+
+                                        
+                                        <h:selectOneMenu value="#{Evento.idUnidadGrupo}" styleClass="form-control">
+                                            <f:selectItems value="#{Evento.obtenerUnidadesGrupo()}" 
+                                                           var="ug" 
+                                                           itemValue="#{ug.idUnidadGrupo}" 
+                                                           itemLabel="#{ug.grupo.nombre} /
+                                                           #{ug.unidadAprendizaje.nombre} /
+                                                           #{ug.usuarios.datosUsuario.nombre}
+                                                           #{ug.usuarios.datosUsuario.apellidoPaterno}
+                                                           #{ug.usuarios.datosUsuario.apellidoMaterno}" />
+                                        </h:selectOneMenu>
+
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <h:commandButton styleClass="btn btn-info text-white" value="Crear evento" action="#{Evento.crearEvento()}" ></h:commandButton>
+                                    </div>
+
+
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ui:define> 
+        </ui:composition>       
+    </h:body>
+</html>

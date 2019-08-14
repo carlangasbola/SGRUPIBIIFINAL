@@ -2,10 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <h:body >
-        <ui:composition> 
+        <ui:composition>
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -24,7 +25,8 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="../Administrador/TemplatePrincipal.xhtml">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Tablero Principal</span></a>
+                        <span>Tablero Principal</span>
+                    </a>
                 </li>
 
                 <!-- Divider -->
@@ -38,7 +40,7 @@
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-                       aria-controls="collapseTwo">
+                        aria-controls="collapseTwo">
                         <i class="fas fa-user"></i>
                         <span>Registro de usuarios</span>
                     </a>
@@ -55,10 +57,33 @@
                         <span>Lista de todos los usuarios</span>
                     </a>
                 </li>
-                
+
                 <!-- Divider -->
                 <hr class="sidebar-divider" />
-                
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Laboratorio
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <h:form>
+                        <a class="nav-link collapsed" jsf:action="#{ManejoLaboratorio.pestamoDisponible()}" >
+                            <i class="fas fa-clipboard-check"></i>
+                            <span>Préstamo de material</span>
+                        </a>
+                    </h:form>
+
+                    <a class="nav-link collapsed" href="../Administrador/Inventario.xhtml" >
+                        <i class="fas fa-fill-drip"></i>
+                        <span>Registro de residuos</span>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider" />
+
                 <!-- Heading -->
                 <div class="sidebar-heading">
                     Inventario
@@ -81,14 +106,14 @@
                     </div>
 
                     <a class="nav-link collapsed" href="../Administrador/Inventario.xhtml" >
-                        <i class="fas fa-list-ul"></i>
+                        <i class="fas fa-dolly-flatbed"></i>
                         <span>Inventario</span>
                     </a>
                 </li>
-                
+
                 <!-- Divider -->
                 <hr class="sidebar-divider" />
-                
+
                 <!-- Heading -->
                 <div class="sidebar-heading">
                     Prácticas
@@ -101,11 +126,11 @@
                         <span>Lista de prácticas</span>
                     </a>
                     <a class="nav-link collapsed" href="../Administrador/CrearPractica1.xhtml" >
-                        <i class="fas fa-list-ul"></i>
+                        <i class="fas fa-edit"></i>
                         <span>Crear nueva práctica</span>
                     </a>
                 </li>
-                
+
                 <!-- Divider -->
                 <hr class="sidebar-divider" />
 

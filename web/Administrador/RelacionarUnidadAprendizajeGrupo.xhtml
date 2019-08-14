@@ -1,0 +1,115 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+
+                <h5>Selecciona las unidades de aprendizaje y el docente que las impartirá a continuación</h5>
+
+                <div class="row">
+                    <div class="col">
+                        <p><strong>Grupo: &nbsp;</strong>  <h:outputText value="#{UnidadGrupo.grupo.nombre}"></h:outputText> <br/>
+                            <strong>Cantidad de Alumnos:</strong>  <h:outputText value="">#{UnidadGrupo.grupo.cupo}</h:outputText> </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal">
+                            <i class="fas fa-plus"></i> Añadir Unidad de aprendizaje
+                        </button>
+                    </div>
+                </div>
+
+                <br />
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Unidad de aprendizaje</th>
+                            <th scope="col">Profesor que Imparte</th>
+                            <th scope="col">Alumnos Inscritos</th>
+                            <th scope="col">Agregar Alumnos</th>
+                            <th scope="col">Eliminar</th>
+                            <th scope="col">Actualizar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <h:outputText  style="font-weight:bold; color: red" value="La tabla no contiene ninguna unidad de aprendizaje." rendered="#{empty UnidadGrupo.obtenerUnidadesAprendizajeGrupo()}" />
+                        <h:form>
+                            <ui:repeat value="#{UnidadGrupo.obtenerUnidadesAprendizajeGrupo()}" var="ug" >
+                                <tr>
+                                    <th>#{ug.unidadAprendizaje.nombre}</th>
+                                    <th>
+                                        #{ug.usuarios.datosUsuario.nombre}
+                                        #{ug.usuarios.datosUsuario.apellidoPaterno}
+                                        #{ug.usuarios.datosUsuario.apellidoMaterno}
+                                    </th>
+                                    <th> 
+                                        <h:commandLink value="#{UnidadGrupo.obtenerCantidadAlumnosUnidadGrupo(ug.idUnidadGrupo)}"  action="#{UnidadGrupo.redirectAlumnosUnidadAprendizaje(ug.idUnidadGrupo)}" ></h:commandLink> 
+                                    </th>
+                                    <th> 
+                                        <h:commandButton class="btn btn-primary btn-sm" value="Agregar Alumnos" action="#{ UnidadGrupo.redirectAgregarListaGrupo(ug.idUnidadGrupo) }" />
+                                    </th>
+                                    <th> <h:commandButton class="btn btn-danger btn-sm" value="Eliminar" action="#{UnidadGrupo.eliminarUnidadGrupo(ug)}"></h:commandButton> </th>
+                                    <th> -- </th>
+                                </tr>
+                            </ui:repeat>
+                        </h:form>
+                    </tbody>
+                </table>
+
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <h:form>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Selecciona el docente y la unidad</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        <label for="docente"> <strong>Docente</strong> </label>
+                                        <h:selectOneMenu id="docente" class="form-control" value = "#{UnidadGrupo.docente.idUsuarios}"> 
+                                            <f:selectItems value="#{DatosUsuario.obtenerDatosUsuarioRol(2)}" var="du" itemValue = "#{du.usuarios.idUsuarios}" itemLabel = "#{du.nombre} #{du.apellidoPaterno} #{du.apellidoMaterno}" /> 
+                                        </h:selectOneMenu> 
+                                        <small id="emailHelp" class="form-text text-muted">Orden: Nombre, Apellido Paterno, Apellido Materno</small>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label for="unidadAprendizaje"> <strong>Unidad de aprendizaje</strong> </label>
+                                        <h:selectOneMenu id="unidadAprendizaje" class="form-control" value = "#{UnidadGrupo.unidadAprendizaje.idUnidadAprendizaje}"> 
+                                            <f:selectItems value="#{UnidadAprendizaje.obtenerUnidadesAprendizaje()}" var="ua" itemValue = "#{ua.idUnidadAprendizaje}" itemLabel = "#{ua.nombre}" /> 
+                                        </h:selectOneMenu> 
+                                        <small id="emailHelp" class="form-text text-muted">Nombre de la unidad de aprendizaje</small>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                                    <h:commandButton class="btn btn-primary" value="Guardar" action="#{UnidadGrupo.insertUnidadGrupo()}" ></h:commandButton>
+
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+
+
+            </ui:define> 			
+        </ui:composition> 
+    </h:body>
+</html>

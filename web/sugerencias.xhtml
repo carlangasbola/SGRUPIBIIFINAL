@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui">
+
+    <head jsf:id="head">
+        <title>Sugerencias</title>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        </link>
+        <!-- Estilos Propios -->
+        <link rel="stylesheet" href="misestilos/estiloC.css"></link>
+        <!-- ICONOS -->
+        <script src="https://kit.fontawesome.com/6d493ccdf7.js"></script>
+    </head>
+
+    <body jsf:id="body">
+
+        <!-- Image and text -->
+        <nav class='navbar navbar-expand-lg navbar-custom mb-4'> <a class='navbar-brand' href='index.html'>IPN</a>
+            <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'><span class='navbar-toggler-icon'></span></button>
+            <div class='collapse navbar-collapse justify-content-end' id='navbarSupportedContent'>
+                <ul class='navbar-nav '>
+                    <li class='nav-item '> <a class='nav-link active' href='#'>Tutorial de uso del sistema<span class='sr-only'>(current)</span></a> </li>
+                    <li class='nav-item'> <a class='nav-link' href='#'>Directorio Teléfonico</a> </li>
+                    <li class='nav-item'> <a class='nav-link disabled' href='#'>Buzón de sugerencias</a> </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Etiqueta para mostrar un mensaje -->
+        <h:form>
+            <p:growl id="growl" showDetail="true" sticky="false" />
+        </h:form>
+
+        <div class="container my-3">
+            <div class="row justify-content-center">
+                <div class="col-7">
+                    <h4 class="text-center mt-4">Buzón de sugerencias</h4>
+                    <p>El sistema comenzó planeado como un prototipo de sistema web que 
+                        sea capaz de gestionar riesgos en los laboratorios de biotecnología en UPIBI,
+                        es por eso que nos gustaría leer su opinión para continuar con la mejora continua de
+                        este sistema.</p>
+
+                    <h:form>
+                        <div class="form-group">
+                            <h:outputLabel styleClass="lead" for="area" value="Comentarios"></h:outputLabel>
+                            <h:inputTextarea value="#{managedBeanCorreo.mensaje}" class="form-control" required="true"  id="area" cols="25" rows="7" >
+                            </h:inputTextarea>
+                        </div>
+                        <h:commandButton action="#{managedBeanCorreo.enviarMensaje()}" class="btn colorazul" value="Enviar comentario"></h:commandButton>
+                    </h:form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript
+                ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    </body>
+
+</html>

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <!-- Aquí va el contenido solo van ROWS y COLS no colocar containers -->
+        <ui:composition template = "TemplatePrincipal.xhtml">		
+            <ui:define name = "Contenido">
+                <h:form>  
+                    <p:growl id="growl" showDetail="true" sticky="false"  />  
+                </h:form>
+
+                <div class="row text-center mt-2">
+                    <div class="col">
+                        <h4 class="colorpantone text-center">Creación de sesión de laboratorio</h4>
+                        <p class="lead"> Llena los datos a continuación para la creación de una sesión de laboratorio.</p>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <div class="card">
+                            <h5 class="card-header ">Sesión de laboratorio</h5>
+                            <div class="card-body">
+                                <h5 class="card-title"> Datos </h5>
+                                <h:form>
+                                    <h:panelGrid columns="2" cellpadding="2">
+                                        <h:outputLabel  for="fecha" value="Fecha de sesión de laboratorio: " />                              
+                                        <p:datePicker id="fecha" value="#{SessionLaboratorio.sesionLaboratorio.fecha}" showTime="true"  showIcon="true" />
+
+
+                                        <h:outputLabel  for="docente" value="Docente Auxiliar " />    
+                                        <p:selectOneMenu id="docente" editable="true" value = "#{SessionLaboratorio.docenteAux}" > 
+                                            <f:selectItems value="#{DatosUsuario.obtenerDatosUsuarioRol(2)}" var="du" itemValue = "#{du.nombre}#{du.apellidoPaterno}#{du.apellidoMaterno}" itemLabel = "#{du.nombre}#{du.apellidoPaterno}#{du.apellidoMaterno}" /> 
+                                            <f:selectItem itemValue="No tiene" itemLabel="No tiene"/>
+                                        </p:selectOneMenu> 
+
+                                        <h:outputLabel  for="unidadgrupo" value="Unidad grupo " />   
+                                        <p:selectOneMenu id="unidadgrupo" value="#{SessionLaboratorio.idUnidadGrupo}" >
+                                            <f:selectItems value="#{Evento.obtenerUnidadesGrupo()}" 
+                                                           var="ug" 
+                                                           itemValue="#{ug.idUnidadGrupo}" 
+                                                           itemLabel="#{ug.grupo.nombre} /
+                                                           #{ug.unidadAprendizaje.nombre} /
+                                                           #{ug.usuarios.datosUsuario.nombre}
+                                                           #{ug.usuarios.datosUsuario.apellidoPaterno}
+                                                           #{ug.usuarios.datosUsuario.apellidoMaterno}" />
+                                        </p:selectOneMenu>
+                                        
+                                        
+                                        <h:commandButton value="Crear Sesión" styleClass="btn btn-info" action="#{SessionLaboratorio.crearSesionLaboratorio()}" ></h:commandButton>
+
+                                    </h:panelGrid>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ui:define> 
+        </ui:composition>    
+
+    </h:body>
+</html>
+
