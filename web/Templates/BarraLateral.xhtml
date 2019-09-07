@@ -44,6 +44,7 @@
                         <i class="fas fa-user"></i>
                         <span>Registro de usuarios</span>
                     </a>
+                    
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Opciones disponibles:</h6>
@@ -68,8 +69,13 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="../Administrador/AgregarSesionLaboratorio.xhtml" >
+                        <i class="fas fa-clock"></i>
+                        <span>Registro de sesiones</span>
+                    </a>
+                    
                     <h:form>
-                        <a class="nav-link collapsed" jsf:action="#{ManejoLaboratorio.pestamoDisponible()}" >
+                        <a class="nav-link collapsed" jsf:action="#{SessionLaboratorio.prestamoDisponible()}" >
                             <i class="fas fa-clipboard-check"></i>
                             <span>Préstamo de material</span>
                         </a>

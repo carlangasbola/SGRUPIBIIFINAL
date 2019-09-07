@@ -32,9 +32,9 @@
                                 <h5 class="card-title"> Datos </h5>
                                 <h:form>
                                     <h:panelGrid columns="2" cellpadding="2">
-                                        <h:outputLabel  for="fecha" value="Fecha de sesión de laboratorio: " />                              
-                                        <p:datePicker id="fecha" value="#{SessionLaboratorio.sesionLaboratorio.fecha}" showTime="true"  showIcon="true" />
-
+                                        
+                                        <h:outputLabel  for="fecha" value="Fecha de sesión de laboratorio: "/>
+                                        <p:calendar id="fecha" value="#{SessionLaboratorio.sesionLaboratorio.fecha}" pattern="MM/dd/yyyy HH:mm"/>
 
                                         <h:outputLabel  for="docente" value="Docente Auxiliar " />    
                                         <p:selectOneMenu id="docente" editable="true" value = "#{SessionLaboratorio.docenteAux}" > 

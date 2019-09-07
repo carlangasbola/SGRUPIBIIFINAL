@@ -309,9 +309,7 @@ public class ManagedBeanPractica implements Serializable {
     }
 
     public List<Practica> getListaPracticas() {
-        if(listaPracticas == null) {
-            ObtenerPracticas();
-        }
+        ObtenerPracticas();
         return listaPracticas;
     }
     
@@ -371,7 +369,7 @@ public class ManagedBeanPractica implements Serializable {
         } 
     }
     
-    public String LeeArchivo(String archivo) throws IOException {
+    public static String LeeArchivo(String archivo) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(archivo));
         try {
             StringBuilder sb = new StringBuilder();
