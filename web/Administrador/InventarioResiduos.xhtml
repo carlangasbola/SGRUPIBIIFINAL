@@ -1,0 +1,65 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <ui:composition template = "TemplatePrincipal.xhtml">	         
+        <ui:define name = "Contenido">
+
+            <h1 class="h3">Inventario de residuos</h1>
+            
+            <h:form>
+                <div class="content card shadow mb-3 p-4">
+
+                    <p:barChart model="#{Residuos.graficaPrincipalHorizontal}" style="width: 100%; height: 500px;"/>
+
+                </div>
+                
+                <div class="row mb-4 mt-4">
+                    <div class="col-6">
+                        <div class="content card shadow p-4">
+
+                            <p:radarChart  model="#{Residuos.radarModel}" style="width: 100%; height: 500px;"/>
+
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <div class="content card shadow p-4">
+
+                            <p:lineChart model="#{Residuos.lineModel}" style="width: 100%; height: 500px;"/>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mb-4 mt-4">
+                    <div class="col-6">
+                        <div class="content card shadow p-4">
+
+                            <label>
+                                Descargar informe completo
+                            </label>
+
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <div class="content card shadow p-4">
+
+                            <label>
+                                OTROS
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+                
+            </h:form>
+            
+        </ui:define> 			
+    </ui:composition>
+
+</html>

@@ -231,7 +231,6 @@ public class ManagedBeanPractica implements Serializable {
     }
     
     public List<Practica> ObtenerPracticas(){
-        
         Transaction tran = null;
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         
@@ -415,7 +414,7 @@ public class ManagedBeanPractica implements Serializable {
             
         return salida;
     }
-
+    
     public Practica getPractica() {
         return practica;
     }

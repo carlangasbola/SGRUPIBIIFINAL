@@ -7,8 +7,8 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.context.*;
 import org.dom4j.DocumentException;
 import org.hibernate.*;
@@ -16,12 +16,14 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 @Named("SessionLaboratorio")
-@RequestScoped
-
+@SessionScoped
 public class ManagedBeanSessionLaboratorio implements Serializable {
     
     private SesionDeLaboratorio sesionLaboratorio = new SesionDeLaboratorio();
     private SesionDeLaboratorio sesionActiva = new SesionDeLaboratorio();
+    private List<Reactivos> reactivosPractica = new ArrayList<>();
+    private List<Material> materialPractica = new ArrayList<>();
+    private List<EquipoLaboratorio> equipoPractica = new ArrayList<>();
     private int IdUnidadGrupo;
     private String docenteAux;
     private Equipo equipoAlumnos = new Equipo();
@@ -48,24 +50,23 @@ public class ManagedBeanSessionLaboratorio implements Serializable {
     
     public void preparaDescarga() throws Exception {
         imprimePDF();
-        String direccion = "Elementos\\Practicas\\Archivos\\" + 
+        String direccion = "Elementos\\PrestamoMaterial\\Archivos\\" + 
                            equipoAlumnos.getNombre() + ".pdf";
         File archivo = new File(direccion);
         InputStream entrada = new FileInputStream(archivo);
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         setDescarga(new DefaultStreamedContent(entrada, externalContext.getMimeType(archivo.getName()), archivo.getName()));
+        
     }
-    
-    
     
     public void imprimePDF() throws MalformedURLException, FileNotFoundException, 
                                     DocumentException, IOException, 
                                     com.lowagie.text.DocumentException{
         crea();
-        String inputFile = "Elementos\\Practicas\\Creacion\\" + 
+        String inputFile = "Elementos\\PrestamoMaterial\\Creacion\\" + 
                            equipoAlumnos.getNombre() + ".html"; 
         String url = new File(inputFile).toURI().toURL().toString(); 
-        String outputFile = "Elementos\\Practicas\\Archivos\\" + 
+        String outputFile = "Elementos\\PrestamoMaterial\\Archivos\\" + 
                             equipoAlumnos.getNombre() + ".pdf";; 
         OutputStream os = new FileOutputStream(outputFile);
         ITextRenderer renderer = new ITextRenderer(); 
@@ -73,18 +74,18 @@ public class ManagedBeanSessionLaboratorio implements Serializable {
         renderer.layout(); 
         renderer.createPDF(os);
 
-        os.close();  
+        os.close();
     }
     
     public void crea(){
         try {
-            File fileDir = new File("Elementos\\Practicas\\Creacion\\" + 
+            File fileDir = new File("Elementos\\PrestamoMaterial\\Creacion\\" + 
                                     equipoAlumnos.getNombre() + ".html");
             Writer out = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(fileDir), "UTF8"));
-            out.append(ManagedBeanPractica.LeeArchivo("Elementos\\Practicas\\Creacion\\inicio.txt") + 
-                       LlenaContenido() + 
-                       ManagedBeanPractica.LeeArchivo("Elementos\\Practicas\\Creacion\\fin.txt"));
+            out.append(ManagedBeanPractica.LeeArchivo("Elementos\\PrestamoMaterial\\Creacion\\inicioPrestamo.txt") + 
+                       llenaContenido() + 
+                       ManagedBeanPractica.LeeArchivo("Elementos\\PrestamoMaterial\\Creacion\\finPrestamo.txt"));
             out.flush();
             out.close();
         } catch (UnsupportedEncodingException e){
@@ -96,11 +97,78 @@ public class ManagedBeanSessionLaboratorio implements Serializable {
         } 
     }
     
-    public String LlenaContenido(){
+    public String llenaContenido(){
             String salida;
-            salida = "HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLA";
             
+            salida = datosPrincipales();
+            salida += "<table border=\"1\" style=\"width: 100%;font-size:14px\" cellpadding=\"5\">";
+            salida += "<tr style=\"text-align:center;\">";
+            salida += "<td width=\"20%\"><strong>TIPO</strong></td>";
+            salida += "<td width=\"50%\"><strong>NOMBRE</strong></td>";
+            salida += "<td width=\"15%\"><strong>CANTIDAD</strong></td>";
+            salida += "<td width=\"15%\"><strong>MEDIDA</strong></td></tr>";
+            
+            salida += agregaReactivosPDF() + agregaMaterialPDF() + agregaEquipoPDF();
+            
+        return salida + "</table>";
+    }
+    
+    public String agregaMaterialPDF(){
+        String salida = "";
+        
+        for (Material item:materialPractica){
+            salida += "<tr>\n" + "<td>Material</td>\n";
+            salida += "<td>" + item.getNombre() + "</td>\n"; 
+            salida += "<td>" + item.getCantidad() + "</td>\n";
+            salida += "<td>Pieza</td>\n" + "</tr>\n";
+        }
+        
         return salida;
+    }
+    
+    public String agregaEquipoPDF(){
+        String salida = "";
+        
+        for (EquipoLaboratorio item:equipoPractica){
+            salida += "<tr>\n" + "<td>Equipo</td>\n";
+            salida += "<td>" + item.getNombre() + "</td>\n"; 
+            salida += "<td>" + item.getCantidad() + "</td>\n";
+            salida += "<td>Pieza</td>\n" + "</tr>\n";
+        }
+        
+        return salida;
+    }
+    
+    public String agregaReactivosPDF(){
+        String salida = "";
+        
+        for (Reactivos item:reactivosPractica){
+            salida += "<tr>\n" + "<td>Reactivo</td>\n";
+            salida += "<td>" + item.getNombre() + "</td>\n"; 
+            salida += "<td>" + item.getCantidad() + "</td>\n";
+            salida += "<td>" + item.getMedida() + "</td>\n" + "</tr>\n";
+        }
+        
+        return salida;
+    }
+    
+    public String datosPrincipales(){
+        String salida;
+        String inicioTabla = "<tr style=\"text-align:left\"><td width=\"10%\"><strong>";
+        String centroTabla = "</strong></td><td width=\"90%\">&nbsp;";
+        String finTabla = "</td></tr>";
+        Date fechaActual = new Date();
+        
+        salida = inicioTabla + "GRUPO:" + centroTabla + 
+                 sesionActiva.getUnidadGrupo().getGrupo().getNombre() + finTabla;
+        
+        salida += inicioTabla + "NOMBRE:" + centroTabla + 
+                  equipoAlumnos.getNombre() + finTabla;
+        
+        salida += inicioTabla + "FECHA:" + centroTabla + 
+                  new SimpleDateFormat("dd/MM/yyyy").format(fechaActual) + finTabla;
+        
+        return salida + "</table><br/>";
     }
     
     public String prestamoDisponible(){
@@ -212,6 +280,42 @@ public class ManagedBeanSessionLaboratorio implements Serializable {
         return fechasLaboratorio;
     }
     
+    public void reactivosPracticas(double cantidad, String nombre) {
+        Reactivos reactivo = new Reactivos();
+        reactivo.setNombre(nombre);
+        reactivo.setCantidad(cantidad);
+        
+        reactivosPractica.add(reactivo);
+    }
+    
+    public void materialPracticas(Integer cantidad, String nombre) {
+        Material material = new Material();
+        material.setNombre(nombre);
+        material.setCantidad(cantidad);
+        
+        materialPractica.add(material);
+    }
+    
+    public void equipoPracticas(Integer cantidad, String nombre) {
+        EquipoLaboratorio equipo = new EquipoLaboratorio();
+        equipo.setNombre(nombre);
+        equipo.setCantidad(cantidad);
+        
+        equipoPractica.add(equipo);
+    }
+    
+    public void eliminarReactivosPracticas(int posicion) {
+        reactivosPractica.remove(posicion);
+    }
+    
+    public void eliminarMaterialPracticas(int posicion) {
+        materialPractica.remove(posicion);
+    }
+    
+    public void eliminarEquipoPracticas(int posicion) {
+        equipoPractica.remove(posicion);
+    }
+    
     public ManagedBeanSessionLaboratorio() {
     }
     
@@ -262,6 +366,30 @@ public class ManagedBeanSessionLaboratorio implements Serializable {
 
     public void setDescarga(DefaultStreamedContent descarga) {
         this.descarga = descarga;
+    }
+
+    public List<Reactivos> getReactivosPractica() {
+        return reactivosPractica;
+    }
+
+    public void setReactivosPractica(List<Reactivos> reactivosPractica) {
+        this.reactivosPractica = reactivosPractica;
+    }
+
+    public List<Material> getMaterialPractica() {
+        return materialPractica;
+    }
+
+    public void setMaterialPractica(List<Material> materialPractica) {
+        this.materialPractica = materialPractica;
+    }
+
+    public List<EquipoLaboratorio> getEquipoPractica() {
+        return equipoPractica;
+    }
+
+    public void setEquipoPractica(List<EquipoLaboratorio> equipoPractica) {
+        this.equipoPractica = equipoPractica;
     }
     
 }

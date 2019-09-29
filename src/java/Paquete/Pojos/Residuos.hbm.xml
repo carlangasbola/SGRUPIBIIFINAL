@@ -11,10 +11,10 @@
         <many-to-one name="sesionDeLaboratorio" class="Paquete.Pojos.SesionDeLaboratorio" fetch="select">
             <column name="idSesion" not-null="true" />
         </many-to-one>
-        <property name="nombre" type="binary">
+        <property name="nombre" type="string">
             <column name="Nombre" not-null="true" />
         </property>
-        <property name="tipo" type="binary">
+        <property name="tipo" type="string">
             <column name="Tipo" not-null="true" />
         </property>
         <property name="cantidad" type="double">

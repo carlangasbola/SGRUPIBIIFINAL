@@ -12,15 +12,15 @@ public class Residuos  implements java.io.Serializable {
 
      private int idResiduo;
      private SesionDeLaboratorio sesionDeLaboratorio;
-     private byte[] nombre;
-     private byte[] tipo;
+     private String nombre;
+     private String tipo;
      private double cantidad;
      private Date fechaDeIngreso;
 
     public Residuos() {
     }
 
-    public Residuos(int idResiduo, SesionDeLaboratorio sesionDeLaboratorio, byte[] nombre, byte[] tipo, double cantidad, Date fechaDeIngreso) {
+    public Residuos(int idResiduo, SesionDeLaboratorio sesionDeLaboratorio, String nombre, String tipo, double cantidad, Date fechaDeIngreso) {
        this.idResiduo = idResiduo;
        this.sesionDeLaboratorio = sesionDeLaboratorio;
        this.nombre = nombre;
@@ -43,18 +43,18 @@ public class Residuos  implements java.io.Serializable {
     public void setSesionDeLaboratorio(SesionDeLaboratorio sesionDeLaboratorio) {
         this.sesionDeLaboratorio = sesionDeLaboratorio;
     }
-    public byte[] getNombre() {
+    public String getNombre() {
         return this.nombre;
     }
     
-    public void setNombre(byte[] nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public byte[] getTipo() {
+    public String getTipo() {
         return this.tipo;
     }
     
-    public void setTipo(byte[] tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
     public double getCantidad() {
