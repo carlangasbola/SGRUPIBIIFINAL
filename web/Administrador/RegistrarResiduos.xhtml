@@ -3,21 +3,91 @@
 <html xmlns = "http://www.w3.org/1999/xhtml"   
       xmlns:h = "http://java.sun.com/jsf/html"
       xmlns:ui = "http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    
-    <ui:composition template = "TemplatePrincipal.xhtml">	         
-        <ui:define name = "Contenido">
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-            <h1 class="h3">Registro de residuos</h1>
-            
-            <h:form>
-                <div class="content card shadow mb-3 p-4">
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
 
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="h2"> Registrar residuos </h1>
+                    </div>
                 </div>
-                
-            </h:form>
-            
-        </ui:define> 			
-    </ui:composition>
 
+                <div class="row">
+                    <div class="col">
+                        <p> Completa la información a continuación para registrar residuos </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h:form>
+
+                            <div class="row form-group">
+                                <label for="Sesion" class="col-sm-2 col-form-label">Sesion</label>
+                                <div class="col-sm-10">
+                                    <h:selectOneMenu id="ses" value="#{ResiduosLaboratorio.sesion}" styleClass="form-control" >
+                                        <f:selectItems value="#{ResiduosLaboratorio.obteneSesionesRecientes()}" var="r" itemValue="#{r.idSesion}" itemLabel="#{r.fecha}" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="Nombre" class="col-sm-2 col-form-label">Apellido Paterno</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="Nombre" placeholder="Nombre del reactivo" required="true" jsf:value="#{ResiduosLaboratorio.residuos.nombre}"/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="Tipo" class="col-sm-2 col-form-label">Tipo</label>
+                                <div class="col-sm-10">
+                                    <h:selectOneMenu value = "#{ResiduosLaboratorio.residuos.tipo}"  class="form-control" id="Tipo">
+                                        <f:selectItem itemValue="Explosivo" itemLabel="Explosivo"/>
+                                        <f:selectItem itemValue="Inflamable" itemLabel="Gases, liquido o sólido inflamable"/>
+                                        <f:selectItem itemValue="Gas a presión" itemLabel="Gas a presión"/>
+                                        <f:selectItem itemValue="Sustancia comburente" itemLabel="Sustancia comburente"/>
+                                        <f:selectItem itemValue="Sustancia perjudicial para la salud" itemLabel="Sustancia perjudicial para la salud"/>
+                                        <f:selectItem itemValue="Sustancia corrosiva" itemLabel="Sustancia corrosiva"/>
+                                        <f:selectItem itemValue="Sustancia nosiva" itemLabel="Sustancia nosiva"/>
+                                        <f:selectItem itemValue="Sustancia tóxica" itemLabel="Sustancia tóxica"/>
+                                        <f:selectItem itemValue="Sustancia peligrosas para el medio ambiente" itemLabel="Sustancia peligrosa para el medio ambiente"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="Cantidad" class="col-sm-2 col-form-label">Cantidad</label>
+                                <div class="col-sm-10">
+                                    <input type="number" jsf:value="#{ResiduosLaboratorio.residuos.cantidad}" class="form-control" placeholder="0.00" required="true" 
+                                           name="Cantidad" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="Medida" class="col-sm-2 col-form-label">Medida</label>
+                                <div class="col-sm-10">
+                                    <h:selectOneMenu class="form-control" id="Medida">
+                                        <f:selectItem itemValue="kilogramos" itemLabel="kilogramos"/>
+                                        <f:selectItem itemValue="litros" itemLabel="litros"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <h:commandButton class="btn btn-primary" value="Registrar residuo" 
+                                                     action="#{ResiduosLaboratorio.InsertResiduos()}" ></h:commandButton>
+                                </div>
+                            </div>
+
+                        </h:form>
+                    </div>
+                </div>
+
+            </ui:define> 			
+        </ui:composition> 
+ 
 </html>
