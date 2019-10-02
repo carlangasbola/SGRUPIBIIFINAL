@@ -5,7 +5,9 @@ import Paquete.Beans.Mensajes;
 import Paquete.Pojos.Residuos;
 import Paquete.Pojos.SesionDeLaboratorio;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -108,31 +110,44 @@ public class ManagedBeanResiduos implements Serializable {
     public void createLineModel() {
         lineModel = new LineChartModel();
         ChartData data = new ChartData();
+        int mesActual = Calendar.getInstance().get(Calendar.MONTH);
+        int aux = 0;
          
         LineChartDataSet dataSet = new LineChartDataSet();
         List<Number> values = new ArrayList<>();
-        values.add(65);
-        values.add(59);
-        values.add(80);
-        values.add(81);
-        values.add(56);
-        values.add(55);
-        values.add(40);
+        
         dataSet.setData(values);
         dataSet.setFill(false);
-        dataSet.setLabel("Residuos en este semestre");
+        dataSet.setLabel("Registro de residuos en este semestre");
         dataSet.setBorderColor("rgb(128, 0, 168)");
         dataSet.setLineTension(0.1);
         data.addChartDataSet(dataSet);
          
         List<String> labels = new ArrayList<>();
-        labels.add("Enero");
-        labels.add("Febrero");
-        labels.add("Marzo");
-        labels.add("Abril");
-        labels.add("Mayo");
-        labels.add("Junio");
-        labels.add("Julio");
+        if (mesActual < 7 ){
+            aux = mesActual - 12;
+            labels.add("Enero");
+            labels.add("Febrero");
+            labels.add("Marzo");
+            labels.add("Abril");
+            labels.add("Mayo");
+            labels.add("Junio");
+        }
+        else {
+            aux = mesActual - 12;
+            labels.add("Julio");
+            labels.add("Agosto");
+            labels.add("Septiembre");
+            labels.add("Octubre");
+            labels.add("Noviembre");
+            labels.add("Diciembre");
+        }
+        
+        for (int i = 0; i < 6; i++){
+            values.add(residuosMes(aux).size());
+            aux++;
+        }
+        
         data.setLabels(labels);
         
         lineModel.setData(data);
@@ -146,7 +161,7 @@ public class ManagedBeanResiduos implements Serializable {
         residuos = obtenerResiduos();
          
         HorizontalBarChartDataSet hbarDataSet = new HorizontalBarChartDataSet();
-        hbarDataSet.setLabel("Cantidades");
+        hbarDataSet.setLabel("Registros");
          
         List<Number> values = new ArrayList<>();
         values.add(cantidadResiduos(residuos, "Explosivo"));
@@ -214,11 +229,12 @@ public class ManagedBeanResiduos implements Serializable {
     }
     
     public void createRadarModel() {
+        int r1 = 0, r2 = 0, r3 = 0, r4 = 0, r5 = 0, r6 = 0, r7 = 0, r8 = 0, r9 = 0;
         radarModel = new RadarChartModel();
         ChartData data = new ChartData();
         
         RadarChartDataSet radarDataSet1 = new RadarChartDataSet();
-        radarDataSet1.setLabel("Julio");
+        radarDataSet1.setLabel(numeroAMes(Calendar.getInstance().get(Calendar.MONTH) - 2));
         radarDataSet1.setFill(true);
         radarDataSet1.setBackgroundColor("rgba(8, 168, 17, 0.2)");
         radarDataSet1.setBorderColor("rgb(8, 168, 17)");
@@ -227,19 +243,30 @@ public class ManagedBeanResiduos implements Serializable {
         radarDataSet1.setPointHoverBackgroundColor("#fff");
         radarDataSet1.setPointHoverBorderColor("rgb(8, 168, 17)");
         List<Number> dataVal1 = new ArrayList<>();
-        dataVal1.add(33);
-        dataVal1.add(89);
-        dataVal1.add(59);
-        dataVal1.add(77);
-        dataVal1.add(90);
-        dataVal1.add(60);
-        dataVal1.add(45);
-        dataVal1.add(75);
-        dataVal1.add(93);
+        for (Residuos item:residuosMes(-2)){
+            if ("Explosivo".equals(item.getTipo())){ r1++;}
+            else if("Inflamable".equals(item.getTipo())){ r2++;}
+            else if("Gas a presión".equals(item.getTipo())){ r3++;}
+            else if("Sustancia comburente".equals(item.getTipo())){ r4++;}
+            else if("Sustancia perjudicial para la salud".equals(item.getTipo())){ r5++;}
+            else if("Sustancia corrosiva".equals(item.getTipo())){ r6++;}
+            else if("Sustancia nosiva".equals(item.getTipo())){ r7++;}
+            else if("Sustancia tóxica".equals(item.getTipo())){ r8++;}
+            else { r9++;}
+        }
+        dataVal1.add(r1);
+        dataVal1.add(r2);
+        dataVal1.add(r3);
+        dataVal1.add(r4);
+        dataVal1.add(r5);
+        dataVal1.add(r6);
+        dataVal1.add(r7);
+        dataVal1.add(r8);
+        dataVal1.add(r9);
         radarDataSet1.setData(dataVal1);
          
         RadarChartDataSet radarDataSet2 = new RadarChartDataSet();
-        radarDataSet2.setLabel("Agosto");
+        radarDataSet2.setLabel(numeroAMes(Calendar.getInstance().get(Calendar.MONTH) - 1));
         radarDataSet2.setFill(true);
         radarDataSet2.setBackgroundColor("rgba(255, 99, 132, 0.2)");
         radarDataSet2.setBorderColor("rgb(255, 99, 132)");
@@ -248,19 +275,31 @@ public class ManagedBeanResiduos implements Serializable {
         radarDataSet2.setPointHoverBackgroundColor("#fff");
         radarDataSet2.setPointHoverBorderColor("rgb(255, 99, 132)");
         List<Number> dataVal2 = new ArrayList<>();
-        dataVal2.add(65);
-        dataVal2.add(59);
-        dataVal2.add(90);
-        dataVal2.add(81);
-        dataVal2.add(56);
-        dataVal2.add(55);
-        dataVal2.add(40);
-        dataVal2.add(64);
-        dataVal2.add(80);
+        r1 = 0; r2 = 0; r3 = 0; r4 = 0; r5 = 0; r6 = 0; r7 = 0; r8 = 0; r9 = 0;
+        for (Residuos item:residuosMes(-1)){
+            if ("Explosivo".equals(item.getTipo())){ r1++;}
+            else if("Inflamable".equals(item.getTipo())){ r2++;}
+            else if("Gas a presión".equals(item.getTipo())){ r3++;}
+            else if("Sustancia comburente".equals(item.getTipo())){ r4++;}
+            else if("Sustancia perjudicial para la salud".equals(item.getTipo())){ r5++;}
+            else if("Sustancia corrosiva".equals(item.getTipo())){ r6++;}
+            else if("Sustancia nosiva".equals(item.getTipo())){ r7++;}
+            else if("Sustancia tóxica".equals(item.getTipo())){ r8++;}
+            else { r9++;}
+        }
+        dataVal2.add(r1);
+        dataVal2.add(r2);
+        dataVal2.add(r3);
+        dataVal2.add(r4);
+        dataVal2.add(r5);
+        dataVal2.add(r6);
+        dataVal2.add(r7);
+        dataVal2.add(r8);
+        dataVal2.add(r9);
         radarDataSet2.setData(dataVal2);
-         
+        
         RadarChartDataSet radarDataSet3 = new RadarChartDataSet();
-        radarDataSet3.setLabel("Septiembre");
+        radarDataSet3.setLabel(numeroAMes(Calendar.getInstance().get(Calendar.MONTH)));
         radarDataSet3.setFill(true);
         radarDataSet3.setBackgroundColor("rgba(54, 162, 235, 0.2)");
         radarDataSet3.setBorderColor("rgb(54, 162, 235)");
@@ -269,15 +308,27 @@ public class ManagedBeanResiduos implements Serializable {
         radarDataSet3.setPointHoverBackgroundColor("#fff");
         radarDataSet3.setPointHoverBorderColor("rgb(54, 162, 235)");
         List<Number> dataVal3 = new ArrayList<>();
-        dataVal3.add(28);
-        dataVal3.add(48);
-        dataVal3.add(40);
-        dataVal3.add(19);
-        dataVal3.add(96);
-        dataVal3.add(27);
-        dataVal3.add(100);
-        dataVal3.add(13);
-        dataVal3.add(54);
+        r1 = 0; r2 = 0; r3 = 0; r4 = 0; r5 = 0; r6 = 0; r7 = 0; r8 = 0; r9 = 0;
+        for (Residuos item:residuosMes(0)){
+            if ("Explosivo".equals(item.getTipo())){ r1++;}
+            else if("Inflamable".equals(item.getTipo())){ r2++;}
+            else if("Gas a presión".equals(item.getTipo())){ r3++;}
+            else if("Sustancia comburente".equals(item.getTipo())){ r4++;}
+            else if("Sustancia perjudicial para la salud".equals(item.getTipo())){ r5++;}
+            else if("Sustancia corrosiva".equals(item.getTipo())){ r6++;}
+            else if("Sustancia nosiva".equals(item.getTipo())){ r7++;}
+            else if("Sustancia tóxica".equals(item.getTipo())){ r8++;}
+            else { r9++;}
+        }
+        dataVal3.add(r1);
+        dataVal3.add(r2);
+        dataVal3.add(r3);
+        dataVal3.add(r4);
+        dataVal3.add(r5);
+        dataVal3.add(r6);
+        dataVal3.add(r7);
+        dataVal3.add(r8);
+        dataVal3.add(r9);
         radarDataSet3.setData(dataVal3);
         
         data.addChartDataSet(radarDataSet3);
@@ -307,6 +358,110 @@ public class ManagedBeanResiduos implements Serializable {
          
         radarModel.setOptions(options);
         radarModel.setData(data);
+    }
+    
+    public List<Residuos> residuosMes(int mes){
+        Date fechaActual = new Date();
+        int dia = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        int horas = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int minutos = Calendar.getInstance().get(Calendar.MINUTE);
+        
+        fechaActual = modificarHoras(modificarDias(modificarMeses(fechaActual, mes), -(dia - 1)), -horas);
+        fechaActual = modificarMinutos(fechaActual, -minutos);
+        Date fechaFin = calculaDiaFinal(fechaActual);
+        List<Residuos> residuos = new ArrayList();
+        SimpleDateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        Transaction tran = null;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            tran = session.beginTransaction();
+            residuos = session.createQuery("FROM Residuos WHERE fechaDeIngreso BETWEEN '" + 
+                                           fecha.format(fechaActual) + "' AND '" + fecha.format(fechaFin) + 
+                                           "'").list();
+            tran.commit();
+            
+        } catch ( Exception e) {
+            tran.rollback();
+            throw e;
+        }
+        
+        return residuos;
+    }
+    
+    public String numeroAMes(int numeroMes){
+        if (numeroMes == 1) { return "Enero"; }
+        else if (numeroMes == 2) { return "Febrero"; }
+        else if (numeroMes == 3) { return "Marzo"; }
+        else if (numeroMes == 4) { return "Abril"; }
+        else if (numeroMes == 5) { return "Mayo"; }
+        else if (numeroMes == 6) { return "Junio"; }
+        else if (numeroMes == 7) { return "Julio"; }
+        else if (numeroMes == 8) { return "Agosto"; }
+        else if (numeroMes == 9) { return "Septiembre"; }
+        else if (numeroMes == 10) { return "Octubre"; }
+        else if (numeroMes == 11) { return "Noviembre"; }
+        else { return "Diciembre"; }
+    }
+    
+    public Date modificarMinutos(Date fecha, int minutos){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.MINUTE, minutos);
+        
+        return calendar.getTime();
+    }
+    
+    public Date modificarHoras(Date fecha, int horas){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.HOUR, horas);
+        
+        return calendar.getTime();
+    }
+    
+    public Date modificarDias(Date fecha, int dias){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.DATE, dias);
+        
+        return calendar.getTime();
+    }
+    
+    public Date modificarMeses(Date fecha, int meses){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.MONTH, meses);
+        
+        return calendar.getTime();
+    }
+    
+    public Date calculaDiaFinal(Date fecha){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        
+        int mes = calendar.get(Calendar.MONTH) + 1;
+        int horas = calendar.get(Calendar.HOUR_OF_DAY) + 1;
+        int diaActual = calendar.get(Calendar.DAY_OF_MONTH);
+        int minutoActual = calendar.get(Calendar.MINUTE);
+        int diasMes;
+        
+        if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12){
+            diasMes = 31;
+        }
+        else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+            diasMes = 30;
+        }
+        else{
+            diasMes = 28;
+        }
+        
+        calendar.add(Calendar.DATE, diasMes - diaActual);
+        calendar.add(Calendar.HOUR_OF_DAY, + (24 - horas));
+        calendar.add(Calendar.MINUTE, + (59 - minutoActual));
+        
+        return calendar.getTime();
     }
     
     public int cantidadResiduos(List<Residuos> listaResiduos, String tipo) {
