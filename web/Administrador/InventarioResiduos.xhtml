@@ -3,7 +3,8 @@
 <html xmlns = "http://www.w3.org/1999/xhtml"   
       xmlns:h = "http://java.sun.com/jsf/html"
       xmlns:ui = "http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <ui:composition template = "TemplatePrincipal.xhtml">	         
         <ui:define name = "Contenido">
@@ -38,21 +39,114 @@
                 <div class="row mb-4 mt-4">
                     <div class="col-6">
                         <div class="content card shadow p-4">
+                            
+                            
+                            <div class="row">
+                                <p:linkButton outcome="#{ResiduosLaboratorio.redireccionaResiduo('Todos')}" value="Ver todos los registros" style="width:100%">
+                                </p:linkButton>
+                            </div>
 
-                            <label>
-                                Descargar informe completo
-                                
-                            </label>
+                            
+                            <div class="row mt-4">
+                                <p:commandButton type="submit"  value = "Descargar reporte completo" ajax="false" actionListener="#{ListaPracticas.preparaDescarga()}" style="width:100%">
+                                    <p:fileDownload value="#{ListaPracticas.descarga}" />
+                                </p:commandButton>
+                            </div>
 
                         </div>
                     </div>
                     
                     <div class="col-6">
                         <div class="content card shadow p-4">
-
-                            <label>
-                                OTROS
-                            </label>
+                            <div class="row p-3">
+                                <div class="col-9">
+                                    <strong><h:outputText value="REACTIVO" escape="false" /></strong>
+                                </div>
+                                <div class="col-3" align="right">
+                                    <strong><h:outputText value="REGISTROS" escape="false" /></strong>
+                                </div>
+                            </div>
+                            
+                            <div class="row p-3">
+                                <div class="col-9">
+                                    <h:commandLink action="#{ResiduosLaboratorio.redireccionaResiduo('Explosivo')}" value="Explosivo" />
+                                </div>
+                                <div class="col-3" align="right">
+                                    <h:outputText value="#{ResiduosLaboratorio.cantidadResiduos(ResiduosLaboratorio.obtenerResiduos(), 'Explosivo')}" escape="false" />
+                                </div>
+                            </div>
+                            
+                            <div class="row p-3">
+                                <div class="col-9">
+                                    <h:commandLink action="#{ResiduosLaboratorio.redireccionaResiduo('Inflamable')}" value="Inflamable" />
+                                </div>
+                                <div class="col-3" align="right">
+                                    <h:outputText value="#{ResiduosLaboratorio.cantidadResiduos(ResiduosLaboratorio.obtenerResiduos(), 'Inflamable')}" escape="false" />
+                                </div>
+                            </div>
+                            
+                            <div class="row p-3">
+                                <div class="col-9">
+                                    <h:commandLink action="#{ResiduosLaboratorio.redireccionaResiduo('Gas a presión')}" value="Gas a presión" />
+                                </div>
+                                <div class="col-3" align="right">
+                                    <h:outputText value="#{ResiduosLaboratorio.cantidadResiduos(ResiduosLaboratorio.obtenerResiduos(), 'Gas a presión')}" escape="false" />
+                                </div>
+                            </div>
+                            
+                            <div class="row p-3">
+                                <div class="col-9">
+                                    <h:commandLink action="#{ResiduosLaboratorio.redireccionaResiduo('Sustancia comburente')}" value="Sustancia comburente" />
+                                </div>
+                                <div class="col-3" align="right">
+                                    <h:outputText value="#{ResiduosLaboratorio.cantidadResiduos(ResiduosLaboratorio.obtenerResiduos(), 'Sustancia comburente')}" escape="false" />
+                                </div>
+                            </div>
+                            
+                            <div class="row p-3">
+                                <div class="col-9">
+                                    <h:commandLink action="#{ResiduosLaboratorio.redireccionaResiduo('Sustancia perjudicial para la salud')}" value="Sustancia perjudicial para la salud" />
+                                </div>
+                                <div class="col-3" align="right">
+                                    <h:outputText value="#{ResiduosLaboratorio.cantidadResiduos(ResiduosLaboratorio.obtenerResiduos(), 'Sustancia perjudicial para la salud')}" escape="false" />
+                                </div>
+                            </div>
+                            
+                            <div class="row p-3">
+                                <div class="col-9">
+                                    <h:commandLink action="#{ResiduosLaboratorio.redireccionaResiduo('Sustancia corrosiva')}" value="Sustancia corrosiva" />
+                                </div>
+                                <div class="col-3" align="right">
+                                    <h:outputText value="#{ResiduosLaboratorio.cantidadResiduos(ResiduosLaboratorio.obtenerResiduos(), 'Sustancia corrosiva')}" escape="false" />
+                                </div>
+                            </div>
+                            
+                            <div class="row p-3">
+                                <div class="col-9">
+                                    <h:commandLink action="#{ResiduosLaboratorio.redireccionaResiduo('Sustancia nosiva')}" value="Sustancia nosiva" />
+                                </div>
+                                <div class="col-3" align="right">
+                                    <h:outputText value="#{ResiduosLaboratorio.cantidadResiduos(ResiduosLaboratorio.obtenerResiduos(), 'Sustancia nosiva')}" escape="false" />
+                                </div>
+                            </div>
+                            
+                            <div class="row p-3">
+                                <div class="col-9">
+                                    <h:commandLink action="#{ResiduosLaboratorio.redireccionaResiduo('Sustancia tóxica')}" value="Sustancia tóxica" />
+                                </div>
+                                <div class="col-3" align="right">
+                                    <h:outputText value="#{ResiduosLaboratorio.cantidadResiduos(ResiduosLaboratorio.obtenerResiduos(), 'Sustancia tóxica')}" escape="false" />
+                                </div>
+                            </div>
+                            
+                            <div class="row p-3">
+                                <div class="col-9">
+                                    <h:commandLink action="#{ResiduosLaboratorio.redireccionaResiduo('Sustancia peligrosas para el medio ambiente')}" value="Sustancia peligrosas para el medio ambiente" />
+                                </div>
+                                <div class="col-3" align="right">
+                                    <h:outputText value="#{ResiduosLaboratorio.cantidadResiduos(ResiduosLaboratorio.obtenerResiduos(), 'Sustancia peligrosas para el medio ambiente')}" escape="false" />
+                                </div>
+                            </div>
 
                         </div>
                     </div>

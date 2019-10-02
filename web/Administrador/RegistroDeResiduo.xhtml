@@ -1,0 +1,84 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    
+    <h:head>
+        <link href="../Files/inventario/estilos.css" rel='stylesheet' type='text/css' />
+    </h:head>
+    
+    <ui:composition template = "TemplatePrincipal.xhtml">	         
+        <ui:define name = "Contenido">
+
+            <h1 class="h3">Registro</h1>
+            <p> Puede visualizar la información del residuo o eliminarlo del sistema. </p>
+
+            <div class="card shadow mb-4">
+                
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Lista de prácticas</h6>
+                </div>
+                
+                <div class="card-body">
+                    <h:form>
+                        <p:dataTable var="du" value="#{ResiduosLaboratorio.todosLosRegistros}" widgetVar="myTable" emptyMessage="No se encontró ningún registro">
+                            <f:facet name="header" >
+                                <p:outputPanel  style="width:100%; text-align: right">
+                                    <h:outputText value="Buscar: "/>
+                                    <p:inputText id="globalFilter" style="width:18%" onkeyup="PF('myTable').filter()" placeholder="Ingresa búsqueda"/>
+                                </p:outputPanel>
+                            </f:facet>
+                            
+                            <p:column style="display: none" filterBy="#{du.cantidad} #{du.fechaDeIngreso} #{du.nombre} #{du.fechaDeIngreso}">
+                            </p:column>
+                            
+                            <p:column style="width:22%" headerText="Nombre">
+                                <h:outputText value="#{du.nombre}"/>
+                            </p:column>
+                            
+                            <p:column style="width:22%" headerText="Tipo">
+                                <h:outputText value="#{du.tipo}"/>
+                            </p:column>
+                            <p:column style="width:12%; text-align:center" headerText="Cantidad">
+                                <h:outputText value="#{du.cantidad}"/>
+                            </p:column>
+
+                            <p:column style="width:22%; text-align: center" headerText="Fecha de ingreso">
+                                <h:outputText value="#{du.fechaDeIngreso}"/>
+                            </p:column>
+                            
+                            <p:column style="width:10%; text-align: center" headerText="Eliminar">
+                                <p:growl id="message" showDetail="true" />
+     
+                                <p:commandButton value="Eliminar" action="#{ListaPracticas.eliminarPractica(du.idPractica)}" update="message">
+                                    <p:confirm header="Confirmación" message="¿Realmente desea eliminar el elemento?" icon="pi pi-exclamation-triangle" />
+                                </p:commandButton>
+
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div  align="center">
+                                                <p:commandButton style="width:80%" value="Si" type="button" styleClass="ui-confirmdialog-yes"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">    
+                                            <div align="center">
+                                                <p:commandButton style="width:80%" value="No" type="button" styleClass="ui-confirmdialog-no"/>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </p:confirmDialog>
+                            </p:column>
+                           
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define> 			
+    </ui:composition>
+
+</html>

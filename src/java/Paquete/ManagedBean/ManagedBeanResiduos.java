@@ -38,10 +38,17 @@ public class ManagedBeanResiduos implements Serializable {
     private RadarChartModel radarModel;
     private Residuos residuos = new Residuos();
     private int sesion;
+    private List<Residuos> todosLosRegistros = new ArrayList<>(); 
     
     @PostConstruct
     public void init() {
         
+    }
+    
+    public String redireccionaResiduo(String residuo){
+        obtenerResiduosNombre(residuo);
+        
+        return "RegistroDeResiduo.xhtml";
     }
     
     public List<SesionDeLaboratorio> obteneSesionesRecientes(){
@@ -106,7 +113,31 @@ public class ManagedBeanResiduos implements Serializable {
         
         return residuos;
     }
-     
+    
+    public List<Residuos> obtenerResiduosNombre(String residuo){
+            
+        Transaction tran = null;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        try {
+            tran = session.beginTransaction();
+            if ("Todos".equals(residuo)){
+                todosLosRegistros = session.createQuery("FROM Residuos").list();
+            }
+            else {
+                todosLosRegistros = session.createQuery("FROM Residuos WHERE tipo = '" + residuo + "'").list();
+            }
+            
+            tran.commit();
+            
+        } catch ( Exception e) {
+            tran.rollback();
+            throw e;
+        }
+        
+        return todosLosRegistros;
+    }
+    
     public void createLineModel() {
         lineModel = new LineChartModel();
         ChartData data = new ChartData();
@@ -517,6 +548,14 @@ public class ManagedBeanResiduos implements Serializable {
 
     public void setSesion(int sesion) {
         this.sesion = sesion;
+    }
+
+    public List<Residuos> getTodosLosRegistros() {
+        return todosLosRegistros;
+    }
+
+    public void setTodosLosRegistros(List<Residuos> todosLosRegistros) {
+        this.todosLosRegistros = todosLosRegistros;
     }
     
 }
