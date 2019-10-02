@@ -38,8 +38,15 @@
                                           fileLimitMessage="El maximo de archivos es 1"  
                                           invalidFileMessage="Se debe seleccionar un archivo xls"
                                           cancelLabel="Cancelar" uploadLabel="Subir Archivo" label="Buscar Archivo"/>
-                            <br />
-                            <h:commandButton value="Añadir usuarios" action="#{ListaGrupo.LeerArchivosExcel()}"  > </h:commandButton>
+                            <br/>
+
+                            <div class="form-group row">
+                                <div class="col">
+                                    <p:commandButton ajax="false" styleClass="col-sm-3" actionListener="#{ListaGrupo.LeerArchivosExcel()}" 
+                                             value="Añadir usuarios">
+                                    </p:commandButton>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="col">

@@ -155,9 +155,7 @@ public class ManagedBeanMaterial implements Serializable{
     }
     
     public List<Material> getDatosMaterial() {
-        if(datosMaterial == null) {
-            ObtenerDatosMaterial();
-        }
+        ObtenerDatosMaterial();
         return datosMaterial;
     }
 

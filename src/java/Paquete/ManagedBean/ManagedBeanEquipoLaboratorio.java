@@ -153,9 +153,7 @@ public class ManagedBeanEquipoLaboratorio implements Serializable{
     }
     
     public List<EquipoLaboratorio> getDatosEquipo() {
-        if(datosEquipo == null) {
-            ObtenerDatosEquipo();
-        }
+        ObtenerDatosEquipo();
         return datosEquipo;
     }
 

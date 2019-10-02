@@ -184,10 +184,10 @@
                     </table>
                     
                     <div class="row form-group" style="padding-top:60px;padding-bottom:40px">
-                        <div class='col-md-3 col-xs-12'>
+                        <div class='col'>
                             
                          <!-- anteriorsiguiente successansig button3 form-control col-sm-8 -->
-                            <p:commandButton ajax="false" actionListener="#{SessionLaboratorio.preparaDescarga()}" 
+                            <p:commandButton ajax="false" styleClass="col-sm-2" actionListener="#{SessionLaboratorio.preparaDescarga()}" 
                                              value="Generar Vale">
                                 <p:fileDownload value="#{SessionLaboratorio.descarga}" />
                             </p:commandButton>

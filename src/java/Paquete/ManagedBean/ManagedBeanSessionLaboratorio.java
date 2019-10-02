@@ -25,7 +25,6 @@ public class ManagedBeanSessionLaboratorio implements Serializable {
     private List<Material> materialPractica = new ArrayList<>();
     private List<EquipoLaboratorio> equipoPractica = new ArrayList<>();
     private int IdUnidadGrupo;
-    private String docenteAux;
     private Equipo equipoAlumnos = new Equipo();
     private DefaultStreamedContent descarga;
     
@@ -248,10 +247,13 @@ public class ManagedBeanSessionLaboratorio implements Serializable {
         try {
             tran = session.beginTransaction();
             
+            System.out.println("Aquí: Fecha -> " + sesionLaboratorio.getFecha());
+            System.out.println("Aquí: idUnidadGrupo -> " + IdUnidadGrupo);
+            System.out.println("Aquí: Docente auxiliar -> " + sesionLaboratorio.getDocenteAuxiliar());
+            
             UnidadGrupo ua = new UnidadGrupo();
             ua = (UnidadGrupo) session.get(UnidadGrupo.class, IdUnidadGrupo);
             sesionLaboratorio.setUnidadGrupo(ua);
-            sesionLaboratorio.setDocenteAuxiliar(docenteAux);
             session.save(this.sesionLaboratorio);
             tran.commit();
             mensaje.setMessage("Sesión de laboratorio creada");
@@ -261,6 +263,23 @@ public class ManagedBeanSessionLaboratorio implements Serializable {
             mensaje.setMessage("No se pudo crear la sesión");
             mensaje.error();
         }
+    }
+    
+    public List<UnidadGrupo> obtenerUnidades() {
+        Transaction tran = null;
+        List<UnidadGrupo> grupos = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        try {
+            tran = session.beginTransaction();
+            grupos = session.createQuery("FROM UnidadGrupo").list();
+            tran.commit();
+            
+        } catch ( Exception e) {
+            tran.rollback();
+            throw e;
+        }
+        return grupos;
     }
     
     public List<SesionDeLaboratorio> ObtenerFechasLaboratorio() {
@@ -333,14 +352,6 @@ public class ManagedBeanSessionLaboratorio implements Serializable {
     
     public void setIdUnidadGrupo(int IdUnidadGrupo) {
         this.IdUnidadGrupo = IdUnidadGrupo;
-    }
-    
-    public String getDocenteAux() {
-        return docenteAux;
-    }
-    
-    public void setDocenteAux(String DocenteAux) {
-        this.docenteAux = DocenteAux;
     }
 
     public SesionDeLaboratorio getSesionActiva() {

@@ -1,72 +1,65 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-
-        <!-- Aquí va el contenido solo van ROWS y COLS no colocar containers -->
-        <ui:composition template = "TemplatePrincipal.xhtml">		
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
             <ui:define name = "Contenido">
-                <h:form>  
-                    <p:growl id="growl" showDetail="true" sticky="false"  />  
-                </h:form>
 
-                <div class="row text-center mt-2">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="h2"> Registro de sesiones de laboratorio </h1>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col">
-                        <h4 class="colorpantone text-center">Creación de sesión de laboratorio</h4>
-                        <p class="lead"> Llena los datos a continuación para la creación de una sesión de laboratorio.</p>
+                        <p> Completa la información a continuación para registrar una nueva sesión de laboratorio </p>
                     </div>
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-8">
-                        <div class="card">
-                            <h5 class="card-header ">Sesión de laboratorio</h5>
-                            <div class="card-body">
-                                <h5 class="card-title"> Datos </h5>
-                                <h:form>
-                                    <h:panelGrid columns="2" cellpadding="2">
-                                        
-                                        <h:outputLabel  for="fecha" value="Fecha de sesión de laboratorio: "/>
-                                        <p:calendar id="fecha" value="#{SessionLaboratorio.sesionLaboratorio.fecha}" pattern="MM/dd/yyyy HH:mm"/>
-
-                                        <h:outputLabel  for="docente" value="Docente Auxiliar " />    
-                                        <p:selectOneMenu id="docente" editable="true" value = "#{SessionLaboratorio.docenteAux}" > 
-                                            <f:selectItems value="#{DatosUsuario.obtenerDatosUsuarioRol(2)}" var="du" itemValue = "#{du.nombre}#{du.apellidoPaterno}#{du.apellidoMaterno}" itemLabel = "#{du.nombre}#{du.apellidoPaterno}#{du.apellidoMaterno}" /> 
-                                            <f:selectItem itemValue="No tiene" itemLabel="No tiene"/>
-                                        </p:selectOneMenu> 
-
-                                        <h:outputLabel  for="unidadgrupo" value="Unidad grupo " />   
-                                        <p:selectOneMenu id="unidadgrupo" value="#{SessionLaboratorio.idUnidadGrupo}" >
-                                            <f:selectItems value="#{Evento.obtenerUnidadesGrupo()}" 
-                                                           var="ug" 
-                                                           itemValue="#{ug.idUnidadGrupo}" 
-                                                           itemLabel="#{ug.grupo.nombre} /
-                                                           #{ug.unidadAprendizaje.nombre} /
-                                                           #{ug.usuarios.datosUsuario.nombre}
-                                                           #{ug.usuarios.datosUsuario.apellidoPaterno}
-                                                           #{ug.usuarios.datosUsuario.apellidoMaterno}" />
-                                        </p:selectOneMenu>
-                                        
-                                        
-                                        <h:commandButton value="Crear Sesión" styleClass="btn btn-info" action="#{SessionLaboratorio.crearSesionLaboratorio()}" ></h:commandButton>
-
-                                    </h:panelGrid>
-                                </h:form>
+                <div class="row">
+                    <div class="col">
+                        <h:form>
+                            
+                            <div class="form-group row">
+                                <label for="Cantidad" class="col-sm-2 col-form-label">Cantidad</label>
+                                <div class="col-md-10">
+                                    <p:calendar size="45" id="fecha" value="#{SessionLaboratorio.sesionLaboratorio.fecha}" pattern="MM/dd/yyyy HH:mm"/>
+                                </div>
                             </div>
-                        </div>
+                            
+                            <div class="form-group row">
+                                <label for="Docente" class="col-sm-2 col-form-label">Docente Auxiliar</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="Docente" placeholder="Docente auxiliar" required="true" jsf:value="#{SessionLaboratorio.sesionLaboratorio.docenteAuxiliar}"/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="Docente" class="col-sm-2 col-form-label">Docente Auxiliar</label>
+                                <div class="col-sm-10">
+                                    <h:selectOneMenu id="uni" value="#{SessionLaboratorio.idUnidadGrupo}" styleClass="form-control" >
+                                        <f:selectItems value="#{SessionLaboratorio.obtenerUnidades()}" var="u" itemValue="#{u.idUnidadGrupo}" itemLabel="#{u.usuarios.datosUsuario.nombre} #{u.usuarios.datosUsuario.apellidoPaterno} #{u.usuarios.datosUsuario.apellidoMaterno} #{u.unidadAprendizaje.nombre} #{u.grupo.nombre}" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            
+                            <br/>
+                            
+                            <p:commandButton value="Crear Sesión" type="submit" styleClass="col-sm-2"
+                                            ajax="false" action="#{SessionLaboratorio.crearSesionLaboratorio()}">
+                            </p:commandButton>
+                            
+                        </h:form>
                     </div>
                 </div>
 
-            </ui:define> 
-        </ui:composition>    
-
-    </h:body>
+            </ui:define> 			
+        </ui:composition> 
+ 
 </html>
-

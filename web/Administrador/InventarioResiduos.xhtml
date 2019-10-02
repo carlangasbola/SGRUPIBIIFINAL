@@ -39,16 +39,11 @@
                 <div class="row mb-4 mt-4">
                     <div class="col-6">
                         <div class="content card shadow p-4">
-                            
-                            
-                            <div class="row">
-                                <p:linkButton outcome="#{ResiduosLaboratorio.redireccionaResiduo('Todos')}" value="Ver todos los registros" style="width:100%">
-                                </p:linkButton>
+                            <div class="">
+                                <p:commandButton styleClass="col" value="Ver todos los registros" action="#{ResiduosLaboratorio.redireccionaResiduo('Todos')}" />
                             </div>
-
-                            
-                            <div class="row mt-4">
-                                <p:commandButton type="submit"  value = "Descargar reporte completo" ajax="false" actionListener="#{ResiduosLaboratorio.preparaDescarga()}" style="width:100%">
+                            <div style="margin-top:15px">
+                                <p:commandButton type="submit"  value = "Descargar reporte completo" ajax="false" actionListener="#{ResiduosLaboratorio.preparaDescarga()}" styleClass="col">
                                     <p:fileDownload value="#{ResiduosLaboratorio.descarga}" />
                                 </p:commandButton>
                             </div>

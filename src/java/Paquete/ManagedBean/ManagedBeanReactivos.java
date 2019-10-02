@@ -368,9 +368,7 @@ public class ManagedBeanReactivos implements Serializable{
     }
 
     public List<Integer> getCantidadReactivos() {
-        if(cantidadReactivos == null) {
-            ObtenerDatosReactivo();
-        }
+        ObtenerDatosReactivo();
         return cantidadReactivos;
     }
 

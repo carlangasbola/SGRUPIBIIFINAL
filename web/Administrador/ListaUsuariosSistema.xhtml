@@ -44,12 +44,14 @@
                             </p:column>
 
 
-                            <p:column style="width:75px;text-align: center" headerText="Editar">
-                                <h:commandButton value="Editar" class="btn btn-success" action="#{DatosUsuario.obtenerDatosUsuario(du)}" ></h:commandButton> 
+                            <p:column style="width:110px;text-align: center" headerText="Editar">
+                                <p:commandButton styleClass="col" value="Editar" action="#{DatosUsuario.obtenerDatosUsuario(du)}" />
                             </p:column>
 
-                            <p:column style="text-align: center" headerText="Eliminar">
-                                <p:commandButton value="Eliminar" class="btn btn-danger" ajax="false"  action="#{DatosUsuario.EliminarUsuario(du.idUsuarios)}" />
+                            <p:column style="width:110px;text-align: center" headerText="Eliminar">
+                                <p:commandButton ajax="false" styleClass="col" actionListener="#{DatosUsuario.EliminarUsuario(du.idUsuarios)}" 
+                                    value="Eliminar">
+                                </p:commandButton>
                             </p:column>
 
                         </p:dataTable>

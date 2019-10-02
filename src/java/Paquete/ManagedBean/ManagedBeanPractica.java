@@ -182,6 +182,7 @@ public class ManagedBeanPractica implements Serializable {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             transObj = session.beginTransaction();
             session.delete((Practica) session.get(Practica.class, idPractica));
+            
             transObj.commit();
             mensaje.setMessage("Práctica eliminada del sistema");
             mensaje.info();

@@ -4,9 +4,10 @@
       xmlns:h = "http://java.sun.com/jsf/html"
       xmlns:ui = "http://java.sun.com/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    
         <ui:composition template = "TemplatePrincipal.xhtml">	         
             <ui:define name = "Contenido">
 
@@ -76,12 +77,12 @@
                                     </h:selectOneMenu>
                                 </div>
                             </div>
-
-                            <div class="form-group row">
-                                <div class="col-sm-10">
-                                    <h:commandButton class="btn btn-primary" value="Agregar Material" action="#{DatosReactivos.InsertDatosReactivo()}" ></h:commandButton>
-                                </div>
-                            </div>
+                            
+                            <br/>
+                            
+                            <p:commandButton value="Agregar Reactivos" type="submit" styleClass="col-sm-2"
+                                            ajax="false" action="#{DatosReactivos.InsertDatosReactivo()}">
+                            </p:commandButton>
 
                         </h:form>
                     </div>

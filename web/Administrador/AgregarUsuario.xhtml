@@ -4,7 +4,8 @@
       xmlns:h = "http://java.sun.com/jsf/html"
       xmlns:ui = "http://java.sun.com/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 
         <ui:composition template = "TemplatePrincipal.xhtml">	         
@@ -82,10 +83,14 @@
                                     <f:selectItem itemValue = "1" itemLabel = "Administrador" />                    
                                 </h:selectOneMenu> 
                             </div>
+                            
+                            <br/>
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <h:commandButton class="btn btn-primary" value="Crear Usuario" action="#{DatosUsuario.InsertDatosUsuario()}" ></h:commandButton>
+                                    <p:commandButton ajax="false" styleClass="col-sm-2" actionListener="#{DatosUsuario.InsertDatosUsuario()}" 
+                                             value="Crear Usuario">
+                                    </p:commandButton>
                                 </div>
                             </div>
 
