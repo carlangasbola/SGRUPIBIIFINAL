@@ -25,7 +25,7 @@
                 
                 <div class="card-body">
                     <h:form>
-                        <p:dataTable var="du" value="#{ResiduosLaboratorio.todosLosRegistros}" widgetVar="myTable" emptyMessage="No se encontró ningún registro">
+                        <p:dataTable var="du" value="#{ResiduosLaboratorio.obtenerResiduosNombre('Todos')}" widgetVar="myTable" emptyMessage="No se encontró ningún registro">
                             <f:facet name="header" >
                                 <p:outputPanel  style="width:100%; text-align: right">
                                     <h:outputText value="Buscar: "/>
@@ -36,25 +36,25 @@
                             <p:column style="display: none" filterBy="#{du.cantidad} #{du.fechaDeIngreso} #{du.nombre} #{du.fechaDeIngreso}">
                             </p:column>
                             
-                            <p:column style="width:22%" headerText="Nombre">
+                            <p:column style="width:20%" headerText="Nombre">
                                 <h:outputText value="#{du.nombre}"/>
                             </p:column>
                             
-                            <p:column style="width:22%" headerText="Tipo">
+                            <p:column style="width:30%" headerText="Tipo">
                                 <h:outputText value="#{du.tipo}"/>
                             </p:column>
                             <p:column style="width:12%; text-align:center" headerText="Cantidad">
                                 <h:outputText value="#{du.cantidad}"/>
                             </p:column>
 
-                            <p:column style="width:22%; text-align: center" headerText="Fecha de ingreso">
+                            <p:column style="width:16%; text-align: center" headerText="Fecha de ingreso">
                                 <h:outputText value="#{du.fechaDeIngreso}"/>
                             </p:column>
                             
                             <p:column style="width:10%; text-align: center" headerText="Eliminar">
                                 <p:growl id="message" showDetail="true" />
      
-                                <p:commandButton value="Eliminar" action="#{ListaPracticas.eliminarPractica(du.idPractica)}" update="message">
+                                <p:commandButton value="Eliminar" action="#{ResiduosLaboratorio.eliminarResiduo(du.idResiduo)}" update="message">
                                     <p:confirm header="Confirmación" message="¿Realmente desea eliminar el elemento?" icon="pi pi-exclamation-triangle" />
                                 </p:commandButton>
 

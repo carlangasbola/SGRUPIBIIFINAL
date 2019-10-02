@@ -28,6 +28,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.dom4j.DocumentException;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.primefaces.model.DefaultStreamedContent;
@@ -61,6 +62,26 @@ public class ManagedBeanResiduos implements Serializable {
     @PostConstruct
     public void init() {
         
+    }
+    
+    public void eliminarResiduo(int idResiduo) {
+        Mensajes mensaje = new Mensajes();
+        Transaction transObj = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            transObj = session.beginTransaction();
+            session.delete((Residuos) session.get(Residuos.class, idResiduo));
+            transObj.commit();
+            mensaje.setMessage("Residuo eliminado del sistema");
+            mensaje.info();
+        } catch (HibernateException exObj) {
+            if (transObj != null) {
+                transObj.rollback();
+                mensaje.setMessage("No se pudo eliminar, contacte el log de errores");
+                mensaje.warn();
+            }
+        }
     }
     
     public String redireccionaResiduo(String residuo){
