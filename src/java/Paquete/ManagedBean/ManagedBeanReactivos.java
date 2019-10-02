@@ -3,15 +3,17 @@ package Paquete.ManagedBean;
 import Hibernate.Util.HibernateUtil;
 import Paquete.Beans.*;
 import Paquete.Pojos.*;
+import java.io.Serializable;
 import java.util.*;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.hibernate.*;
 
 @Named("DatosReactivos")
-@RequestScoped
-public class ManagedBeanReactivos {
+@SessionScoped
+public class ManagedBeanReactivos implements Serializable{
 
     private List<Reactivos> datosReactivo;
     private Reactivos reactivo;
@@ -23,6 +25,11 @@ public class ManagedBeanReactivos {
         datosReactivo = new ArrayList<>();
         reactivo = new Reactivos();
         ObtenerDatosReactivo();
+    }
+    
+    public String actualizarReactivo(Reactivos reactivo){
+        this.reactivo = reactivo;
+        return "ActualizarReactivos";
     }
     
     public String porcentajeReactivo(String tipoReactivo){
@@ -126,6 +133,29 @@ public class ManagedBeanReactivos {
         } catch (RuntimeException e) {
             tx.rollback();
             mensaje.setMessage("No se puedo insertar el material, consulte el log para mas detalles");
+            mensaje.fatal();
+            throw e;
+        }
+    }
+    
+     public void ActualizarDatosReactivo() {
+        Mensajes mensaje = new Mensajes();
+        Session session = null;
+        Transaction tx = null;
+        
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+            
+            session.update(reactivo);
+            tx.commit();
+            
+            mensaje.setMessage("Reactivo actualizado");
+            mensaje.info();
+            
+        } catch (RuntimeException e) {
+            tx.rollback();
+            mensaje.setMessage("No se puedo actualizar el material, consulte el log para mas detalles");
             mensaje.fatal();
             throw e;
         }

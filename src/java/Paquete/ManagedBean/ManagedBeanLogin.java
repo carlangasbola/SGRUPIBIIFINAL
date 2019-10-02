@@ -80,6 +80,7 @@ public class ManagedBeanLogin {
             // Si el usuario tiene datos de usuario los guarda en session
             // y los muestra en Templates/BarraNavegacion solo los nombres
             if (du != null) {
+                httpSession.setAttribute("idUsuarios", du.getUsuarios().getIdUsuarios() );
                 httpSession.setAttribute("identificador", du.getIdentificador());
                 httpSession.setAttribute("nombre", du.getNombre());
                 httpSession.setAttribute("paterno", du.getApellidoPaterno());

@@ -12,7 +12,9 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -36,6 +38,28 @@ public class ManagedBeanDatosUsuario implements Serializable{
         return "EditarDatosUsuario";
     }
     
+    public String obtenerDatosUsuarioAdministrador(){
+        
+        FacesContext context2 = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) context2.getExternalContext().getSession(true);
+        
+        int idUsuarios = (int)httpSession.getAttribute("idUsuarios");
+        
+        Transaction tran = null;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try {
+            tran = session.beginTransaction();
+            this.datosUsuario = (DatosUsuario) session.createQuery("FROM DatosUsuario WHERE idUsuarios = :id")
+                           .setParameter("id", idUsuarios)
+                           .uniqueResult();
+            
+            tran.commit();
+        } catch (Exception e) {
+            tran.rollback();
+        }
+        
+        return "PerfilUsuario";
+    }
 
     public void actualizarDatosUsuario() {
         Mensajes mensaje = new Mensajes();

@@ -3,19 +3,21 @@ package Paquete.ManagedBean;
 import Hibernate.Util.HibernateUtil;
 import Paquete.Beans.Mensajes;
 import Paquete.Pojos.Material;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 @Named("DatosMaterial")
-@RequestScoped
-public class ManagedBeanMaterial {
+@SessionScoped
+public class ManagedBeanMaterial implements Serializable{
 
     private List<Material> datosMaterial;
     private Material material;
@@ -26,6 +28,11 @@ public class ManagedBeanMaterial {
         material = new Material();
         ObtenerDatosMaterial();
         
+    }
+    
+    public String obtenerMaterial(Material material){
+        this.material = material;
+        return "ActualizarMaterial";
     }
     
     public List<Material> ObtenerDatosMaterial() {
@@ -98,6 +105,29 @@ public class ManagedBeanMaterial {
         } catch (RuntimeException e) {
             tx.rollback();
             mensaje.setMessage("No se puedo insertar el material, consulte el log para mas detalles");
+            mensaje.fatal();
+            throw e;
+        }
+    }
+    
+    public void ActualizarDatosMaterial() {
+        Mensajes mensaje = new Mensajes();
+        Session session = null;
+        Transaction tx = null;
+        
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+            
+            session.update(material);
+            tx.commit();
+            
+            mensaje.setMessage("Material actualizado");
+            mensaje.info();
+            
+        } catch (RuntimeException e) {
+            tx.rollback();
+            mensaje.setMessage("No se puedo actualizar el material, consulte el log para mas detalles");
             mensaje.fatal();
             throw e;
         }

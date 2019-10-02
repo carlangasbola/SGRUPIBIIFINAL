@@ -3,20 +3,20 @@ package Paquete.ManagedBean;
 import Hibernate.Util.HibernateUtil;
 import Paquete.Beans.Mensajes;
 import Paquete.Pojos.EquipoLaboratorio;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 @Named("DatosEquipoLaboratorio")
-@RequestScoped
-
-public class ManagedBeanEquipoLaboratorio {
+@SessionScoped
+public class ManagedBeanEquipoLaboratorio implements Serializable{
     
     private List<EquipoLaboratorio> datosEquipo;
     private EquipoLaboratorio equipo;
@@ -26,6 +26,11 @@ public class ManagedBeanEquipoLaboratorio {
         datosEquipo = new ArrayList<>();
         equipo = new EquipoLaboratorio();
         ObtenerDatosEquipo();
+    }
+    
+    public String obtenerEquipoLaboratorio(EquipoLaboratorio equipo){
+        this.equipo = equipo;
+        return "ActualizarEquipoLaboratorio";
     }
     
     public List<EquipoLaboratorio> ObtenerDatosEquipo() {
@@ -98,6 +103,29 @@ public class ManagedBeanEquipoLaboratorio {
         } catch (RuntimeException e) {
             tx.rollback();
             mensaje.setMessage("No se puedo insertar el material, consulte el log para mas detalles");
+            mensaje.fatal();
+            throw e;
+        }
+    }
+    
+     public void ActualzarDatosEquipo() {
+        Mensajes mensaje = new Mensajes();
+        Session session = null;
+        Transaction tx = null;
+        
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            tx = session.beginTransaction();
+            
+            session.update(equipo);
+            tx.commit();
+            
+            mensaje.setMessage("Equipo actualizado");
+            mensaje.info();
+            
+        } catch (RuntimeException e) {
+            tx.rollback();
+            mensaje.setMessage("No se puedo actualizar el equipo, consulte el log para mas detalles");
             mensaje.fatal();
             throw e;
         }
