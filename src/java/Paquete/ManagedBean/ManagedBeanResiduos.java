@@ -4,7 +4,19 @@ import Hibernate.Util.HibernateUtil;
 import Paquete.Beans.Mensajes;
 import Paquete.Pojos.Residuos;
 import Paquete.Pojos.SesionDeLaboratorio;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,9 +24,13 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.axes.cartesian.CartesianScales;
 import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearAxes;
@@ -29,6 +45,7 @@ import org.primefaces.model.charts.optionconfig.elements.ElementsLine;
 import org.primefaces.model.charts.radar.RadarChartDataSet;
 import org.primefaces.model.charts.radar.RadarChartModel;
 import org.primefaces.model.charts.radar.RadarChartOptions;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
 @Named("ResiduosLaboratorio")
 @SessionScoped
@@ -38,7 +55,8 @@ public class ManagedBeanResiduos implements Serializable {
     private RadarChartModel radarModel;
     private Residuos residuos = new Residuos();
     private int sesion;
-    private List<Residuos> todosLosRegistros = new ArrayList<>(); 
+    private List<Residuos> todosLosRegistros = new ArrayList<>();
+    private DefaultStreamedContent descarga;
     
     @PostConstruct
     public void init() {
@@ -506,6 +524,98 @@ public class ManagedBeanResiduos implements Serializable {
         
         return cantidad;
     }
+    
+    public void preparaDescarga() throws Exception {
+        imprimePDF();
+        String direccion = "Elementos\\ReporteResiduos\\Archivos\\" + 
+                           "Reporte general de residuos" + ".pdf";
+        File archivo = new File(direccion);
+        InputStream entrada = new FileInputStream(archivo);
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        setDescarga(new DefaultStreamedContent(entrada, externalContext.getMimeType(archivo.getName()), archivo.getName()));
+        
+    }
+    
+    public void imprimePDF() throws MalformedURLException, FileNotFoundException, 
+                                    DocumentException, IOException, 
+                                    com.lowagie.text.DocumentException{
+        crea();
+        String inputFile = "Elementos\\ReporteResiduos\\Creacion\\" + 
+                           "Reporte general de residuos" + ".html"; 
+        String url = new File(inputFile).toURI().toURL().toString(); 
+        String outputFile = "Elementos\\ReporteResiduos\\Archivos\\" + 
+                            "Reporte general de residuos" + ".pdf";; 
+        OutputStream os = new FileOutputStream(outputFile);
+        ITextRenderer renderer = new ITextRenderer(); 
+        renderer.setDocument(url); 
+        renderer.layout(); 
+        renderer.createPDF(os);
+
+        os.close();
+    }
+    
+    public void crea(){
+        try {
+            File fileDir = new File("Elementos\\ReporteResiduos\\Creacion\\" + 
+                                    "Reporte general de residuos" + ".html");
+            Writer out = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(fileDir), "UTF8"));
+            out.append(ManagedBeanPractica.LeeArchivo("Elementos\\ReporteResiduos\\Creacion\\inicioReporte.txt") + 
+                       llenaContenido() + 
+                       ManagedBeanPractica.LeeArchivo("Elementos\\ReporteResiduos\\Creacion\\finReporte.txt"));
+            out.flush();
+            out.close();
+        } catch (UnsupportedEncodingException e){
+            System.out.println(e.getMessage());
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        } 
+    }
+    
+    public String llenaContenido(){
+            String salida;
+            
+            salida = datosPrincipales();
+            salida += "<table border=\"1\" style=\"width: 100%;font-size:14px\" cellpadding=\"5\">";
+            salida += "<tr style=\"text-align:center;\">";
+            salida += "<td width=\"25%\"><strong>NOMBRE</strong></td>";
+            salida += "<td width=\"39%\"><strong>TIPO</strong></td>";
+            salida += "<td width=\"15%\"><strong>CANTIDAD</strong></td>";
+            salida += "<td width=\"21%\"><strong>FECHA</strong></td></tr>";
+            
+            salida += agregaResiduosPDF();
+            
+        return salida + "</table>";
+    }
+    
+    public String agregaResiduosPDF(){
+        String salida = "";
+                
+        for (Residuos item:obtenerResiduos()){
+            salida += "<tr>\n <td>" + item.getNombre() + "</td>\n";
+            salida += "<td>" + item.getTipo() + "</td>\n"; 
+            salida += "<td>" + item.getCantidad() + "</td>\n";
+            salida += "<td>" + item.getFechaDeIngreso().toString().substring(0, 19) + "</td>\n</tr>\n";
+        }
+        
+        return salida;
+    }
+    
+    public String datosPrincipales(){
+        String salida;
+        String inicioTabla = "<tr style=\"text-align:left\"><td width=\"10%\"><strong>";
+        String centroTabla = "</strong></td><td width=\"90%\">&nbsp;";
+        String finTabla = "</td></tr>";
+        Date fechaActual = new Date();
+        
+        salida = inicioTabla + "TIPO:" + centroTabla + "Reporte general de residuos" + finTabla;
+        salida += inicioTabla + "FECHA:" + centroTabla + 
+                  new SimpleDateFormat("dd/MM/yyyy").format(fechaActual) + finTabla;
+        
+        return salida + "</table><br/>";
+    }
 
     public LineChartModel getLineModel() {
         createLineModel();
@@ -556,6 +666,14 @@ public class ManagedBeanResiduos implements Serializable {
 
     public void setTodosLosRegistros(List<Residuos> todosLosRegistros) {
         this.todosLosRegistros = todosLosRegistros;
+    }
+
+    public DefaultStreamedContent getDescarga() {
+        return descarga;
+    }
+
+    public void setDescarga(DefaultStreamedContent descarga) {
+        this.descarga = descarga;
     }
     
 }
